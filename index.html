@@ -3,85 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeGo.ro | Asigurări Urban Active</title>
+    <title>SafeGo.ro - Siguranță Urbană</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .neon-glow:hover { border-color: #39FF14; box-shadow: 0 0 20px rgba(57, 255, 20, 0.4); transform: translateY(-3px); }
-        .neon-glow:active { transform: scale(0.98); filter: brightness(1.2); }
-        .btn-cyan { background-color: #00D1FF; box-shadow: 0 0 15px rgba(0, 209, 255, 0.3); }
+        .glow-card:hover { box-shadow: 0 0 20px rgba(34, 211, 238, 0.4); border-color: #22d3ee; }
+        .sticky-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 10, 10, 0.95); border-top: 1px solid #333; }
     </style>
 </head>
-<body class="bg-[#1A1C1E] text-white font-sans">
+<body class="bg-black text-white font-sans pb-20">
 
-    <header class="p-4 flex justify-between items-center max-w-md mx-auto sticky top-0 bg-[#1A1C1E]/90 backdrop-blur-md z-50">
+    <nav class="p-4 flex justify-between items-center border-b border-zinc-800">
         <div class="flex items-center gap-2">
-            <img src="https://raw.githubusercontent.com/Adrian6804/safego-site/main/logo.png" alt="SafeGo Logo" class="w-8 h-8">
-            <span class="font-black text-lg tracking-tighter">SafeGo<span class="text-[#00D1FF]">.ro</span></span>
+            <img src="https://raw.githubusercontent.com/adrian6804/safego-site/main/logo-scut.png" alt="SafeGo Logo" class="h-10 w-10">
+            <span class="text-xl font-bold tracking-tight">SafeGo<span class="text-cyan-400">.ro</span></span>
         </div>
-        <button class="btn-cyan text-black px-4 py-1.5 rounded-full text-[10px] font-black uppercase">Autentificare</button>
-    </header>
-
-    <main class="max-w-md mx-auto px-6 space-y-8 pb-32">
-        <h1 class="text-3xl font-black uppercase italic leading-none mt-6">Libertate.<br><span class="text-[#39FF14]">Siguranță. Instant.</span></h1>
-
-        <div class="space-y-4">
-            <div class="bg-black/40 border border-white/10 p-6 rounded-[32px] neon-glow transition-all">
-                <div class="flex justify-between items-start mb-2">
-                    <span class="text-2xl">✈️</span>
-                    <span class="text-[#00D1FF] text-[10px] font-bold uppercase tracking-widest">Activ Acum</span>
-                </div>
-                <h3 class="text-xl font-black uppercase italic">GO Travel</h3>
-                <p class="text-gray-500 text-[10px] uppercase mb-4">Asigurare medicală în 30 de secunde</p>
-                <button class="w-full py-3 border border-[#00D1FF] text-[#00D1FF] rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-[#00D1FF] hover:text-black transition-all">Calculează Travel</button>
-            </div>
-
-            <div class="bg-black/40 border border-white/10 p-6 rounded-[32px] neon-glow transition-all">
-                <div class="flex justify-between items-start mb-2">
-                    <span class="text-2xl">🏠</span>
-                    <span class="text-[#39FF14] text-[10px] font-bold uppercase tracking-widest">Protecție Casă</span>
-                </div>
-                <h3 class="text-xl font-black uppercase italic">GO Home</h3>
-                <p class="text-gray-500 text-[10px] uppercase mb-4">Protejează-ți gadget-urile și casa</p>
-                <button class="w-full py-3 border border-[#39FF14] text-[#39FF14] rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-[#39FF14] hover:text-black transition-all">Protejează Locuința</button>
-            </div>
-        </div>
-
-        <footer class="pt-10 border-t border-white/5 space-y-8 text-center sm:text-left">
-            <div>
-                <p class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Partener</p>
-                <p class="text-xs font-black uppercase mt-1">INTER BROKER DE ASIGURARE</p>
-                <p class="text-[8px] text-gray-600 mt-1 uppercase">Operator date cu caracter personal nr. 27870</p>
-            </div>
-
-            <div class="grid grid-cols-2 gap-8 text-[10px] font-bold uppercase tracking-tighter text-gray-400">
-                <div class="space-y-2">
-                    <p class="text-white border-b border-white/10 pb-1">Linkuri utile</p>
-                    <p>Franciza</p>
-                    <p>Termeni și condiții</p>
-                    <p>Politica de confidențialitate</p>
-                </div>
-                <div class="space-y-2">
-                    <p class="text-white border-b border-white/10 pb-1">Contact</p>
-                    <p class="text-[#00D1FF]">office@safego.ro</p>
-                    <p>0723 697 805</p>
-                </div>
-            </div>
-
-            <div class="flex justify-center gap-4 pt-4 border-t border-white/5">
-                <span class="text-[8px] text-gray-600">ASF România</span>
-                <span class="text-[8px] text-gray-600">SAL-FIN</span>
-                <span class="text-[8px] text-gray-600">ANPC</span>
-            </div>
-        </footer>
-    </main>
-
-    <nav class="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-lg border-t border-white/5 p-4 z-50">
-        <div class="max-w-md mx-auto flex justify-around items-center text-[8px] font-black uppercase tracking-widest">
-            <div class="flex flex-col items-center gap-1 text-[#39FF14]"><span>🏠</span>ACASĂ</div>
-            <div class="flex flex-col items-center gap-1 text-gray-500"><span>🛡️</span>POLIȚE</div>
-            <div class="flex flex-col items-center gap-1 text-gray-500"><span>📞</span>CONTACT</div>
-        </div>
+        <button class="bg-cyan-500 text-black px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest">Autentificare</button>
     </nav>
+
+    <div class="p-6 space-y-6">
+        <h1 class="text-3xl font-black italic tracking-tighter uppercase">SafeGo Wheels<br><span class="text-green-400">Libertate. Siguranță. Instant.</span></h1>
+       
+        <div class="bg-zinc-900 p-6 rounded-3xl border border-zinc-800 glow-card transition-all">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-4xl">✈️</span>
+                <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-widest">Activ Acum</span>
+            </div>
+            <h2 class="text-xl font-bold uppercase italic">Go Travel</h2>
+            <p class="text-zinc-400 text-xs mb-4">Asigurare medicală în 30 de secunde.</p>
+            <button class="w-full py-3 border border-cyan-500 rounded-xl text-cyan-400 font-bold hover:bg-cyan-500 hover:text-black transition-all uppercase text-sm">Calculează Travel</button>
+        </div>
+    </div>
+
+    <footer class="p-6 bg-zinc-950 text-[10px] text-zinc-500 space-y-4 border-t border-zinc-900">
+        <div class="text-center font-bold text-zinc-300">Partener: INTER BROKER DE ASIGURARE</div>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <p class="font-bold text-white mb-1 uppercase">Contact</p>
+                <p>Email: office@safego.ro</p>
+                <p>Tel: 0723697805</p>
+            </div>
+            <div>
+                <p class="font-bold text-white mb-1 uppercase">Link-uri utile</p>
+                <p>Termeni și condiții</p>
+                <p>Politica GDPR</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="sticky-nav flex justify-around p-3 z-50">
+        <div class="flex flex-col items-center text-green-400">
+            <span class="text-lg">🏠</span>
+            <span class="text-[8px] font-bold uppercase">Acasă</span>
+        </div>
+        <div class="flex flex-col items-center text-zinc-500">
+            <span class="text-lg">📍</span>
+            <span class="text-[8px] font-bold uppercase">Polițe</span>
+        </div>
+        <div class="flex flex-col items-center text-zinc-500">
+            <span class="text-lg">📞</span>
+            <span class="text-[8px] font-bold uppercase">Contact</span>
+        </div>
+    </div>
+
 </body>
 </html>
     
