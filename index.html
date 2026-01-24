@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeGo.ro | Asigurări Instant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse-neon { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .neon-glow-green { box-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
+        .neon-glow-blue { box-shadow: 0 0 15px rgba(0, 209, 255, 0.4); }
+    </style>
+</head>
+<body class="bg-[#0F1115] text-white font-sans min-h-screen flex flex-col items-center">
+
+    <header class="w-full p-6 flex justify-between items-center max-w-md">
+        <div class="text-[#39FF14] font-black italic text-2xl tracking-tighter">SAFEGO<span class="text-white">.RO</span></div>
+        <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-xs">👤</div>
+    </header>
+
+    <main class="w-full max-w-md px-6 flex flex-col gap-8">
+        <div class="mt-4">
+            <h1 class="text-3xl font-black uppercase italic leading-none">Asigurări<br><span class="text-[#39FF14]">fără stres.</span></h1>
+            <p class="text-gray-500 text-xs mt-2 uppercase tracking-widest font-bold">Generația Digitală • Instant pe telefon</p>
+        </div>
+
+        <div class="flex flex-col gap-4">
+            <button class="w-full bg-[#39FF14] text-black font-black py-5 rounded-2xl uppercase italic shadow-[0_10px_30px_rgba(57,255,20,0.3)] hover:scale-[1.02] transition-all">
+                🛴 Asigură Trotineta / Bici
+            </button>
+            <button class="w-full bg-transparent border-2 border-[#00D1FF] text-[#00D1FF] font-black py-5 rounded-2xl uppercase italic neon-glow-blue hover:bg-[#00D1FF]/5 transition-all">
+                🚗 Calcul RCA Instant
+            </button>
+        </div>
+
+        <div>
+            <p class="text-[10px] font-bold text-gray-600 uppercase mb-4 tracking-widest">Recenzii Comunitate</p>
+            <div class="flex gap-4 overflow-x-auto no-scrollbar">
+                <div class="min-w-[70px] flex flex-col items-center gap-1">
+                    <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-[#39FF14] to-[#00D1FF]">
+                        <div class="w-full h-full rounded-full bg-[#1A1C1E] border-2 border-[#0F1115]"></div>
+                    </div>
+                    <span class="text-[8px] font-bold text-gray-500">ANDREI M.</span>
+                </div>
+                </div>
+        </div>
+    </main>
+
+    <a href="#" class="fixed bottom-6 right-6 w-14 h-14 bg-[#25D366]/20 border border-[#25D366] rounded-full flex items-center justify-center neon-glow-green animate-bounce">
+        <span class="text-2xl">💬</span>
+    </a>
+
+</body>
+</html>
