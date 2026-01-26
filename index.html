@@ -3,177 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeGo - Asigurări Gen Z</title>
+    <title>SafeGo.ro | Asigurări Gen Z</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* 1. FUNDATIA (Scena Întunecată) */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #121212; /* Charcoal Dark - mai soft decât negrul pur */
-            font-family: 'Montserrat', sans-serif;
-            color: white;
-            overflow-x: hidden;
+        :root {
+            --bg-dark: #121212;
+            --neon-cyan: #00F0FF;
+            --neon-lime: #39FF14;
+            --neon-orange: #FF5F1F;
+            --neon-purple: #D300C5;
+            --neon-red: #FF003C;
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
-        /* 2. HEADER PLUTITOR (Glassmorphism) */
+        body {
+            margin: 0;
+            background-color: var(--bg-dark);
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 5%;
-            position: fixed;
-            width: 90%;
+            position: sticky;
             top: 0;
-            z-index: 100;
-            background: rgba(18, 18, 18, 0.8); /* Transparență */
-            backdrop-filter: blur(10px); /* Efect de sticlă mată */
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
         }
 
-        .logo {
-            font-weight: 900;
-            font-size: 1.5rem;
-            color: #fff;
-            letter-spacing: 1px;
-        }
-        
-        .logo span { color: #00F0FF; } /* Accent SafeGo */
+        .logo { font-weight: 900; font-size: 1.8rem; }
+        .logo span { color: var(--neon-cyan); }
 
         .auth-btn {
+            border: 2px solid var(--neon-cyan);
             background: transparent;
-            border: 2px solid #00F0FF;
-            color: #00F0FF;
-            padding: 10px 25px;
-            border-radius: 50px; /* Capsulă */
+            color: var(--neon-cyan);
+            padding: 8px 20px;
+            border-radius: 50px;
             font-weight: 700;
+            text-transform: uppercase;
             cursor: pointer;
             transition: 0.3s;
-            text-transform: uppercase;
-            font-size: 0.8rem;
         }
+        .auth-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 15px var(--neon-cyan); }
 
-        .auth-btn:hover {
-            background: #00F0FF;
-            color: #000;
-            box-shadow: 0 0 15px #00F0FF; /* Glow simplu */
-        }
-
-        /* 3. HERO SECTION (Consola Centrală) */
-        .hero-container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* HERO & GRID */
+        .hero {
+            padding: 60px 5%;
             text-align: center;
-            padding-top: 60px;
         }
 
         h1 {
-            font-size: 3rem;
-            line-height: 1.1;
-            margin-bottom: 40px;
-            text-transform: uppercase;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-style: italic;
+            font-weight: 900;
+            margin-bottom: 50px;
+            text-transform: uppercase;
         }
+        .h-lime { color: var(--neon-lime); }
 
-        .highlight-text {
-            color: #39FF14; /* Lime Green - Siguranță */
-        }
-
-        /* 4. GRILA DE BUTOANE (Neon Grid) */
-        .control-grid {
+        .grid-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 coloane desktop */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 20px;
-            max-width: 800px;
-            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        /* Stilul Butonului Neon */
-        .neon-card {
-            background: rgba(255, 255, 255, 0.05); /* Aproape invizibil în repaus */
+        .card {
+            background: var(--glass);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 30px 20px;
+            padding: 40px 20px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .card i { font-size: 2.5rem; display: block; margin-bottom: 15px; filter: grayscale(1); transition: 0.3s; }
+        .card span { font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; }
+
+        /* EFECTE NEON ACTIVE LA ATINGERE */
+        .card.travel:hover { border-color: var(--neon-cyan); box-shadow: 0 0 20px var(--neon-cyan); }
+        .card.home:hover { border-color: var(--neon-lime); box-shadow: 0 0 20px var(--neon-lime); }
+        .card.wheels:hover { border-color: var(--neon-purple); box-shadow: 0 0 20px var(--neon-purple); }
+        .card.rca:hover { border-color: var(--neon-orange); box-shadow: 0 0 20px var(--neon-orange); }
+        .card.health:hover { border-color: var(--neon-red); box-shadow: 0 0 20px var(--neon-red); }
+        .card:hover i { filter: grayscale(0); }
+
+        /* FOOTER */
+        footer {
+            background: #000;
+            padding: 60px 5% 20px;
+            border-top: 1px solid #222;
+            margin-top: 100px;
+        }
+
+        .f-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .f-col h4 { color: var(--neon-cyan); margin-bottom: 20px; text-transform: uppercase; font-size: 0.8rem; }
+        .f-col ul { list-style: none; padding: 0; }
+        .f-col li { margin-bottom: 10px; }
+        .f-col a { color: #888; text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
+        .f-col a:hover { color: var(--neon-lime); }
+
+        /* ICONITE LEGALE */
+        .legal-icons {
             display: flex;
-            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .icon-box {
+            width: 80px;
+            height: 40px;
+            background: white;
+            border-radius: 5px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            color: black;
+            font-size: 10px;
+            font-weight: 900;
+            text-align: center;
+            text-decoration: none;
+            overflow: hidden;
         }
 
-        .icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            filter: grayscale(100%); /* Gri când e inactiv */
-            transition: 0.3s;
-        }
-
-        .label {
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            opacity: 0.7;
-        }
-
-        /* 5. MAGIA: ACTIVARE LA ATINGERE (Hover/Touch) */
-        
-        /* TRAVEL - Cyan Electric */
-        .neon-card.travel:hover {
-            border-color: #00F0FF;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6), inset 0 0 10px rgba(0, 240, 255, 0.2);
-            transform: translateY(-5px);
-        }
-        .neon-card.travel:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #00F0FF; }
-        .neon-card.travel:hover .label { color: #00F0FF; opacity: 1; text-shadow: 0 0 5px #00F0FF; }
-
-        /* LOCUINTA - Lime Green */
-        .neon-card.home:hover {
-            border-color: #39FF14;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.6), inset 0 0 10px rgba(57, 255, 20, 0.2);
-            transform: translateY(-5px);
-        }
-        .neon-card.home:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #39FF14; }
-        .neon-card.home:hover .label { color: #39FF14; opacity: 1; text-shadow: 0 0 5px #39FF14; }
-
-        /* WHEELS - Purple Neon */
-        .neon-card.wheels:hover {
-            border-color: #D300C5;
-            box-shadow: 0 0 20px rgba(211, 0, 197, 0.6), inset 0 0 10px rgba(211, 0, 197, 0.2);
-            transform: translateY(-5px);
-        }
-        .neon-card.wheels:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #D300C5; }
-        .neon-card.wheels:hover .label { color: #D300C5; opacity: 1; text-shadow: 0 0 5px #D300C5; }
-
-        /* RCA - Orange Alert */
-        .neon-card.rca:hover {
-            border-color: #FF5F1F;
-            box-shadow: 0 0 20px rgba(255, 95, 31, 0.6), inset 0 0 10px rgba(255, 95, 31, 0.2);
-            transform: translateY(-5px);
-        }
-        .neon-card.rca:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #FF5F1F; }
-        .neon-card.rca:hover .label { color: #FF5F1F; opacity: 1; text-shadow: 0 0 5px #FF5F1F; }
-
-        /* SANATATE - Red Pulse */
-        .neon-card.health:hover {
-            border-color: #FF003C;
-            box-shadow: 0 0 20px rgba(255, 0, 60, 0.6), inset 0 0 10px rgba(255, 0, 60, 0.2);
-            transform: translateY(-5px);
-        }
-        .neon-card.health:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #FF003C; }
-        .neon-card.health:hover .label { color: #FF003C; opacity: 1; text-shadow: 0 0 5px #FF003C; }
-
-        /* RESPONSIVE (Mobil) */
-        @media (max-width: 600px) {
-            .control-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 pe rând pe telefon */
-            }
-            h1 { font-size: 2rem; }
-            .neon-card { padding: 20px 10px; }
+        /* WHATSAPP */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -184,271 +167,60 @@
         <button class="auth-btn">Autentificare</button>
     </header>
 
-    <div class="hero-container">
-        
-        <h1>LIBERTATE.<br><span class="highlight-text">SIGURANȚĂ.</span> INSTANT.</h1>
+    <section class="hero">
+        <h1>LIBERTATE.<br><span class="h-lime">SIGURANȚĂ.</span> INSTANT.</h1>
 
-        <div class="control-grid">
-            
-            <div class="neon-card travel">
-                <div class="icon">✈️</div>
-                <div class="label">TRAVEL</div>
-            </div>
-
-            <div class="neon-card home">
-                <div class="icon">🏠</div>
-                <div class="label">LOCUINȚĂ</div>
-            </div>
-
-            <div class="neon-card wheels">
-                <div class="icon">🚲</div>
-                <div class="label">WHEELS</div>
-            </div>
-
-            <div class="neon-card rca">
-                <div class="icon">🚗</div>
-                <div class="label">RCA</div>
-            </div>
-
-            <div class="neon-card health">
-                <div class="icon">❤️</div>
-                <div class="label">SĂNĂTATE</div>
-            </div>
-
-            <div class="neon-card" style="border-style: dashed;">
-                <div class="icon">➕</div>
-                <div class="label">ALTELE</div>
-            </div>
-
+        <div class="grid-container">
+            <a href="#" class="card travel"><i>✈️</i><span>TRAVEL</span></a>
+            <a href="#" class="card home"><i>🏠</i><span>LOCUINȚĂ</span></a>
+            <a href="#" class="card wheels"><i>🚲</i><span>WHEELS</span></a>
+            <a href="#" class="card rca"><i>🚗</i><span>RCA</span></a>
+            <a href="#" class="card health"><i>❤️</i><span>SĂNĂTATE</span></a>
+            <a href="#" class="card"><i>➕</i><span>ALTELE</span></a>
         </div>
-    </div>
-<style>
-        /* STILURI FOOTER */
-        footer {
-            background-color: #0d0d0d; /* Mai inchis decat fundalul principal */
-            border-top: 1px solid #333;
-            padding: 60px 5% 20px;
-            margin-top: 50px;
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 Coloane conform schita */
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .footer-col h4 {
-            color: #00F0FF; /* Cyan Neon pentru titluri */
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            font-size: 1rem;
-            letter-spacing: 1px;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-col li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col a {
-            color: #888;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .footer-col a:hover {
-            color: #39FF14; /* Verde la hover */
-            padding-left: 5px; /* Mica miscare spre dreapta */
-        }
-
-        /* ANPC & SOL (Obligatorii legal) */
-        .legal-icons {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .legal-img {
-            width: 100px;
-            height: auto;
-            opacity: 0.7;
-            transition: 0.3s;
-            cursor: pointer;
-            background: #fff; /* Fundal alb pt logo-uri oficiale */
-            padding: 2px;
-            border-radius: 4px;
-        }
-        .legal-img:hover { opacity: 1; }
-
-        /* COPYRIGHT */
-        .copyright {
-            text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 20px;
-            color: #555;
-            font-size: 0.8rem;
-        }
-
-        /* BUTON WHATSAPP PLUTITOR */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 35px;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.6);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(37, 211, 102, 1);
-        }
-
-        /* RESPONSIVE FOOTER */
-        @media (max-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 1fr; /* 1 coloana pe mobil */
-                text-align: center;
-            }
-            .legal-icons {
-                justify-content: center;
-            }
-        }
-    </style>
+    </section>
 
     <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="logo" style="margin-bottom: 15px;">Safe<span>Go</span>.ro</div>
-                <p style="color: #666;">Asigurări rapide pentru generația digitală. Simplu. Transparent. Instant.</p>
+        <div class="f-grid">
+            <div class="f-col">
+                <div class="logo" style="font-size: 1.2rem; margin-bottom: 10px;">Safe<span>Go</span>.ro</div>
+                <p style="color: #555; font-size: 0.8rem;">Asigurări rapide pentru generația digitală.</p>
+                <a href="mailto:office@safego.ro" style="color: var(--neon-cyan); font-weight: bold;">office@safego.ro</a>
             </div>
 
-            <div class="footer-col">
+            <div class="f-col">
                 <h4>Informații</h4>
                 <ul>
                     <li><a href="#">Despre Noi</a></li>
                     <li><a href="#">Termeni și Condiții</a></li>
                     <li><a href="#">Politica de Cookies</a></li>
-                    <li><a href="#">Prelucrare Date (GDPR)</a></li>
-                    <li><a href="#">Politica Confidențialitate</a></li>
+                    <li><a href="https://asfromania.ro" target="_blank">ASF</a></li>
                 </ul>
             </div>
 
-            <div class="footer-col">
+            <div class="f-col">
                 <h4>Servicii</h4>
                 <ul>
+                    <li><a href="https://www.aida.info.ro/polite-rca" target="_blank">Verificare polita RCA | AIDA</a></li>
                     <li><a href="#">Informare Precontractuală</a></li>
-                    <li><a href="#">Verificare Poliță</a></li>
-                    <li><a href="#">Polite RCA</a></li>
-                    <li><a href="#">Travel & Sănătate</a></li>
+                    <li><a href="#">Polițe RCA</a></li>
                 </ul>
             </div>
 
-            <div class="footer-col">
+            <div class="f-col">
                 <h4>Suport & Legal</h4>
-                <ul>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Reclamații</a></li>
-                </ul>
                 <div class="legal-icons">
-                    <div style="background:#fff; color:#000; font-size:10px; padding:5px; font-weight:bold;">ANPC - SAL</div>
-                    <div style="background:#fff; color:#000; font-size:10px; padding:5px; font-weight:bold;">ANPC - SOL</div>
+                    <a href="https://anpc.ro" class="icon-box" target="_blank">ANPC</a>
+                    <a href="https://www.sal-fin.ro" class="icon-box" target="_blank">SAL-FIN</a>
+                    <a href="https://asfromania.ro" class="icon-box" target="_blank">ASF</a>
                 </div>
             </div>
         </div>
+        <p style="text-align: center; color: #333; font-size: 0.7rem; margin-top: 40px;">&copy; 2026 SafeGo Broker de Asigurare. Toate drepturile rezervate.</p>
+    </footer>
 
-        <div class="copyright">
-            &copy; 2024 SafeGo Broker de Asigurare. Toate drepturile rezervate.
-        </div>
-   <style>
-    /* Ajustări pentru textele legale lungi */
-    .footer-col ul li {
-        margin-bottom: 12px;
-        line-height: 1.4;
-    }
-    .footer-col a {
-        font-size: 0.85rem; /* Puțin mai mic pentru a încăpea textele lungi */
-    }
-    .legal-full-link {
-        display: block;
-        padding: 8px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 5px;
-        margin-top: 10px;
-        border: 1px solid rgba(0, 240, 255, 0.2);
-    }
-</style>
+    <a href="https://wa.me/40700000000" class="wa-float" target="_blank">🟢</a>
 
-<footer>
-    <div class="footer-grid">
-        <div class="footer-col">
-            <div class="logo" style="margin-bottom: 15px;">Safe<span>Go</span>.ro</div>
-            <p style="color: #666;">Asigurări rapide pentru generația digitală. Simplu. Transparent. Instant.</p>
-            <a href="mailto:office@safego.ro" style="color: #00F0FF; font-weight: bold; text-decoration: none;">
-                ✉️ office@safego.ro
-            </a>
-        </div>
-
-        <div class="footer-col">
-            <h4>Informații</h4>
-            <ul>
-                <li><a href="#">Despre Noi</a></li>
-                <li><a href="#">Termeni și Condiții</a></li>
-                <li><a href="#">Politica de Cookies</a></li>
-                <li><a href="#">Prelucrare Date (GDPR)</a></li>
-                <li><a href="https://asfromania.ro" target="_blank">Autoritatea de Supraveghere Financiară</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h4>Servicii</h4>
-            <ul>
-                <li><a href="#">Informare Precontractuală</a></li>
-                <li><a href="https://www.aida.info.ro/polite-rca" target="_blank">
-                    Verificare polita RCA | Administrare Istoric Date Asigurari Auto
-                </a></li>
-                <li><a href="#">Polite RCA</a></li>
-                <li><a href="#">Travel & Sănătate</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h4>Suport & Legal</h4>
-            <ul>
-                <li><a href="mailto:office@safego.ro">Contact: office@safego.ro</a></li>
-                <li><a href="#">Reclamații</a></li>
-            </ul>
-            
-            <a href="https://anpc.ro" target="_blank" class="legal-full-link">
-                ANPC – Autoritatea Națională pentru Protecția Consumatorilor
-            </a>
-            <a href="https://www.sal-fin.ro" target="_blank" class="legal-full-link">
-                Salfin – Entitatea de Soluţionare Alternativă a Litigiilor în domeniul financiar nonbancar
-            </a>
-        </div>
-    </div>
-
-    <div class="copyright">
-        &copy; 2026 SafeGo Broker de Asigurare. Toate drepturile rezervate.
-    </div>
-</footer>
 </body>
 </html>
+            
