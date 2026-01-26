@@ -11,7 +11,7 @@
             --lime: #39FF14;
             --dark: #0a0a0a;
             --glass: rgba(255, 255, 255, 0.05);
-            --glass-strong: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
@@ -22,18 +22,18 @@
             overflow-x: hidden;
         }
 
-        /* HEADER - Design Curat */
+        /* HEADER */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.9);
             backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .logo { font-weight: 900; font-size: 1.6rem; text-decoration: none; color: white; letter-spacing: -1px; }
@@ -49,170 +49,122 @@
             cursor: pointer;
             text-transform: uppercase;
             font-size: 0.75rem;
-            transition: 0.4s ease;
+            transition: 0.4s;
         }
-        .auth-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 20px var(--cyan); }
 
         /* HERO & SLOGAN */
-        .hero { padding: 80px 5% 40px; text-align: center; max-width: 1100px; margin: 0 auto; }
-        
-        .slogan-main {
-            font-size: clamp(1.8rem, 5vw, 3rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            font-style: italic;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .slogan-sub {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: #999;
-            margin-bottom: 50px;
-            font-weight: 400;
-        }
-
+        .hero { padding: 60px 5% 40px; text-align: center; max-width: 1100px; margin: 0 auto; }
+        .slogan-main { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900; text-transform: uppercase; font-style: italic; margin-bottom: 15px; }
         .highlight { color: var(--lime); text-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
+        .slogan-sub { color: #888; margin-bottom: 40px; }
 
-        /* GRID SERVICII - Butoane care se activează la atingere */
+        /* GRID SERVICII */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 20px;
-            padding: 0 5%;
+            margin-bottom: 60px;
         }
 
         .card {
             background: var(--glass);
-            border: 1px solid var(--glass-strong);
+            border: 1px solid var(--glass-border);
             border-radius: 24px;
-            padding: 40px 20px;
+            padding: 35px 15px;
             text-decoration: none;
             color: white;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s ease;
             text-align: center;
         }
+        .card:hover { transform: translateY(-8px); border-color: var(--cyan); box-shadow: 0 10px 20px rgba(0,240,255,0.15); }
 
-        .card:hover { 
-            transform: translateY(-10px); 
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--cyan);
-            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
-        }
-
-        .card i { font-size: 2.5rem; display: block; margin-bottom: 15px; opacity: 0.7; }
-        .card span { font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; }
-
-        /* BANNER MAGNETIC (EROUZILEI) - Inspirat din Poza site IDEALA.jpg */
+        /* BANNER IMPACT */
         .impact-banner {
-            margin: 80px 5%;
-            height: 500px;
+            margin: 40px 5% 60px;
+            height: 400px;
             border-radius: 40px;
-            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.1)), 
-                        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1470');
+            background: linear-gradient(to right, rgba(0,0,0,0.8), transparent), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1200');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             padding: 0 60px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid var(--glass-border);
         }
 
         .banner-content {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px);
-            padding: 40px;
-            border-radius: 30px;
-            max-width: 450px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 1s ease-out;
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 25px;
+            max-width: 400px;
+            border: 1px solid var(--glass-border);
         }
 
-        .banner-content h2 { font-size: 2.2rem; margin: 0 0 15px 0; font-weight: 900; text-transform: uppercase; }
-        .banner-content p { color: #ccc; font-size: 1rem; margin-bottom: 30px; line-height: 1.5; }
-
-        .cta-banner {
-            background: var(--cyan);
-            color: #000;
-            padding: 14px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            transition: 0.3s;
-            display: inline-block;
-        }
-        .cta-banner:hover { box-shadow: 0 0 30px var(--cyan); transform: scale(1.05); }
-
-        /* FOOTER OPTIMIZAT - Butoane mici și verticale */
-        footer {
-            background: #050505;
-            padding: 60px 8% 40px;
-            border-top: 1px solid #1a1a1a;
-        }
-
-        .f-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 40px;
-        }
-
-        .f-col h4 { font-size: 0.75rem; color: #444; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
-        .f-col ul { list-style: none; padding: 0; }
-        .f-col li { margin-bottom: 12px; }
-        .f-col a { color: #777; text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
-        .f-col a:hover { color: white; }
-
-        .legal-stack { display: flex; flex-direction: column; gap: 10px; }
-        .legal-btn {
-            background: rgba(255, 255, 255, 0.95);
-            color: #000;
-            font-size: 10px;
-            font-weight: 900;
-            padding: 6px 12px;
-            border-radius: 4px;
-            text-decoration: none;
-            width: fit-content;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-        .legal-btn:hover { background: #fff; transform: translateX(5px); }
-
-        /* WHATSAPP FLOAT - Pulsant */
-        .wa-float {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #25d366;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        /* RECENZII VIDEO - NEW STUFF */
+        .reviews-section { padding: 40px 5%; }
+        .reviews-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .reviews-header h3 { font-size: 1.5rem; text-transform: uppercase; font-weight: 900; }
+        
+        .stories-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            z-index: 2000;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
-            animation: pulse 2s infinite;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+        .stories-container::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
+
+        .story-card {
+            min-width: 180px;
+            height: 280px;
+            border-radius: 25px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            cursor: pointer;
+            transition: 0.4s;
+            border: 2px solid transparent;
+        }
+        .story-card:hover { transform: scale(1.05); border-color: var(--lime); }
+        .story-card::after {
+            content: "▶";
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 2rem; color: white; opacity: 0.8;
+        }
+        .story-label {
+            position: absolute;
+            bottom: 15px; left: 15px;
+            font-size: 0.7rem; font-weight: 900; text-transform: uppercase;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 10px; border-radius: 5px;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+        /* FOOTER */
+        footer { background: #000; padding: 60px 8% 40px; border-top: 1px solid #111; }
+        .f-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 40px; }
+        .legal-stack { display: flex; flex-direction: column; gap: 8px; }
+        .legal-btn {
+            background: #eee; color: #000; font-size: 9px; font-weight: 900;
+            padding: 5px 10px; border-radius: 4px; text-decoration: none; width: fit-content; text-transform: uppercase;
+        }
+
+        /* WA FLOAT */
+        .wa-float {
+            position: fixed; right: 25px; top: 50%; transform: translateY(-50%);
+            background: #25d366; width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 24px;
+            text-decoration: none; z-index: 2000; animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse { 
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-
-        @media (max-width: 768px) {
-            .impact-banner { height: auto; padding: 60px 20px; margin: 40px 5%; }
-            .banner-content { text-align: center; }
-            .wa-float { top: auto; bottom: 30px; right: 20px; transform: none; }
-        }
+        @media (max-width: 768px) { .wa-float { top: auto; bottom: 20px; } }
     </style>
 </head>
 <body>
@@ -239,9 +191,30 @@
 
         <section class="impact-banner">
             <div class="banner-content">
-                <h2>Viață & <span class="highlight">Sănătate</span></h2>
-                <p>Protecție reală pentru planurile tale mari. Fără compromisuri, oriunde te-ai afla.</p>
-                <a href="#" class="cta-banner">Află mai mult</a>
+                <h2 style="font-size: 1.8rem; margin: 0 0 10px 0;">VIAȚĂ & <span class="highlight">SĂNĂTATE</span></h2>
+                <p style="font-size: 0.85rem; color: #bbb;">Protecție reală pentru planurile tale mari. Oriunde în lume.</p>
+                <a href="#" style="background:var(--cyan); color:#000; padding:10px 25px; border-radius:50px; text-decoration:none; font-weight:900; font-size:0.7rem;">AFLĂ MAI MULT</a>
+            </div>
+        </section>
+
+        <section class="reviews-section">
+            <div class="reviews-header">
+                <h3>Recenzii Video</h3>
+                <a href="#" style="color:var(--lime); font-size: 0.8rem; font-weight: 700; text-decoration: none;">VEZI TOATE →</a>
+            </div>
+            <div class="stories-container">
+                <div class="story-card" style="background-image: url('https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop');">
+                    <span class="story-label">Am fost la ski...</span>
+                </div>
+                <div class="story-card" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop');">
+                    <span class="story-label">Laptopul salvat!</span>
+                </div>
+                <div class="story-card" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&auto=format&fit=crop');">
+                    <span class="story-label">Vacanță fără griji</span>
+                </div>
+                <div class="story-card" style="background-image: url('https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=300&auto=format&fit=crop');">
+                    <span class="story-label">RCA rapid</span>
+                </div>
             </div>
         </section>
     </main>
@@ -249,27 +222,20 @@
     <footer>
         <div class="f-grid">
             <div class="f-col">
-                <div class="logo" style="font-size: 1.2rem; margin-bottom: 15px;">Safe<span>Go</span>.ro</div>
+                <div class="logo" style="font-size: 1.1rem; margin-bottom: 10px;">Safe<span>Go</span>.ro</div>
                 <p style="color: #444; font-size: 0.75rem;">Protecție digitală pentru viitor.</p>
                 <a href="mailto:office@safego.ro" style="color: var(--cyan); font-weight: 700;">office@safego.ro</a>
             </div>
             <div class="f-col">
                 <h4>Informații</h4>
-                <ul>
+                <ul style="font-size: 0.8rem;">
                     <li><a href="#">Politica Cookies</a></li>
                     <li><a href="#">GDPR</a></li>
-                    <li><a href="#">Termeni și Condiții</a></li>
+                    <li><a href="#">Termeni</a></li>
                 </ul>
             </div>
             <div class="f-col">
-                <h4>Servicii</h4>
-                <ul>
-                    <li><a href="https://www.aida.info.ro/polite-rca" target="_blank">Verificare RCA | AIDA</a></li>
-                    <li><a href="#">Informare Precontractuală</a></li>
-                </ul>
-            </div>
-            <div class="f-col">
-                <h4>Suport & Legal</h4>
+                <h4>Legal & Suport</h4>
                 <div class="legal-stack">
                     <a href="https://anpc.ro" class="legal-btn" target="_blank">ANPC</a>
                     <a href="https://www.sal-fin.ro" class="legal-btn" target="_blank">SAL-FIN</a>
@@ -277,4 +243,9 @@
                 </div>
             </div>
         </div>
-        <p style="text-align: center; color: #222; font-size: 0.65rem; margin-top: 50px;">© 2026 SafeGo Broker de Asigurare.</p>
+    </footer>
+
+    <a href="https://wa.me/40700000000" class="wa-float" target="_blank">💬</a>
+
+</body>
+</html>
