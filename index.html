@@ -3,103 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeGo.ro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>SafeGo - Asigurări Gen Z</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        body { background: #0a0a0a; color: white; font-family: sans-serif; }
-        .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('1769436406916.png');
-            background-size: cover; background-position: center; border-radius: 24px;
+        /* 1. FUNDATIA (Scena Întunecată) */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Charcoal Dark - mai soft decât negrul pur */
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            overflow-x: hidden;
         }
-        .btn-neon { background: #00f2ff; color: black; font-weight: 900; box-shadow: 0 0 20px rgba(0, 242, 255, 0.5); }
+
+        /* 2. HEADER PLUTITOR (Glassmorphism) */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            position: fixed;
+            width: 90%;
+            top: 0;
+            z-index: 100;
+            background: rgba(18, 18, 18, 0.8); /* Transparență */
+            backdrop-filter: blur(10px); /* Efect de sticlă mată */
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        
+        .logo span { color: #00F0FF; } /* Accent SafeGo */
+
+        .auth-btn {
+            background: transparent;
+            border: 2px solid #00F0FF;
+            color: #00F0FF;
+            padding: 10px 25px;
+            border-radius: 50px; /* Capsulă */
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .auth-btn:hover {
+            background: #00F0FF;
+            color: #000;
+            box-shadow: 0 0 15px #00F0FF; /* Glow simplu */
+        }
+
+        /* 3. HERO SECTION (Consola Centrală) */
+        .hero-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        .highlight-text {
+            color: #39FF14; /* Lime Green - Siguranță */
+        }
+
+        /* 4. GRILA DE BUTOANE (Neon Grid) */
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 coloane desktop */
+            gap: 20px;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        /* Stilul Butonului Neon */
+        .neon-card {
+            background: rgba(255, 255, 255, 0.05); /* Aproape invizibil în repaus */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            filter: grayscale(100%); /* Gri când e inactiv */
+            transition: 0.3s;
+        }
+
+        .label {
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        /* 5. MAGIA: ACTIVARE LA ATINGERE (Hover/Touch) */
+        
+        /* TRAVEL - Cyan Electric */
+        .neon-card.travel:hover {
+            border-color: #00F0FF;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6), inset 0 0 10px rgba(0, 240, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .neon-card.travel:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #00F0FF; }
+        .neon-card.travel:hover .label { color: #00F0FF; opacity: 1; text-shadow: 0 0 5px #00F0FF; }
+
+        /* LOCUINTA - Lime Green */
+        .neon-card.home:hover {
+            border-color: #39FF14;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.6), inset 0 0 10px rgba(57, 255, 20, 0.2);
+            transform: translateY(-5px);
+        }
+        .neon-card.home:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #39FF14; }
+        .neon-card.home:hover .label { color: #39FF14; opacity: 1; text-shadow: 0 0 5px #39FF14; }
+
+        /* WHEELS - Purple Neon */
+        .neon-card.wheels:hover {
+            border-color: #D300C5;
+            box-shadow: 0 0 20px rgba(211, 0, 197, 0.6), inset 0 0 10px rgba(211, 0, 197, 0.2);
+            transform: translateY(-5px);
+        }
+        .neon-card.wheels:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #D300C5; }
+        .neon-card.wheels:hover .label { color: #D300C5; opacity: 1; text-shadow: 0 0 5px #D300C5; }
+
+        /* RCA - Orange Alert */
+        .neon-card.rca:hover {
+            border-color: #FF5F1F;
+            box-shadow: 0 0 20px rgba(255, 95, 31, 0.6), inset 0 0 10px rgba(255, 95, 31, 0.2);
+            transform: translateY(-5px);
+        }
+        .neon-card.rca:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #FF5F1F; }
+        .neon-card.rca:hover .label { color: #FF5F1F; opacity: 1; text-shadow: 0 0 5px #FF5F1F; }
+
+        /* SANATATE - Red Pulse */
+        .neon-card.health:hover {
+            border-color: #FF003C;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.6), inset 0 0 10px rgba(255, 0, 60, 0.2);
+            transform: translateY(-5px);
+        }
+        .neon-card.health:hover .icon { filter: grayscale(0); text-shadow: 0 0 15px #FF003C; }
+        .neon-card.health:hover .label { color: #FF003C; opacity: 1; text-shadow: 0 0 5px #FF003C; }
+
+        /* RESPONSIVE (Mobil) */
+        @media (max-width: 600px) {
+            .control-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 pe rând pe telefon */
+            }
+            h1 { font-size: 2rem; }
+            .neon-card { padding: 20px 10px; }
+        }
     </style>
 </head>
-<body class="p-4 pb-28">
+<body>
 
-    <header class="flex justify-between items-center py-4 mb-6">
-        <div class="flex items-center gap-2">
-            <img src="logo-scut.png" class="h-10 w-10" alt="Logo">
-            <span class="text-2xl font-black italic uppercase">SafeGo<span class="text-cyan-400">.ro</span></span>
-        </div>
+    <header>
+        <div class="logo">Safe<span>Go</span>.ro</div>
+        <button class="auth-btn">Autentificare</button>
     </header>
 
-    <div class="hero-section h-[500px] flex flex-col items-center justify-end text-center p-8 mb-8 border border-zinc-800">
-        <div class="mb-10">
-            <h2 class="text-4xl font-black uppercase italic mb-2">SafeGo Wheels</h2>
-            <p class="text-zinc-200 text-sm mb-6 max-w-xs">Asigurare specializată pentru trotinete și biciclete electrice.</p>
-            <a href="https://wa.me/40723697805?text=Vreau%20oferta%20Wheels"
-               class="px-12 py-4 btn-neon rounded-2xl uppercase text-sm inline-block transition-transform hover:scale-105">
-               Calculează Wheels
-            </a>
+    <div class="hero-container">
+        
+        <h1>LIBERTATE.<br><span class="highlight-text">SIGURANȚĂ.</span> INSTANT.</h1>
+
+        <div class="control-grid">
+            
+            <div class="neon-card travel">
+                <div class="icon">✈️</div>
+                <div class="label">TRAVEL</div>
+            </div>
+
+            <div class="neon-card home">
+                <div class="icon">🏠</div>
+                <div class="label">LOCUINȚĂ</div>
+            </div>
+
+            <div class="neon-card wheels">
+                <div class="icon">🚲</div>
+                <div class="label">WHEELS</div>
+            </div>
+
+            <div class="neon-card rca">
+                <div class="icon">🚗</div>
+                <div class="label">RCA</div>
+            </div>
+
+            <div class="neon-card health">
+                <div class="icon">❤️</div>
+                <div class="label">SĂNĂTATE</div>
+            </div>
+
+            <div class="neon-card" style="border-style: dashed;">
+                <div class="icon">➕</div>
+                <div class="label">ALTELE</div>
+            </div>
+
         </div>
     </div>
-
-    <div class="grid gap-4 mb-16">
-        <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-3xl flex justify-between items-center">
-            <div>
-                <h3 class="font-bold uppercase italic text-lg">✈️ Go Travel</h3>
-                <p class="text-zinc-500 text-xs mt-1">Medicală externă emisă instant.</p>
-            </div>
-            <a href="https://wa.me/40723697805" class="text-cyan-400 font-black text-[10px] uppercase border border-cyan-400/30 px-3 py-2 rounded-lg italic">Solicită →</a>
-        </div>
-        <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-3xl flex justify-between items-center">
-            <div>
-                <h3 class="font-bold uppercase italic text-lg">🏠 Go Home</h3>
-                <p class="text-zinc-500 text-xs mt-1">Protecție completă pentru locuință.</p>
-            </div>
-            <a href="https://wa.me/40723697805" class="text-green-400 font-black text-[10px] uppercase border border-green-400/30 px-3 py-2 rounded-lg italic">Solicită →</a>
-        </div>
-    </div>
-
-    <footer class="border-t border-zinc-900 pt-10 pb-10">
-        <div class="flex flex-col md:flex-row justify-between items-start gap-12">
-           
-            <div class="space-y-6 flex-1">
-                <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Protecția Consumatorului</p>
-                <div class="flex flex-col gap-4">
-                    <a href="https://anpc.ro/ce-este-sal/" target="_blank">
-                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" alt="ANPC SAL" class="h-11 opacity-80 hover:opacity-100 transition-all">
-                    </a>
-                   
-                    <a href="https://www.salfin.ro/" target="_blank" class="inline-block bg-white p-2 rounded-lg w-[250px]">
-                        <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" alt="SAL-FIN" class="h-10 mx-auto">
-                    </a>
-
-                    <a href="https://www.asfromania.ro/" target="_blank" class="inline-block text-zinc-500 hover:text-white text-[10px] font-bold border border-zinc-800 px-4 py-3 rounded-lg uppercase italic transition-colors">
-                        Autoritatea de Supraveghere Financiară (ASF)
-                    </a>
-                </div>
-            </div>
-
-            <div class="md:text-right space-y-3">
-                <p class="text-white font-black italic uppercase text-xl tracking-tighter">SafeGo Digital</p>
-                <div class="text-zinc-500 text-xs font-medium">
-                    <p>Email: office@safego.ro</p>
-                    <p>Tel: 0723 697 805</p>
-                </div>
-                <div class="pt-6">
-                    <p class="text-[9px] text-zinc-700 uppercase font-black leading-tight">Partener:<br>INTER BROKER DE ASIGURARE</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="flex gap-6 mt-12 text-[9px] font-black text-zinc-800 uppercase">
-            <a href="#" class="hover:text-zinc-600">GDPR</a>
-            <a href="#" class="hover:text-zinc-600">Termeni</a>
-            <a href="#" class="hover:text-zinc-600">Cookies</a>
-        </div>
-    </footer>
-
-    <nav class="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t border-zinc-900 p-4 flex justify-around z-50">
-        <a href="#" class="flex flex-col items-center text-cyan-400">
-            <span class="text-xl">🏠</span>
-            <span class="text-[8px] font-bold mt-1">HOME</span>
-        </a>
-        <a href="https://wa.me/40723697805" class="flex flex-col items-center text-zinc-500">
-            <span class="text-xl">💬</span>
-            <span class="text-[8px] font-bold mt-1">CONTACT</span>
-        </a>
-    </nav>
 
 </body>
 </html>
