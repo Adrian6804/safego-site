@@ -3,136 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeGo.ro | Expertiză și Siguranță</title>
+    <title>SafeGo.ro | Siguranță Instant</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    
     <style>
         :root {
-            --bg-dark: #0a0a0a;
-            --neon-cyan: #00F0FF;
-            --neon-lime: #39FF14;
-            --neon-wa: #25d366;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --cyan: #00F0FF;
+            --lime: #39FF14;
+            --dark: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
         body {
             margin: 0;
-            background-color: var(--bg-dark);
-            font-family: 'Montserrat', sans-serif;
+            background: var(--dark);
             color: white;
-            line-height: 1.6;
+            font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
         }
 
-        /* 1. HEADER */
+        /* HEADER */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
+            padding: 20px 5%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 999;
+            border-bottom: 1px solid #222;
         }
 
-        .logo { font-weight: 900; font-size: 1.6rem; letter-spacing: -1px; text-decoration: none; color: white; }
-        .logo span { color: var(--neon-cyan); }
+        .logo { font-weight: 900; font-size: 1.5rem; text-decoration: none; color: white; }
+        .logo span { color: var(--cyan); }
 
         .auth-btn {
-            border: 2px solid var(--neon-cyan);
+            border: 2px solid var(--cyan);
             background: transparent;
-            color: var(--neon-cyan);
-            padding: 8px 22px;
+            color: var(--cyan);
+            padding: 8px 20px;
             border-radius: 50px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.4s;
             text-transform: uppercase;
             font-size: 0.7rem;
         }
-        .auth-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 20px var(--neon-cyan); }
 
-        /* 2. HERO / SLOGAN */
-        .hero {
-            padding: 60px 5% 20px;
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
+        /* HERO SECTION */
+        .hero { padding: 60px 5% 20px; text-align: center; }
+        
         .slogan-main {
-            font-size: clamp(1.5rem, 4vw, 2.6rem);
+            font-size: clamp(1.4rem, 4vw, 2.5rem);
             font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            font-style: italic;
             text-transform: uppercase;
+            font-style: italic;
+            margin-bottom: 10px;
         }
 
         .slogan-sub {
             font-size: clamp(0.9rem, 2vw, 1.2rem);
             color: #888;
-            font-weight: 400;
             margin-bottom: 40px;
         }
 
-        .highlight { color: var(--neon-lime); text-shadow: 0 0 10px rgba(57, 255, 20, 0.3); }
+        .highlight { color: var(--lime); }
 
-        /* 3. GRID SERVICII */
+        /* GRID BUTOANE */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 15px;
-            padding: 0 5%;
             margin-bottom: 60px;
         }
 
         .card {
             background: var(--glass);
-            border: 1px solid var(--glass-border);
+            border: 1px solid #333;
             border-radius: 20px;
-            padding: 35px 15px;
-            text-align: center;
+            padding: 30px 10px;
             text-decoration: none;
             color: white;
-            transition: all 0.4s ease;
+            transition: 0.3s;
         }
 
-        .card i { font-size: 2rem; display: block; margin-bottom: 12px; opacity: 0.5; transition: 0.3s; }
-        .card span { font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; }
+        .card:hover { transform: translateY(-5px); border-color: var(--cyan); box-shadow: 0 0 15px var(--cyan); }
+        .card i { font-size: 2rem; display: block; margin-bottom: 10px; }
+        .card span { font-weight: 700; font-size: 0.75rem; }
 
-        .card:hover { transform: translateY(-8px); background: rgba(255, 255, 255, 0.07); }
-        .card.travel:hover { border-color: var(--neon-cyan); box-shadow: 0 0 25px rgba(0, 240, 255, 0.3); }
-        .card.home:hover { border-color: var(--neon-lime); box-shadow: 0 0 25px rgba(57, 255, 20, 0.3); }
-        .card.rca:hover { border-color: #FF5F1F; box-shadow: 0 0 25px rgba(255, 95, 31, 0.3); }
-
-        /* 4. BANNER IMPACT (EROU) */
-        .impact-banner {
-            margin: 40px 5% 80px;
-            height: 400px;
+        /* BANNER IMPACT */
+        .banner {
+            margin: 40px 0;
+            height: 350px;
             border-radius: 25px;
-            background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.1)), 
-                        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1470');
+            background: linear-gradient(to right, rgba(0,0,0,0.8), transparent), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
-            border: 1px solid var(--glass-border);
-            position: relative;
+            padding: 0 40px;
+            border: 1px solid #222;
         }
 
-        .banner-box {
-            margin-left: 40px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            border: 1px solid var(--glass-border);
-            max-width: 400px;
+        .banner-text {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 350px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .banner-box h2 { font
+        /* FOOTER */
+        footer {
+            background: #000;
+            padding: 40px 5%;
+            border-top: 1px solid #222;
+            margin-top: 60px;
+        }
+
+        .f-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+        }
+
+        .f-col h4 { font-size: 0.7rem; color: #555; text-transform: uppercase; margin-bottom: 15px; }
+        .f-col ul { list-style: none; padding: 0; }
+        .f-col a { color: #888; text-decoration: none; font-size: 0.8rem; }
+
+        /* BUTOANE LEGALE MICI VERTICALE */
+        .legal-box { display: flex; flex-direction: column; gap: 8px; }
+        .legal-item {
+            background: white;
+            color: black;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 4px 8px;
+            border-radius: 3px;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        /* WHATSAPP FLOAT */
+        .wa-btn {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #25d366;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            z-index: 1001;
+            box-shadow: 0 0 15px rgba(37,211,102,0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
+
+        @media (max-width: 768px) {
+            .wa-btn { top: auto; bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Safe<span>Go</span>.ro</a>
+        <button class="auth-btn">Autentificare</button>
+    </header>
+
+    <div class="hero">
+        <h1 class="slogan-main">Expertiză în protecție. <br><span class="highlight">Siguranță fără întrerupere.</span></h1>
+        <p class="slogan-sub">Fără „ne mai auzim”. Fără cozi. Doar click și ești asigurat.</p>
+
+        <div class="grid-container">
+            <a href="#" class="card"><i>✈️</i><span>TRAVEL</span></a>
+            <a href="#" class="card"><i>🏠</i><span>LOCUINȚĂ</span></a>
+            <a href="#" class="card"><i>🚲</i><span>WHEELS</span></a>
+            <a href="#" class="card"><i>🚗</i><span>RCA</span></a>
+            <a href="#" class="card"><i>❤️</i><span>SĂNĂTATE</span></a>
+            <a href="#" class="card"><i>➕</i><span>ALTELE</span></a>
+        </div>
+
+        <div class="banner">
+            <div class="banner-text">
+                <h2 style="margin:0 0 10px 0;">Siguranță <span class="highlight">Premium</span></h2>
+                <p style="font-size:0.8rem; color:#ccc;">Soluții smart pentru protecția ta și a familiei tale.</p>
+                <a href="#" style="color:var(--lime); font-weight:900; text-decoration:none; font-size:0.8rem;">DETALII →</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="f-grid">
+            <div class="f-col">
+                <div class="logo" style="font-size:1rem; margin-bottom:10px;">Safe<span>Go</span>.ro</div>
+                <a href="mailto:office@safego.ro" style="color:var(--cyan); font-weight:700;">office@safego.ro</a>
+            </div>
+            <div class="f-col">
+                <h4>Link-uri</h4>
+                <ul>
+                    <li><a href="#">Termeni</a></li>
+                    <li><a href="#">GDPR</a></li>
+                </ul>
+            </div>
+            <div class="f-col">
+                <h4>Servicii</h4>
+                <ul>
+                    <li><a href="https://www.aida.info.ro/polite-rca" target="_blank">Verificare RCA</a></li>
+                </ul>
+            </div>
+            <div class="f-col">
+                <h4>Legal</h4>
+                <div class="legal-box">
+                    <a href="https://anpc.ro" class="legal-item" target="_blank">ANPC</a>
+                    <a href="https://www.sal-fin.ro" class="legal-item" target="_blank">SAL-FIN</a>
+                    <a href="https://asfromania.ro" class="legal-item" target="_blank">ASF</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/40700000000" class="wa-btn" target="_blank">🟢</a>
+
+</body>
+</html>
