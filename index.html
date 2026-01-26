@@ -3,33 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeGo</title>
+    <title>SafeGo.ro - Asigurări Urbane</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glow-card:hover { box-shadow: 0 0 15px rgba(34, 211, 238, 0.3); border-color: #22d3ee; }
+        body { background-color: #000; color: #fff; font-family: sans-serif; }
+    </style>
 </head>
-<body class="bg-black text-white p-4">
+<body class="pb-24">
 
-    <div class="flex items-center gap-3 mb-8 border-b border-zinc-800 pb-4">
-        <img src="logo-scut.png" class="h-12 w-12" alt="Logo">
-        <h1 class="text-2xl font-black italic uppercase">SafeGo.ro</h1>
+    <nav class="p-4 flex justify-between items-center border-b border-zinc-800 bg-black sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <img src="logo-scut.png" alt="SafeGo Logo" class="h-10 w-10">
+            <span class="text-xl font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
+        </div>
+        <div class="text-[10px] font-bold text-zinc-500 uppercase text-right">
+            Partener<br><span class="text-white">Inter Broker</span>
+        </div>
+    </nav>
+
+    <div class="p-5 space-y-6">
+       
+        <div class="bg-zinc-900 border border-zinc-800 p-5 rounded-3xl glow-card transition-all">
+            <img src="Wheels.jpg" class="w-full h-44 object-cover rounded-2xl mb-4" alt="SafeGo Wheels">
+            <h2 class="text-xl font-black uppercase italic text-cyan-400">SafeGo Wheels</h2>
+            <p class="text-zinc-400 text-xs mb-4">Asigurare specializată pentru trotinete și biciclete electrice. Protecție la furt și răspundere civilă.</p>
+            <a href="https://wa.me/40723697805?text=Salut!%20Doresc%20o%20ofertă%20pentru%20SafeGo%20Wheels."
+               class="block text-center py-4 bg-cyan-500 text-black font-black rounded-2xl uppercase text-sm shadow-lg shadow-cyan-500/20">
+               Calculează Wheels
+            </a>
+        </div>
+
+        <div class="bg-zinc-900 border border-zinc-800 p-5 rounded-3xl glow-card transition-all">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-xl font-black uppercase italic text-white">✈️ Go Travel</h2>
+                <span class="text-[9px] bg-zinc-800 px-2 py-1 rounded text-zinc-400 uppercase font-bold">Activ 24/7</span>
+            </div>
+            <p class="text-zinc-400 text-xs mb-4">Polița de asigurare medicală externă direct pe telefonul tău în 30 de secunde.</p>
+            <a href="https://wa.me/40723697805?text=Salut!%20Doresc%20o%20ofertă%20pentru%20asigurare%20Travel."
+               class="block text-center py-4 border-2 border-cyan-500 text-cyan-400 font-black rounded-2xl uppercase text-sm">
+               Calculează Travel
+            </a>
+        </div>
+
+        <div class="bg-zinc-900 border border-zinc-800 p-5 rounded-3xl glow-card transition-all">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-xl font-black uppercase italic text-white">🏠 Go Home</h2>
+                <span class="text-[9px] bg-green-500/10 px-2 py-1 rounded text-green-400 uppercase font-bold">Protecție Casă</span>
+            </div>
+            <p class="text-zinc-400 text-xs mb-4">Asigurări facultative și PAD pentru locuința ta. Protejează-ți investiția instant.</p>
+            <a href="https://wa.me/40723697805?text=Salut!%20Doresc%20o%20ofertă%20pentru%20asigurarea%20locuinței."
+               class="block text-center py-4 border-2 border-green-500 text-green-400 font-black rounded-2xl uppercase text-sm">
+               Protejează Locuința
+            </a>
+        </div>
+
     </div>
 
-    <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-3xl mb-6">
-        <p class="text-4xl mb-2">✈️</p>
-        <h2 class="text-xl font-bold uppercase italic">Go Travel</h2>
-        <p class="text-zinc-400 text-sm mb-4">Asigurare în 30 secunde pe WhatsApp.</p>
-        <a href="https://wa.me/40723697805?text=Salut!%20Vreau%20asigurare%20Travel"
-           class="block text-center py-4 bg-cyan-500 text-black font-black rounded-2xl uppercase">
-           Calculează Travel
-        </a>
-    </div>
+    <footer class="mt-10 bg-zinc-950 border-t border-zinc-900 p-6 space-y-8">
+       
+        <div class="flex flex-col gap-3 items-center">
+            <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="nofollow">
+                <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" alt="SAL" class="h-[50px] w-[250px] opacity-70">
+            </a>
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="nofollow">
+                <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" alt="SOL" class="h-[50px] w-[250px] opacity-70">
+            </a>
+        </div>
 
-    <div class="bg-zinc-900 border border-zinc-700 p-6 rounded-3xl mb-20">
-        <p class="text-4xl mb-2">🏠</p>
-        <h2 class="text-xl font-bold uppercase italic">Go Home</h2>
-        <p class="text-zinc-400 text-sm mb-4">Protecție pentru casă și gadget-uri.</p>
-        <a href="https://wa.me/40723697805?text=Salut!%20Vreau%20asigurare%20Home"
-           class="block text-center py-4 bg-green-500 text-black font-black rounded-2xl uppercase text-sm">
-           Protejează Locuința
+        <div class="text-center space-y-2">
+            <p class="text-white font-bold text-xs uppercase tracking-widest">SafeGo Digital Agency</p>
+            <p class="text-zinc-500 text-[10px]">Email: office@safego.ro | Tel: 0723 697 805</p>
+            <p class="text-zinc-600 text-[9px] uppercase">Asistent în brokeraj: INTER BROKER DE ASIGURARE</p>
+        </div>
+
+        <div class="flex justify-center gap-4 text-[9px] font-bold text-zinc-500 uppercase">
+            <a href="#">GDPR</a>
+            <a href="#">Termeni</a>
+            <a href="#">Cookie</a>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-md border-t border-zinc-800 p-4 flex justify-around z-50">
+        <div class="flex flex-col items-center text-cyan-400">
+            <span class="text-xl">🏠</span>
+            <span class="text-[8px] font-bold uppercase">Acasă</span>
+        </div>
+        <a href="https://wa.me/40723697805" class="flex flex-col items-center text-zinc-500">
+            <span class="text-xl">💬</span>
+            <span class="text-[8px] font-bold uppercase">WhatsApp</span>
         </a>
     </div>
 
