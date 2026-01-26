@@ -21,9 +21,10 @@
             font-family: 'Montserrat', sans-serif;
             color: white;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* HEADER */
+        /* 1. HEADER */
         header {
             display: flex;
             justify-content: space-between;
@@ -37,7 +38,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .logo { font-weight: 900; font-size: 1.6rem; letter-spacing: -1px; }
+        .logo { font-weight: 900; font-size: 1.6rem; letter-spacing: -1px; text-decoration: none; color: white; }
         .logo span { color: var(--neon-cyan); }
 
         .auth-btn {
@@ -51,10 +52,10 @@
             transition: 0.4s;
             text-transform: uppercase;
             font-size: 0.75rem;
-        }
+        } /* */
         .auth-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 20px var(--neon-cyan); }
 
-        /* HERO SECTION */
+        /* 2. HERO SECTION & SLOGAN */
         .hero {
             padding: 80px 5% 40px;
             text-align: center;
@@ -63,7 +64,7 @@
         }
 
         .slogan-main {
-            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-size: clamp(1.6rem, 4vw, 2.8rem);
             font-weight: 900;
             line-height: 1.2;
             margin-bottom: 20px;
@@ -72,7 +73,7 @@
         }
 
         .slogan-sub {
-            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
             color: #888;
             font-weight: 400;
             margin-bottom: 50px;
@@ -80,7 +81,7 @@
 
         .highlight { color: var(--neon-lime); text-shadow: 0 0 10px rgba(57, 255, 20, 0.3); }
 
-        /* GRID BUTOANE */
+        /* 3. GRID BUTOANE SERVICII */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -103,7 +104,6 @@
         .card i { font-size: 2.2rem; display: block; margin-bottom: 15px; opacity: 0.5; transition: 0.3s; }
         .card span { font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; }
 
-        /* ACTIVARE LA ATINGERE */
         .card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.06); }
         .card:hover i { opacity: 1; transform: scale(1.1); }
         
@@ -113,149 +113,41 @@
         .card.rca:hover { border-color: #FF5F1F; box-shadow: 0 0 30px rgba(255, 95, 31, 0.4); }
         .card.health:hover { border-color: #FF003C; box-shadow: 0 0 30px rgba(255, 0, 60, 0.4); }
 
-        /* FOOTER */
+        /* 4. FOOTER OPTIMIZAT */
         footer {
             background: #050505;
-            padding: 80px 8% 40px;
+            padding: 60px 8% 40px;
             border-top: 1px solid #1a1a1a;
         }
 
         .f-grid {
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 40px;
         }
 
-        .f-col h4 { color: #555; margin-bottom: 25px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; }
-        .f-col ul { list-style: none; padding: 0; }
-        .f-col li { margin-bottom: 12px; }
-        .f-col a { color: #999; text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
+        .f-col h4 { color: #555; margin-bottom: 20px; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; }
+        .f-col ul { list-style: none; padding: 0; margin: 0; }
+        .f-col li { margin-bottom: 10px; }
+        .f-col a { color: #999; text-decoration: none; font-size: 0.8rem; transition: 0.3s; }
         .f-col a:hover { color: white; }
 
-        /* LEGALE VERTICALE */
+        /* BUTOANE LEGALE MICI (REMEDIATE) */
         .legal-stack {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px; /* Spațiu mic între ele */
+            max-width: 140px; /* Lățime redusă pentru a nu domina vizual */
         }
 
         .legal-btn {
-            background: white;
-            color: black;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 900;
+            background: #fff;
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 10px; /* Font mic conform cerinței */
+            font-weight: 800;
             text-align: center;
             text-decoration: none;
             transition: 0.3s;
-        }
-        .legal-btn:hover { background: #e0e0e0; transform: scale(1.02); }
-
-        /* WHATSAPP MIJLOC-DREAPTA */
-        .wa-magnetic {
-            position: fixed;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--neon-wa);
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            text-decoration: none;
-            z-index: 2000;
-            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            animation: pulse-neon 2s infinite;
-        }
-
-        @keyframes pulse-neon {
-            0% { transform: translateY(-50%) scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
-            100% { transform: translateY(-50%) scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        @media (max-width: 900px) {
-            .f-grid { grid-template-columns: 1fr 1fr; }
-            .wa-magnetic { bottom: 30px; top: auto; right: 20px; transform: none; animation: pulse-neon-mobile 2s infinite; }
-        }
-        @keyframes pulse-neon-mobile {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="logo">Safe<span>Go</span>.ro</div>
-        <button class="auth-btn">Autentificare</button>
-    </header>
-
-    <section class="hero">
-        <h1 class="slogan-main">
-            Expertiză în protecție. <span class="highlight">Siguranță fără întrerupere.</span>
-        </h1>
-        <p class="slogan-sub">
-            Fără „ne mai auzim”. Fără cozi. Doar click și ești asigurat.
-        </p>
-
-        <div class="grid-container">
-            <a href="#" class="card travel"><i>✈️</i><span>TRAVEL</span></a>
-            <a href="#" class="card home"><i>🏠</i><span>LOCUINȚĂ</span></a>
-            <a href="#" class="card wheels"><i>🚲</i><span>WHEELS</span></a>
-            <a href="#" class="card rca"><i>🚗</i><span>RCA</span></a>
-            <a href="#" class="card health"><i>❤️</i><span>SĂNĂTATE</span></a>
-            <a href="#" class="card"><i>➕</i><span>ALTELE</span></a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="f-grid">
-            <div class="f-col">
-                <div class="logo" style="margin-bottom: 20px;">Safe<span>Go</span>.ro</div>
-                <p style="color: #444; font-size: 0.8rem;">Asigurări smart pentru stilul tău de viață.</p>
-                <a href="mailto:office@safego.ro" style="color: var(--neon-cyan); font-weight: bold; border-bottom: 1px solid;">office@safego.ro</a>
-            </div>
-
-            <div class="f-col">
-                <h4>Link-uri</h4>
-                <ul>
-                    <li><a href="#">Despre Noi</a></li>
-                    <li><a href="#">Politica de Cookies</a></li>
-                    <li><a href="#">GDPR</a></li>
-                    <li><a href="#">Termeni și Condiții</a></li>
-                </ul>
-            </div>
-
-            <div class="f-col">
-                <h4>Servicii</h4>
-                <ul>
-                    <li><a href="https://www.aida.info.ro/polite-rca" target="_blank">Verificare poliță RCA | AIDA</a></li>
-                    <li><a href="#">Informare Precontractuală</a></li>
-                    <li><a href="#">Polițe RCA</a></li>
-                </ul>
-            </div>
-
-            <div class="f-col">
-                <h4>Suport & Legal</h4>
-                <div class="legal-stack">
-                    <a href="https://anpc.ro" class="legal-btn" target="_blank">ANPC</a>
-                    <a href="https://www.sal-fin.ro" class="legal-btn" target="_blank">SAL-FIN</a>
-                    <a href="https://asfromania.ro" class="legal-btn" target="_blank">ASF</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <a href="https://wa.me/40700000000" class="wa-magnetic" target="_blank">
-        <span style="filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));">🟢</span>
-    </a>
-
-</body>
-</html>
             
