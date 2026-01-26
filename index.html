@@ -6,79 +6,75 @@
     <title>SafeGo.ro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #0a0a0a; color: white; font-family: 'Inter', sans-serif; }
-        .card-neon { background: #141414; border: 1px solid #262626; border-radius: 24px; overflow: hidden; }
-        .btn-cyan { background: #00f2ff; color: black; font-weight: 900; transition: 0.3s; }
-        .btn-cyan:hover { background: #00c8d4; transform: scale(1.02); }
-        .btn-outline { border: 1px solid #333; color: #888; transition: 0.3s; }
-        .btn-outline:hover { border-color: #00f2ff; color: white; }
+        body { background: #0a0a0a; color: white; font-family: sans-serif; }
+        .card-neon { background: #111; border: 1px solid #222; border-radius: 20px; overflow: hidden; }
+        .btn-main { background: #00f2ff; color: black; font-weight: 900; }
     </style>
 </head>
-<body class="p-4 pb-28">
+<body class="p-4 pb-24">
 
     <header class="flex justify-between items-center py-4 mb-6 border-b border-zinc-800">
         <div class="flex items-center gap-2">
-            <img src="logo-scut.png" class="h-8 w-8" alt="L">
-            <span class="text-lg font-black tracking-tighter uppercase italic">SafeGo<span class="text-cyan-400">.ro</span></span>
+            <img src="logo-scut.png" class="h-8 w-8" alt="Logo">
+            <span class="text-lg font-black italic uppercase">SafeGo<span class="text-cyan-400">.ro</span></span>
         </div>
-        <span class="text-[10px] text-zinc-500 font-bold uppercase">Partener Inter Broker</span>
     </header>
 
-    <h1 class="text-3xl font-black italic uppercase leading-none mb-8">
-        Siguranță.<br><span class="text-cyan-400">Fără Birocrație.</span>
-    </h1>
-
-    <div class="space-y-6">
-        <div class="card-neon">
-            <div class="relative h-44">
-                <img src="Wheels.jpg" class="w-full h-full object-cover opacity-60" alt="Wheels">
-                <div class="absolute bottom-4 left-4">
-                    <span class="bg-cyan-500 text-black text-[10px] font-bold px-2 py-1 rounded uppercase">Nou</span>
-                </div>
-            </div>
-            <div class="p-5">
-                <h2 class="text-xl font-black italic uppercase mb-1">SafeGo Wheels</h2>
-                <p class="text-zinc-400 text-xs mb-4">Protecție completă pentru trotinete și biciclete electrice.</p>
-                <a href="https://wa.me/40723697805?text=Vreau%20oferta%20Wheels" class="block w-full py-4 text-center btn-cyan rounded-xl uppercase text-sm">Calculează Acum</a>
-            </div>
-        </div>
-
-        <div class="card-neon p-5">
-            <div class="flex justify-between items-start mb-4">
-                <span class="text-3xl">✈️</span>
-                <h2 class="text-xl font-black italic uppercase">Go Travel</h2>
-            </div>
-            <p class="text-zinc-400 text-xs mb-4">Asigurare medicală externă emisă instant pe WhatsApp.</p>
-            <a href="https://wa.me/40723697805?text=Vreau%20oferta%20Travel" class="block w-full py-4 text-center btn-outline rounded-xl uppercase text-sm font-bold">Solicită Travel</a>
-        </div>
-
-        <div class="card-neon p-5">
-            <div class="flex justify-between items-start mb-4">
-                <span class="text-3xl">🏠</span>
-                <h2 class="text-xl font-black italic uppercase">Go Home</h2>
-            </div>
-            <p class="text-zinc-400 text-xs mb-4">Protecție pentru locuință, bunuri și gadget-uri.</p>
-            <a href="https://wa.me/40723697805?text=Vreau%20oferta%20Home" class="block w-full py-4 text-center btn-outline rounded-xl uppercase text-sm font-bold">Protejează Casa</a>
+    <div class="card-neon mb-6">
+        <img src="Wheels.jpg" class="w-full h-48 object-cover opacity-70" alt="SafeGo Wheels">
+        <div class="p-5">
+            <h2 class="text-xl font-bold italic uppercase mb-2 text-cyan-400">SafeGo Wheels</h2>
+            <p class="text-zinc-400 text-xs mb-4">Asigurare trotinete și biciclete electrice.</p>
+            <a href="https://wa.me/40723697805?text=Vreau%20oferta%20Wheels" class="block w-full py-4 text-center btn-main rounded-xl uppercase text-sm">Calculează Wheels</a>
         </div>
     </div>
 
-    <footer class="mt-12 pt-8 border-t border-zinc-900 space-y-6">
-        <div class="flex flex-col items-center gap-4">
-            <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="w-60 opacity-50 hover:opacity-100" alt="SAL"></a>
-            <a href="https://ec.europa.eu/consumers/odr" target="_blank"><img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" class="w-60 opacity-50 hover:opacity-100" alt="SOL"></a>
+    <div class="grid gap-4 mb-10">
+        <div class="card-neon p-5 border-l-4 border-cyan-500">
+            <h3 class="font-bold uppercase italic">✈️ Go Travel</h3>
+            <a href="https://wa.me/40723697805?text=Oferta%20Travel" class="text-cyan-400 text-xs font-bold mt-2 block">SOLICITĂ PE WHATSAPP →</a>
         </div>
-        <div class="text-center text-[10px] text-zinc-600 space-y-1">
-            <p class="font-bold text-zinc-400">Email: office@safego.ro</p>
-            <p>ASISTENT ÎN BROKERAJ: INTER BROKER DE ASIGURARE</p>
-            <div class="flex justify-center gap-4 pt-2">
-                <a href="#">Termeni</a> <a href="#">GDPR</a> <a href="#">Cookies</a>
+        <div class="card-neon p-5 border-l-4 border-green-500">
+            <h3 class="font-bold uppercase italic">🏠 Go Home</h3>
+            <a href="https://wa.me/40723697805?text=Oferta%20Home" class="text-green-400 text-xs font-bold mt-2 block">SOLICITĂ PE WHATSAPP →</a>
+        </div>
+    </div>
+
+    <footer class="mt-10 pt-6 border-t border-zinc-900">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-8">
+           
+            <div class="flex flex-col gap-4 items-start">
+                <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1">Protecția Consumatorului</p>
+               
+                <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+                    <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" alt="ANPC SAL" class="h-10 opacity-70 hover:opacity-100">
+                </a>
+
+                <a href="https://www.salfin.ro/" target="_blank" class="bg-white p-2 rounded">
+                    <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" alt="SAL-FIN" class="h-8">
+                </a>
+
+                <a href="https://www.asfromania.ro/" target="_blank" class="text-zinc-400 text-[10px] font-bold hover:text-white border border-zinc-700 px-3 py-1 rounded">
+                    AUTORITATEA DE SUPRAVEGHERE FINANCIARĂ (ASF)
+                </a>
             </div>
+
+            <div class="text-left md:text-right space-y-2">
+                <p class="text-white font-black text-sm italic uppercase">SafeGo Digital</p>
+                <p class="text-zinc-500 text-[10px]">Email: office@safego.ro</p>
+                <p class="text-zinc-500 text-[10px]">Tel: 0723 697 805</p>
+                <p class="text-[9px] text-zinc-600 uppercase">Partener: INTER BROKER DE ASIGURARE</p>
+            </div>
+        </div>
+
+        <div class="flex gap-4 mt-8 text-[9px] font-bold text-zinc-700 uppercase">
+            <a href="#">Termeni</a> <a href="#">GDPR</a> <a href="#">Cookies</a>
         </div>
     </footer>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-lg border-t border-zinc-800 p-4 flex justify-around">
-        <div class="flex flex-col items-center text-cyan-400"><span class="text-xl">🏠</span><span class="text-[8px] font-bold uppercase">Home</span></div>
-        <a href="https://wa.me/40723697805" class="flex flex-col items-center text-zinc-500"><span class="text-xl">💬</span><span class="text-[8px] font-bold uppercase">Contact</span></a>
+    <nav class="fixed bottom-0 left-0 right-0 bg-black/90 border-t border-zinc-800 p-4 flex justify-around">
+        <div class="flex flex-col items-center text-cyan-400"><span class="text-xl">🏠</span><span class="text-[8px] font-bold">HOME</span></div>
+        <a href="https://wa.me/40723697805" class="flex flex-col items-center text-zinc-500"><span class="text-xl">💬</span><span class="text-[8px] font-bold">CONTACT</span></a>
     </nav>
 
 </body>
