@@ -24,7 +24,7 @@
             line-height: 1.6;
         }
 
-        /* 1. HEADER */
+        /* 1. HEADER [cite: 1] */
         header {
             display: flex;
             justify-content: space-between;
@@ -52,7 +52,7 @@
             transition: 0.4s;
             text-transform: uppercase;
             font-size: 0.75rem;
-        } /* */
+        } /* [cite: 5] */
         .auth-btn:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 20px var(--neon-cyan); }
 
         /* 2. HERO SECTION & SLOGAN */
@@ -81,7 +81,7 @@
 
         .highlight { color: var(--neon-lime); text-shadow: 0 0 10px rgba(57, 255, 20, 0.3); }
 
-        /* 3. GRID BUTOANE SERVICII */
+        /* 3. GRID BUTOANE SERVICII [cite: 4] */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -113,7 +113,7 @@
         .card.rca:hover { border-color: #FF5F1F; box-shadow: 0 0 30px rgba(255, 95, 31, 0.4); }
         .card.health:hover { border-color: #FF003C; box-shadow: 0 0 30px rgba(255, 0, 60, 0.4); }
 
-        /* 4. FOOTER OPTIMIZAT */
+        /* 4. FOOTER OPTIMIZAT [cite: 6] */
         footer {
             background: #050505;
             padding: 60px 8% 40px;
@@ -150,4 +150,117 @@
             text-align: center;
             text-decoration: none;
             transition: 0.3s;
-            
+            text-transform: uppercase;
+            border: 1px solid transparent;
+        }
+        .legal-btn:hover { background: #ccc; transform: translateX(5px); }
+
+        /* 5. WHATSAPP GLOW  */
+        .wa-magnetic {
+            position: fixed;
+            right: 25px;
+            top: 55%; /* Poziționat la mijloc-dreapta */
+            transform: translateY(-50%);
+            background: var(--neon-wa);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            text-decoration: none;
+            z-index: 2000;
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.6);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); transform: translateY(-50%) scale(0.95); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); transform: translateY(-50%) scale(1); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); transform: translateY(-50%) scale(0.95); }
+        }
+
+        @media (max-width: 768px) {
+            .wa-magnetic { top: auto; bottom: 30px; transform: none; right: 20px; }
+            @keyframes pulse-glow {
+                0% { transform: scale(0.95); }
+                70% { transform: scale(1); }
+                100% { transform: scale(0.95); }
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Safe<span>Go</span>.ro</a>
+        <button class="auth-btn">AUTENTIFICARE</button>
+    </header>
+
+    <section class="hero">
+        <h1 class="slogan-main">
+            Expertiză în protecție. <span class="highlight">Siguranță fără întrerupere.</span>
+        </h1>
+        <p class="slogan-sub">
+            Fără „ne mai auzim”. Fără cozi. Doar click și ești asigurat.
+        </p>
+
+        <div class="grid-container">
+            <a href="#" class="card travel"><i>✈️</i><span>TRAVEL</span></a>
+            <a href="#" class="card home"><i>🏠</i><span>LOCUINȚĂ</span></a>
+            <a href="#" class="card wheels"><i>🚲</i><span>WHEELS</span></a>
+            <a href="#" class="card rca"><i>🚗</i><span>RCA</span></a>
+            <a href="#" class="card health"><i>❤️</i><span>SĂNĂTATE</span></a>
+            <a href="#" class="card"><i>➕</i><span>ALTELE</span></a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="f-grid">
+            <div class="f-col">
+                <div class="logo" style="font-size: 1.2rem; margin-bottom: 15px;">Safe<span>Go</span>.ro</div>
+                <p style="color: #444; font-size: 0.75rem;">Simplu. Transparent. Instant.</p>
+                <a href="mailto:office@safego.ro" style="color: var(--neon-cyan); font-weight: bold;">office@safego.ro</a>
+            </div>
+
+            <div class="f-col">
+                <h4>Link-uri</h4>
+                <ul>
+                    <li><a href="#">Despre Noi</a></li>
+                    <li><a href="#">Politica de Cookies</a></li>
+                    <li><a href="#">GDPR</a></li>
+                    <li><a href="#">Termeni și Condiții</a></li>
+                </ul>
+            </div>
+
+            <div class="f-col">
+                <h4>Servicii</h4>
+                <ul>
+                    <li><a href="https://www.aida.info.ro/polite-rca" target="_blank">Verificare poliță RCA | AIDA</a></li>
+                    <li><a href="#">Informare Precontractuală</a></li>
+                    <li><a href="#">Polițe RCA</a></li>
+                </ul>
+            </div>
+
+            <div class="f-col">
+                <h4>Suport & Legal</h4>
+                <div class="legal-stack">
+                    <a href="https://anpc.ro" class="legal-btn" target="_blank">ANPC</a>
+                    <a href="https://www.sal-fin.ro" class="legal-btn" target="_blank">SAL-FIN</a>
+                    <a href="https://asfromania.ro" class="legal-btn" target="_blank">ASF</a>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center; color: #222; font-size: 0.65rem; margin-top: 50px;">
+            © 2026 SafeGo Broker de Asigurare. Toate drepturile rezervate.
+        </p>
+    </footer>
+
+    <a href="https://wa.me/40700000000" class="wa-magnetic" target="_blank">
+        <span style="filter: brightness(1.5);">💬</span>
+    </a>
+
+</body>
+</html>
+         
