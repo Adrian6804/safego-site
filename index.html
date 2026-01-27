@@ -1,125 +1,105 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeGo.ro - Expertiză în Protecție</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background: #0a0a0a; color: white; font-family: 'Inter', sans-serif; margin: 0; }
-        .hero-bg {
-            background: linear-gradient(rgba(10,10,10,0.5), rgba(10,10,10,0.9)), url('Wheels.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            min-height: 100vh; display: flex; flex-direction: column;
-        }
-        .config-card {
-            background: rgba(255, 255, 255, 0.98); color: #1a1a1a;
-            border-radius: 28px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        /* Efect activ la atingere pentru butoane si icoane */
-        .btn-active:active { transform: scale(0.95); transition: 0.1s; }
-    </style>
-</head>
-<body>
+"use client";
 
-    <div class="hero-bg">
-        <header class="p-5 flex justify-between items-center bg-black/40 backdrop-blur-md sticky top-0 z-50">
-            <div class="flex items-center gap-2 btn-active cursor-pointer">
-                <img src="logo-scut.png" class="h-10 w-10" alt="Logo">
-                <span class="text-2xl font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
-            </div>
-           
-            <div class="flex gap-4">
-                <a href="#" class="p-3 bg-zinc-900 rounded-full btn-active border border-zinc-800" title="Acasă">
-                    <span class="text-xl">🏠</span>
-                </a>
-                <button class="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-black uppercase text-xs rounded-full btn-active shadow-lg shadow-cyan-500/20">
-                    Autentificare
-                </button>
-            </div>
-        </header>
+import { useState } from "react";
+import InsuranceForm from "./InsuranceForm";
 
-        <main class="flex-grow flex flex-col items-center justify-center px-4 py-12">
-            <div class="text-center mb-12">
-                <h1 class="text-3xl md:text-5xl font-black uppercase italic mb-4 leading-tight">
-                    Expertiză în protecție.<br>
-                    <span class="text-cyan-400 text-2xl md:text-4xl">Siguranța fără întrerupere</span>
-                </h1>
-            </div>
+export default function Hero() {
+  const [vehicleType, setVehicleType] = useState<'auto' | 'electric'>('auto');
+  const [showForm, setShowForm] = useState(false);
 
-            <div class="config-card w-full max-w-sm p-8 btn-active">
-                <h2 class="text-gray-400 text-[10px] font-black uppercase mb-8 tracking-[0.2em] text-center border-b pb-4">SafeGo Wheels</h2>
-               
-                <div class="space-y-6">
-                    <div>
-                        <label class="text-[9px] font-bold uppercase text-gray-400 block mb-1">Tip Vehicul</label>
-                        <select id="vType" class="w-full border-b-2 border-zinc-100 py-3 text-sm bg-transparent outline-none focus:border-cyan-500 transition-colors">
-                            <option>Trotinetă Electrică</option>
-                            <option>Bicicletă Electrică</option>
-                        </select>
-                    </div>
+  return (
+    <section className="pt-24 pb-10 px-4 max-w-md mx-auto bg-[#0F1115] min-h-screen text-white">
+      {/* Secțiunea Categorii - Dinamice și Luminoase */}
+      <div className="mb-8">
+        <span className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-2 block italic">Categorii</span>
+        <h2 className="text-2xl font-black mb-6 tracking-tighter uppercase leading-none">
+          Libertate. <br/>Siguranță. <span className="text-[#00D1FF]">Instant.</span>
+        </h2>
+        
+        <div className="grid grid-cols-3 gap-3">
+          {/* GO Travel - Albastru Neon */}
+          <div className="bg-[#1D3E79]/20 p-3 rounded-2xl border border-[#00D1FF]/10 flex flex-col justify-between h-28 transition-all duration-300 group hover:border-[#00D1FF] hover:shadow-[0_0_15px_rgba(0,209,255,0.3)] active:scale-95 cursor-pointer">
+            <span className="text-xl transition-transform group-hover:scale-110"> </span>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-tighter group-hover:text-[#00D1FF] transition-colors">GO Travel</p>
+              <p className="text-white/40 text-[7px]">Ready în 30 sec</p>
+            </div>
+          </div>
 
-                    <div>
-                        <label class="text-[9px] font-bold uppercase text-gray-400 block mb-1">Valoare Vehicul (RON)</label>
-                        <input type="number" id="vValue" placeholder="ex: 2500" class="w-full border-b-2 border-zinc-100 py-3 text-sm bg-transparent outline-none focus:border-cyan-500 transition-colors">
-                    </div>
+          {/* GO Life - Roz/Magenta Neon */}
+          <div className="bg-[#4E1632]/20 p-3 rounded-2xl border border-[#FF007A]/10 flex flex-col justify-between h-28 transition-all duration-300 group hover:border-[#FF007A] hover:shadow-[0_0_15px_rgba(255,0,122,0.3)] active:scale-95 cursor-pointer">
+            <span className="text-xl transition-transform group-hover:scale-110"> </span>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-tighter group-hover:text-[#FF007A] transition-colors">GO Life</p>
+              <p className="text-white/40 text-[7px]">Fără stres</p>
+            </div>
+          </div>
 
-                    <div class="flex items-center justify-between py-2 cursor-pointer">
-                        <span class="text-[11px] font-black text-zinc-800 uppercase italic">Acoperire Furt</span>
-                        <input type="checkbox" checked class="w-6 h-6 rounded accent-cyan-500 cursor-pointer">
-                    </div>
+          {/* GO Home - Verde Neon */}
+          <div className="bg-[#2D4A26]/20 p-3 rounded-2xl border border-[#39FF14]/10 flex flex-col justify-between h-28 transition-all duration-300 group hover:border-[#39FF14] hover:shadow-[0_0_15px_rgba(57,255,20,0.3)] active:scale-95 cursor-pointer">
+            <span className="text-xl transition-transform group-hover:scale-110"> </span>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-tighter group-hover:text-[#39FF14] transition-colors">GO Home</p>
+              <p className="text-white/40 text-[7px]">Protecția casei</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-                    <button onclick="trimiteWhatsApp()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-black py-5 rounded-2xl uppercase text-xs tracking-widest shadow-xl transition-all btn-active">
-                        Calculează Acum
-                    </button>
-                </div>
-            </div>
-        </main>
+      {/* Secțiunea Eroul Zilei - SafeGo Wheels */}
+      <div className="mb-8">
+        <span className="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-2 block italic">Eroul Zilei</span>
+        <div className="bg-[#1A1C1E] rounded-[32px] p-5 border border-white/5 shadow-2xl">
+          <h3 className="text-sm font-black mb-4 italic uppercase tracking-widest">SafeGo Wheels</h3>
+          
+          <div className="grid grid-cols-2 gap-2 bg-black/60 p-1.5 rounded-2xl border border-white/10 mb-5">
+            <button 
+              onClick={() => setVehicleType('auto')}
+              className={`py-3 rounded-xl text-[10px] font-black uppercase transition-all duration-300 flex items-center justify-center gap-2 ${
+                vehicleType === 'auto' ? 'bg-[#39FF14] text-black shadow-[0_0_20px_rgba(57,255,20,0.3)]' : 'text-gray-500'
+              }`}
+            >
+              Mașină
+            </button>
+            <button 
+              onClick={() => setVehicleType('electric')}
+              className={`py-3 rounded-xl text-[10px] font-black uppercase transition-all duration-300 flex items-center justify-center gap-2 ${
+                vehicleType === 'electric' ? 'bg-[#39FF14] text-black shadow-[0_0_20px_rgba(57,255,20,0.3)]' : 'text-gray-500'
+              }`}
+            >
+              Bici / Trotinetă
+            </button>
+          </div>
 
-        <footer class="p-10 bg-black/95 border-t border-zinc-900">
-            <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
-               
-                <div class="flex flex-col gap-4">
-                    <p class="text-zinc-600 text-[9px] font-black uppercase tracking-[0.2em] mb-2">Conformitate Legală</p>
-                   
-                    <a href="https://www.asfromania.ro/" target="_blank" class="opacity-70 hover:opacity-100 btn-active">
-                        <span class="text-[9px] font-bold border border-zinc-700 px-3 py-1 rounded">ASF - SUPRAVEGHERE FINANCIARĂ</span>
-                    </a>
+          <button 
+            onClick={() => setShowForm(true)}
+            className="w-full bg-[#39FF14] text-black font-black py-4 rounded-2xl text-[11px] uppercase mb-4 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_5px_15px_rgba(57,255,20,0.2)]"
+          >
+            Calculează acum
+          </button>
 
-                    <a href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=RO" target="_blank" class="btn-active">
-                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" class="h-6 grayscale hover:grayscale-0 transition-all" alt="SOL">
-                    </a>
+          <p className="text-center text-[9px] text-gray-400 font-bold uppercase tracking-widest italic">
+            {vehicleType === 'auto' ? "Asigurare RCA Instant" : "Protecție Biciclete & Trotinete"}
+          </p>
+        </div>
+      </div>
 
-                    <a href="https://anpc.ro/ce-este-sal/" target="_blank" class="btn-active">
-                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-6 grayscale hover:grayscale-0 transition-all" alt="ANPC">
-                    </a>
+      {/* Recenzii Video - Stil Story Premium */}
+      <div className="mb-4">
+         <span className="text-gray-500 text-[10px] uppercase tracking-widest font-bold italic underline decoration-[#39FF14]">Recenzii Comunitate</span>
+      </div>
+      <div className="flex gap-3 overflow-x-auto no-scrollbar pb-4">
+         {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="min-w-[110px] h-44 bg-gradient-to-b from-[#1A1C1E] to-black rounded-2xl border border-white/5 flex flex-col justify-end p-3 relative overflow-hidden group cursor-pointer hover:border-[#00D1FF]/40 transition-all">
+                <div className="absolute top-2 left-2 w-7 h-7 rounded-full border border-[#00D1FF] bg-gray-800"></div>
+                <p className="text-[8px] font-black uppercase text-white relative z-10 leading-tight">Expert Review {i}</p>
+                <div className="absolute inset-0 bg-[#00D1FF]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+         ))}
+      </div>
 
-                    <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank" class="btn-active">
-                        <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-4 bg-white px-2 py-1 rounded shadow-sm" alt="SAL-FIN">
-                    </a>
-                </div>
-
-                <div class="md:text-right">
-                    <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-4">SafeGo Digital</p>
-                    <p class="text-2xl font-black italic uppercase">office@safego.ro</p>
-                    <p class="text-cyan-400 font-bold mt-2">0723 697 805</p>
-                    <div class="mt-8 flex gap-6 md:justify-end text-[9px] font-black text-zinc-800 uppercase">
-                        <a href="#" class="hover:text-zinc-400">GDPR</a>
-                        <a href="#" class="hover:text-zinc-400">Termeni</a>
-                        <a href="#" class="hover:text-zinc-400">Cookies</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <script>
-        function trimiteWhatsApp() {
-            const tip = document.getElementById('vType').value;
-            const val = document.getElementById('vValue').value || "nespecificată";
-            const msg = `Bună ziua! Solicit ofertă SafeGo Wheels pentru ${tip}, valoare vehicul ${val} RON.`;
-            window.location.href = `https://wa.me/40723697805?text=${encodeURIComponent(msg)}`;
-        }
-    </script>
-</body>
-</html>
+      {showForm && <InsuranceForm type={vehicleType} onClose={() => setShowForm(false)} />}
+    </section>
+  );
+}
+ 
