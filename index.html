@@ -1,123 +1,160 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeGo.ro - Expertiză în Protecție</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background: #0a0a0a; color: white; font-family: 'Inter', sans-serif; margin: 0; }
-        .hero-bg {
-            background: linear-gradient(rgba(10,10,10,0.5), rgba(10,10,10,0.9)), url('Wheels.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            min-height: 100vh; display: flex; flex-direction: column;
-        }
-        .config-card {
-            background: rgba(255, 255, 255, 0.98); color: #1a1a1a;
-            border-radius: 28px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        .btn-active:active { transform: scale(0.95); transition: 0.1s; }
-        .contact-link { color: #a1a1aa; transition: color 0.3s; text-decoration: none; }
-        .contact-link:hover { color: #22d3ee; }
-    </style>
-</head>
-<body>
+"use client";
 
-    <div class="hero-bg">
-        <header class="p-5 flex justify-between items-center bg-black/40 backdrop-blur-md sticky top-0 z-50">
-            <div class="flex items-center gap-2 btn-active cursor-pointer">
-                <img src="logo-scut.png" class="h-10 w-10" alt="Logo">
-                <span class="text-2xl font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
+import { useState } from "react";
+
+export default function SafeGoSite() {
+  const [vehicleType, setVehicleType] = useState<'auto' | 'electric'>('electric');
+
+  return (
+    <div className="bg-[#0A0A0A] min-h-screen text-white font-sans selection:bg-cyan-500">
+     
+      {/* 1. HEADER (Logo stânga, Butoane dreapta) */}
+      <header className="fixed top-0 w-full z-50 p-5 flex justify-between items-center bg-black/60 backdrop-blur-lg border-b border-white/5">
+        <div className="flex items-center gap-2 active:scale-95 transition-transform cursor-pointer">
+          <img src="logo-scut.png" alt="Logo" className="h-8 w-8" />
+          <span className="text-xl font-black italic uppercase tracking-tighter">
+            SafeGo<span className="text-cyan-400">.ro</span>
+          </span>
+        </div>
+        <div className="flex gap-3">
+          <button className="p-2 bg-zinc-900 rounded-full border border-zinc-800 active:scale-90 transition-all">🏠</button>
+          <button className="px-5 py-2 bg-cyan-500 text-black font-black uppercase text-[10px] rounded-full active:scale-90 transition-all shadow-lg shadow-cyan-500/20">
+            Autentificare
+          </button>
+        </div>
+      </header>
+
+      <main className="pt-28 pb-10 px-4 max-w-md mx-auto">
+       
+        {/* HERO SECTION - Mesaj actualizat */}
+        <div className="mb-10">
+          <span className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold mb-2 block italic">Expertiză în protecție</span>
+          <h1 className="text-3xl font-black mb-2 tracking-tighter uppercase leading-none">
+            LIBERTATE. SIGURANȚĂ. <br/>
+            <span className="text-cyan-400">FĂRĂ ÎNTRERUPERE.</span>
+          </h1>
+        </div>
+
+        {/* CATEGORII (Carduri Neon) */}
+        <div className="grid grid-cols-3 gap-3 mb-10">
+          {/* GO Travel */}
+          <div className="bg-[#1D3E79]/20 p-3 rounded-2xl border border-cyan-500/10 flex flex-col justify-between h-28 hover:border-cyan-500/50 transition-all active:scale-95 cursor-pointer group">
+            <span className="text-lg group-hover:scale-110 transition-transform">✈️</span>
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-tighter">GO Travel</p>
+              <p className="text-white/40 text-[7px]">Ready în 30 sec</p>
             </div>
+          </div>
+
+          {/* GO Life */}
+          <div className="bg-[#4E1632]/20 p-3 rounded-2xl border border-pink-500/10 flex flex-col justify-between h-28 hover:border-pink-500/50 transition-all active:scale-95 cursor-pointer group">
+            <span className="text-lg group-hover:scale-110 transition-transform">❤️</span>
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-tighter">GO Life</p>
+              <p className="text-white/40 text-[7px]">Protecție viață</p>
+            </div>
+          </div>
+
+          {/* GO Home */}
+          <div className="bg-[#2D4A26]/20 p-3 rounded-2xl border border-green-500/10 flex flex-col justify-between h-28 hover:border-green-500/50 transition-all active:scale-95 cursor-pointer group">
+            <span className="text-lg group-hover:scale-110 transition-transform">🏠</span>
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-tighter">GO Home</p>
+              <p className="text-white/40 text-[7px]">Siguranța casei</p>
+            </div>
+          </div>
+        </div>
+
+        {/* EROUL ZILEI - Configurator SafeGo Wheels */}
+        <div className="bg-[#16181D] rounded-[32px] p-6 border border-white/5 mb-10 shadow-2xl relative overflow-hidden">
+          <h3 className="text-[10px] font-black mb-5 uppercase tracking-[0.3em] text-zinc-500 text-center italic">SafeGo Wheels</h3>
+         
+          <div className="grid grid-cols-2 gap-2 bg-black/60 p-1.5 rounded-2xl border border-white/5 mb-6">
+            <button
+              onClick={() => setVehicleType('auto')}
+              className={`py-3 rounded-xl text-[10px] font-black uppercase transition-all ${
+                vehicleType === 'auto' ? 'bg-white text-black shadow-lg' : 'text-zinc-500 hover:text-white'
+              }`}
+            >
+              Mașină
+            </button>
+            <button
+              onClick={() => setVehicleType('electric')}
+              className={`py-3 rounded-xl text-[10px] font-black uppercase transition-all ${
+                vehicleType === 'electric' ? 'bg-cyan-500 text-black shadow-lg shadow-cyan-500/20' : 'text-zinc-500 hover:text-white'
+              }`}
+            >
+              Bici / Trotinetă
+            </button>
+          </div>
+
+          <button className="w-full bg-cyan-500 text-black font-black py-4 rounded-2xl text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-cyan-500/20">
+            Calculează acum
+          </button>
+         
+          <p className="text-center text-[8px] text-zinc-600 font-bold uppercase tracking-widest mt-4">
+            {vehicleType === 'auto' ? "Asigurare RCA Instant" : "Protecție completă vehicule electrice"}
+          </p>
+        </div>
+
+        {/* RECENZII VIDEO */}
+        <div className="mb-4 flex justify-between items-center">
+           <span className="text-zinc-600 text-[10px] uppercase tracking-widest font-black italic">Recenzii Comunitate</span>
+           <span className="text-[8px] text-cyan-500 font-bold uppercase">Vezi toate</span>
+        </div>
+        <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="min-w-[110px] h-44 bg-zinc-900 rounded-2xl border border-white/5 flex flex-col justify-end p-3 relative overflow-hidden group cursor-pointer active:scale-95 transition-all">
+                <div className="absolute top-2 left-2 w-6 h-6 rounded-full border border-cyan-500 bg-zinc-800 z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                <p className="text-[8px] font-black uppercase text-white relative z-10 leading-tight">Expert Review {i}</p>
+            </div>
+          ))}
+        </div>
+      </main>
+
+      {/* 3. FOOTER (Stânga: Legale, Dreapta: Contact link-uri mici) */}
+      <footer className="p-8 bg-black/80 backdrop-blur-md border-t border-white/5">
+        <div className="max-w-md mx-auto flex justify-between items-start gap-4">
+         
+          {/* Legale Stânga (Unul sub altul) */}
+          <div className="flex flex-col gap-4">
+            <p className="text-[8px] font-bold text-zinc-600 uppercase tracking-widest mb-1">Conformitate</p>
            
-            <div class="flex gap-4">
-                <a href="#" class="p-3 bg-zinc-900 rounded-full btn-active border border-zinc-800">
-                    <span class="text-xl">🏠</span>
-                </a>
-                <button class="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-black uppercase text-xs rounded-full btn-active shadow-lg shadow-cyan-500/20">
-                    Autentificare
-                </button>
+            <a href="https://www.asfromania.ro/" target="_blank" className="active:scale-95 transition-all">
+               <span className="text-[8px] font-black border border-zinc-800 px-2 py-1 rounded text-zinc-500 hover:text-white transition-colors uppercase">ASF - Supraveghere</span>
+            </a>
+
+            <a href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=RO" target="_blank" className="active:scale-95 transition-all">
+               <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" className="h-5 opacity-80 hover:opacity-100" alt="SOL" />
+            </a>
+
+            <a href="https://anpc.ro/ce-este-sal/" target="_blank" className="active:scale-95 transition-all">
+               <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" className="h-5 opacity-80 hover:opacity-100" alt="ANPC" />
+            </a>
+
+            <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank" className="active:scale-95 transition-all">
+               <div className="bg-white p-1 rounded-md h-5 flex items-center shadow-sm">
+                 <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" className="h-2" alt="SAL-FIN" />
+               </div>
+            </a>
+          </div>
+
+          {/* Contact Dreapta (Link-uri mici) */}
+          <div className="text-right flex flex-col gap-2">
+            <p className="text-[8px] font-bold text-zinc-600 uppercase tracking-widest mb-1">Contact</p>
+            <a href="mailto:office@safego.ro" className="text-[11px] font-black italic uppercase text-cyan-400 hover:text-white transition-colors">office@safego.ro</a>
+            <a href="tel:0723697805" className="text-[10px] font-bold text-zinc-500 hover:text-cyan-400 transition-colors">0723 697 805</a>
+           
+            <div className="mt-6 flex gap-3 justify-end text-[7px] font-bold text-zinc-800 uppercase tracking-tighter">
+              <a href="#" className="hover:text-zinc-400 transition-colors">GDPR</a>
+              <a href="#" className="hover:text-zinc-400 transition-colors">Termeni</a>
+              <a href="#" className="hover:text-zinc-400 transition-colors text-[6px]">SafeGo Digital</a>
             </div>
-        </header>
+          </div>
 
-        <main class="flex-grow flex flex-col items-center justify-center px-4 py-12">
-            <div class="text-center mb-12">
-                <h1 class="text-3xl md:text-5xl font-black uppercase italic mb-4 leading-tight">
-                    Expertiză în protecție.<br>
-                    <span class="text-cyan-400 text-2xl md:text-4xl">Siguranța fără întrerupere</span>
-                </h1>
-            </div>
-
-            <div class="config-card w-full max-w-sm p-8 btn-active">
-                <h2 class="text-gray-400 text-[10px] font-black uppercase mb-8 tracking-[0.2em] text-center border-b pb-4">SafeGo Wheels</h2>
-                <div class="space-y-6">
-                    <div>
-                        <label class="text-[9px] font-bold uppercase text-gray-400 block mb-1">Tip Vehicul</label>
-                        <select id="vType" class="w-full border-b-2 border-zinc-100 py-3 text-sm bg-transparent outline-none focus:border-cyan-500 transition-colors">
-                            <option>Trotinetă Electrică</option>
-                            <option>Bicicletă Electrică</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="text-[9px] font-bold uppercase text-gray-400 block mb-1">Valoare Vehicul (RON)</label>
-                        <input type="number" id="vValue" placeholder="ex: 2500" class="w-full border-b-2 border-zinc-100 py-3 text-sm bg-transparent outline-none focus:border-cyan-500 transition-colors">
-                    </div>
-                    <div class="flex items-center justify-between py-2 cursor-pointer">
-                        <span class="text-[11px] font-black text-zinc-800 uppercase italic">Acoperire Furt</span>
-                        <input type="checkbox" checked class="w-6 h-6 rounded accent-cyan-500 cursor-pointer">
-                    </div>
-                    <button onclick="trimite()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-black py-5 rounded-2xl uppercase text-xs tracking-widest shadow-xl transition-all btn-active">
-                        Calculează Acum
-                    </button>
-                </div>
-            </div>
-        </main>
-
-        <footer class="p-10 bg-black/95 border-t border-zinc-900">
-            <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
-               
-                <div class="flex flex-col gap-5">
-                    <p class="text-zinc-600 text-[9px] font-black uppercase tracking-[0.2em] mb-1">Conformitate Legală</p>
-                   
-                    <a href="https://www.asfromania.ro/" target="_blank" class="btn-active">
-                        <span class="text-[9px] font-bold border border-zinc-700 px-3 py-1 rounded text-zinc-400 hover:text-white">ASF - SUPRAVEGHERE FINANCIARĂ</span>
-                    </a>
-
-                    <a href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=RO" target="_blank" class="btn-active block">
-                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" class="h-8 md:h-10 hover:opacity-80 transition-opacity" alt="SOL">
-                    </a>
-
-                    <a href="https://anpc.ro/ce-este-sal/" target="_blank" class="btn-active block">
-                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-8 md:h-10 hover:opacity-80 transition-opacity" alt="ANPC">
-                    </a>
-
-                    <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank" class="btn-active block">
-                        <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-6 md:h-8 bg-white px-3 py-2 rounded shadow-md" alt="SAL-FIN">
-                    </a>
-                </div>
-
-                <div class="md:text-right flex flex-col gap-2">
-                    <p class="text-zinc-600 text-[9px] font-black uppercase tracking-widest mb-2">Contact</p>
-                    <a href="mailto:office@safego.ro" class="contact-link text-lg md:text-xl font-bold italic uppercase">office@safego.ro</a>
-                    <a href="tel:0723697805" class="contact-link text-md md:text-lg font-bold">0723 697 805</a>
-                   
-                    <div class="mt-6 flex gap-4 md:justify-end text-[9px] font-black text-zinc-700 uppercase">
-                        <a href="#" class="hover:text-zinc-400">GDPR</a>
-                        <a href="#" class="hover:text-zinc-400">Termeni</a>
-                        <a href="#" class="hover:text-zinc-400">Cookies</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        </div>
+      </footer>
     </div>
-
-    <script>
-        function trimite() {
-            const tip = document.getElementById('vType').value;
-            const val = document.getElementById('vValue').value || "nespecificată";
-            const msg = `Bună ziua! Solicit ofertă SafeGo Wheels: ${tip}, valoare ${val} RON.`;
-            window.location.href = `https://wa.me/40723697805?text=${encodeURIComponent(msg)}`;
-        }
-    </script>
-</body>
-</html>
+  );
+}
