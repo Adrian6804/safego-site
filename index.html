@@ -6,69 +6,79 @@
     <title>SafeGo.ro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #000; color: white; font-family: sans-serif; }
+        body { background: #000; color: white; font-family: sans-serif; margin: 0; }
         .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('Wheels.jpg');
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('1769436406916.png');
             background-size: cover; background-position: center; min-height: 100vh;
+            display: flex; flex-direction: column;
         }
         .config-card {
-            background: #f8f9fa; color: #333; border-radius: 20px;
+            background: #ffffff; color: #333; border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
     </style>
 </head>
-<body class="hero-bg flex flex-col justify-between">
+<body>
 
-    <header class="p-6 flex items-center gap-3">
-        <img src="logo-scut.png" class="h-10 w-10" alt="Logo">
-        <span class="text-2xl font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
-    </header>
+    <div class="hero-bg">
+        <header class="p-6 flex items-center gap-3">
+            <img src="logo-scut.png" class="h-10 w-10" alt="Logo">
+            <span class="text-2xl font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
+        </header>
 
-    <main class="flex flex-col items-center px-4">
-        <div class="mb-8 text-center">
-            <h1 class="text-4xl font-black italic uppercase mb-2">SafeGo Wheels</h1>
-            <p class="text-zinc-300 text-sm">Protecție completă pentru vehiculul tău electric.</p>
-        </div>
-
-        <div class="config-card w-full max-w-sm p-8">
-            <h2 class="text-gray-500 text-[10px] font-black uppercase mb-6 tracking-widest">Configurare Asigurare</h2>
-           
-            <div class="space-y-6">
-                <div>
-                    <label class="text-[10px] font-bold uppercase text-gray-400 block mb-1">Tip Vehicul</label>
-                    <select id="type" class="w-full border-b border-gray-200 py-2 text-sm bg-transparent focus:outline-none">
-                        <option>Trotinetă Electrică</option>
-                        <option>Bicicletă Electrică</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="text-[10px] font-bold uppercase text-gray-400 block mb-1">Valoare Vehicul (RON)</label>
-                    <input type="number" id="valoare" placeholder="ex: 2500" class="w-full border-b border-gray-200 py-2 text-sm bg-transparent focus:outline-none">
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-gray-700 uppercase">Acoperire Furt</span>
-                    <input type="checkbox" checked class="w-5 h-5 accent-cyan-500">
-                </div>
-
-                <button onclick="trimiteWhatsApp()" class="w-full bg-[#00b4c8] text-white font-black py-4 rounded-xl uppercase text-xs tracking-widest mt-4 shadow-lg shadow-cyan-900/20">
-                    Calculează Acum
-                </button>
+        <main class="flex-grow flex flex-col items-center justify-center px-4 py-10">
+            <div class="mb-8 text-center">
+                <h1 class="text-4xl font-black italic uppercase mb-2">SafeGo Wheels</h1>
+                <p class="text-zinc-300 text-sm">Protecție completă pentru vehiculul tău electric.</p>
             </div>
-        </div>
-    </main>
 
-    <footer class="p-8 flex flex-col md:flex-row justify-between items-end gap-6 bg-black/40 backdrop-blur-sm mt-12">
-        <div class="flex flex-col gap-4 items-start">
-            <a href="https://anpc.ro/ce-este-sal/" target="_blank"><img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-10 opacity-80"></a>
-            <a href="https://www.salfin.ro/" target="_blank" class="bg-white p-2 rounded-lg w-[180px]"><img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-6 mx-auto"></a>
-        </div>
-        <div class="text-right">
-            <p class="font-black italic text-sm uppercase">SafeGo Digital</p>
-            <p class="text-[10px] text-zinc-500 uppercase">Partener: INTER BROKER DE ASIGURARE</p>
-        </div>
-    </footer>
+            <div class="config-card w-full max-w-sm p-8">
+                <h2 class="text-gray-500 text-[10px] font-black uppercase mb-6 tracking-widest text-center">Configurare Asigurare</h2>
+               
+                <div class="space-y-6">
+                    <div>
+                        <label class="text-[10px] font-bold uppercase text-gray-400 block mb-1">Tip Vehicul</label>
+                        <select id="type" class="w-full border-b border-gray-200 py-2 text-sm bg-transparent focus:outline-none">
+                            <option>Trotinetă Electrică</option>
+                            <option>Bicicletă Electrică</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-[10px] font-bold uppercase text-gray-400 block mb-1">Valoare Vehicul (RON)</label>
+                        <input type="number" id="valoare" placeholder="ex: 2500" class="w-full border-b border-gray-200 py-2 text-sm bg-transparent focus:outline-none">
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-700 uppercase">Acoperire Furt</span>
+                        <input type="checkbox" checked class="w-5 h-5 accent-cyan-500">
+                    </div>
+
+                    <button onclick="trimiteWhatsApp()" class="w-full bg-[#00b4c8] text-white font-black py-4 rounded-xl uppercase text-xs tracking-widest mt-4 shadow-lg shadow-cyan-900/20 transition-transform active:scale-95">
+                        Calculează Acum
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="p-8 flex flex-col md:flex-row justify-between items-end gap-6 bg-black/60 backdrop-blur-md">
+            <div class="flex flex-col gap-4 items-start">
+                <p class="text-zinc-500 text-[9px] font-bold uppercase tracking-widest">Protecția Consumatorului</p>
+                <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+                    <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-8 opacity-80">
+                </a>
+                <a href="https://www.salfin.ro/" target="_blank" class="bg-white p-2 rounded-lg w-[160px]">
+                    <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-5 mx-auto">
+                </a>
+                <a href="https://www.asfromania.ro/" target="_blank" class="text-[9px] text-zinc-500 border border-zinc-800 px-2 py-1 rounded">ASF ROMANIA</a>
+            </div>
+            <div class="text-right">
+                <p class="font-black italic text-lg uppercase leading-none">SafeGo Digital</p>
+                <p class="text-[10px] text-zinc-500 uppercase mt-2">office@safego.ro | 0723 697 805</p>
+                <p class="text-[9px] text-zinc-700 uppercase mt-4 font-bold">Partener: INTER BROKER DE ASIGURARE</p>
+            </div>
+        </footer>
+    </div>
 
     <script>
         function trimiteWhatsApp() {
