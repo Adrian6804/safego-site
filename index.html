@@ -3,67 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeGo.ro - Expertiză în Protecție</title>
+    <title>SafeGo.ro | Siguranță Urbană</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        body { background-color: #0F1115; font-family: 'Inter', sans-serif; color: white; }
+        .neon-card-blue { background: rgba(29, 62, 121, 0.2); border: 1px solid rgba(0, 209, 255, 0.1); }
+        .neon-card-pink { background: rgba(78, 22, 50, 0.2); border: 1px solid rgba(255, 0, 122, 0.1); }
+        .neon-card-green { background: rgba(45, 74, 38, 0.2); border: 1px solid rgba(57, 255, 20, 0.1); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-[#0A0A0A] text-white font-sans">
-    <header class="fixed top-0 w-full z-50 p-5 flex justify-between items-center bg-black/70 backdrop-blur-xl border-b border-white/5">
+<body>
+
+    <header class="fixed top-0 w-full z-50 p-4 flex justify-between items-center bg-[#0F1115]/80 backdrop-blur-md border-b border-white/5">
         <div class="flex items-center gap-2">
-            <img src="logo-scut.png" alt="Logo" class="h-8 w-8">
-            <span class="text-xl font-black italic uppercase tracking-tighter text-white">SafeGo<span class="text-cyan-400">.ro</span></span>
+            <div class="w-8 h-8 bg-[#00D1FF] rounded-lg flex items-center justify-center font-black text-black text-xs">SG</div>
+            <span class="text-xl font-black italic uppercase tracking-tighter italic">SafeGo<span class="text-[#00D1FF]">.ro</span></span>
         </div>
-        <div class="flex gap-3">
+        <div class="flex gap-2">
             <button class="p-2 bg-zinc-900 rounded-full border border-zinc-800">🏠</button>
-            <button class="px-5 py-2 bg-cyan-500 text-black font-black uppercase text-[10px] rounded-full shadow-lg shadow-cyan-500/30">Autentificare</button>
+            <button class="px-4 py-2 bg-[#00D1FF] text-black font-black uppercase text-[10px] rounded-full shadow-lg shadow-[#00D1FF]/20">Login</button>
         </div>
     </header>
 
-    <main class="pt-32 pb-16 px-5 max-w-md mx-auto">
+    <main class="pt-24 pb-12 px-5 max-w-md mx-auto">
+       
+        <div class="mb-8">
+            <span class="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-2 block italic">Categorii</span>
+            <h1 class="text-3xl font-black mb-1 tracking-tighter uppercase leading-none italic">
+                Libertate. <br/>Siguranță. <span class="text-[#00D1FF]">Instant.</span>
+            </h1>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 mb-10">
+            <div class="neon-card-blue p-3 rounded-2xl h-28 flex flex-col justify-between active:scale-95 transition-all">
+                <span class="text-xl">✈️</span>
+                <div>
+                    <p class="text-[9px] font-black uppercase text-[#00D1FF]">GO Travel</p>
+                    <p class="text-white/40 text-[7px]">Ready în 30s</p>
+                </div>
+            </div>
+            <div class="neon-card-pink p-3 rounded-2xl h-28 flex flex-col justify-between active:scale-95 transition-all">
+                <span class="text-xl">❤️</span>
+                <div>
+                    <p class="text-[9px] font-black uppercase text-[#FF007A]">GO Life</p>
+                    <p class="text-white/40 text-[7px]">Fără stres</p>
+                </div>
+            </div>
+            <div class="neon-card-green p-3 rounded-2xl h-28 flex flex-col justify-between active:scale-95 transition-all">
+                <span class="text-xl">🏠</span>
+                <div>
+                    <p class="text-[9px] font-black uppercase text-[#39FF14]">GO Home</p>
+                    <p class="text-white/40 text-[7px]">Protecția casei</p>
+                </div>
+            </div>
+        </div>
+
         <div class="mb-10">
-            <h1 class="text-4xl font-black tracking-tighter uppercase leading-[0.9] italic">EXPERTIZĂ ÎN <span class="text-cyan-400">PROTECȚIE.</span></h1>
-            <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-3 italic underline decoration-cyan-500/30">Siguranța fără întrerupere</p>
+            <span class="text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-2 block italic">Eroul Zilei</span>
+            <div class="bg-[#1A1C1E] rounded-[32px] p-6 border border-white/5 shadow-2xl">
+                <h3 class="text-[11px] font-black mb-4 italic uppercase tracking-widest text-center">SafeGo Wheels</h3>
+                <div class="bg-black/40 p-1.5 rounded-2xl border border-white/5 mb-5 flex">
+                    <button class="flex-1 py-3 rounded-xl text-[10px] font-black uppercase bg-[#39FF14] text-black">Bici / Trotinetă</button>
+                </div>
+                <button class="w-full bg-[#39FF14] text-black font-black py-4 rounded-2xl text-[11px] uppercase shadow-lg shadow-[#39FF14]/20 active:scale-95 transition-all">
+                    Calculează acum
+                </button>
+            </div>
         </div>
 
-        <div class="bg-[#111318] rounded-[40px] p-8 border border-white/5 mb-12 shadow-2xl">
-            <h3 class="text-[10px] font-black mb-6 uppercase tracking-[0.3em] text-zinc-500 text-center italic">SafeGo Wheels</h3>
-            <button class="w-full bg-cyan-500 text-black font-black py-5 rounded-2xl text-[11px] uppercase shadow-2xl shadow-cyan-500/20 mb-4">Calculează acum</button>
+        <div class="mb-4">
+            <span class="text-gray-500 text-[10px] uppercase tracking-widest font-bold italic underline decoration-[#39FF14]">Recenzii Comunitate</span>
         </div>
-
-        <div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
-            <div class="min-w-[140px] h-48 bg-zinc-900 rounded-[32px] border border-white/5 p-4 relative flex flex-col justify-end">
-                <p class="text-[9px] font-black uppercase text-white relative z-10">Review Expert</p>
+        <div class="flex gap-3 overflow-x-auto no-scrollbar pb-6">
+            <div class="min-w-[120px] h-44 bg-zinc-900 rounded-2xl border border-white/5 p-3 flex flex-col justify-end">
+                <p class="text-[8px] font-black uppercase">Expert Review</p>
+            </div>
+            <div class="min-w-[120px] h-44 bg-zinc-900 rounded-2xl border border-white/5 p-3 flex flex-col justify-end">
+                <p class="text-[8px] font-black uppercase">Safety Check</p>
             </div>
         </div>
     </main>
 
-    <footer class="p-10 bg-black border-t border-white/5">
-        <div class="max-w-md mx-auto flex flex-col gap-8">
-            <div class="flex justify-between items-center border-b border-white/5 pb-6">
-                <a href="mailto:office@safego.ro" class="text-[10px] font-black italic uppercase text-cyan-400">office@safego.ro</a>
-                <a href="tel:0723697805" class="text-[10px] font-bold text-zinc-500">0723 697 805</a>
-            </div>
+    <footer class="p-8 bg-black border-t border-white/5">
+        <div class="max-w-md mx-auto">
+            <div class="flex justify-between items-start gap-4 mb-8">
+                <div class="flex flex-col gap-3 flex-1">
+                    <p class="text-[8px] font-bold text-zinc-600 uppercase tracking-widest">Conformitate</p>
+                    <a href="https://www.asfromania.ro/" target="_blank" class="text-[9px] font-bold text-zinc-400 border border-zinc-800 p-2 rounded text-center">ASF SUPRAVEGHERE</a>
+                   
+                    <div class="bg-white rounded p-1 flex justify-center active:scale-95 transition-all">
+                        <a href="https://ec.europa.eu/consumers/odr" target="_blank">
+                            <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" class="h-6" alt="SOL">
+                        </a>
+                    </div>
+                    <div class="bg-white rounded p-1 flex justify-center active:scale-95 transition-all">
+                        <a href="https://anpc.ro/ce-este-sal/" target="_blank">
+                            <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-6" alt="ANPC">
+                        </a>
+                    </div>
+                    <div class="bg-white rounded p-1 flex justify-center active:scale-95 transition-all">
+                        <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank">
+                            <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-5" alt="SAL-FIN">
+                        </a>
+                    </div>
+                </div>
 
-            <div class="flex flex-col gap-4 text-center">
-                <p class="text-[9px] font-black text-zinc-700 uppercase tracking-widest">Conformitate Legală</p>
-                <a href="https://www.asfromania.ro/" target="_blank" class="text-[9px] font-bold text-zinc-500 border border-zinc-800 p-2 rounded-lg">ASF - Supraveghere</a>
-               
-                <div class="grid grid-cols-1 gap-2">
-                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" class="bg-white rounded-lg p-2 flex justify-center">
-                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" class="h-8" alt="SOL">
-                    </a>
-                    <a href="https://anpc.ro/ce-este-sal/" target="_blank" class="bg-white rounded-lg p-2 flex justify-center">
-                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-8" alt="ANPC">
-                    </a>
-                    <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank" class="bg-white rounded-lg p-2 flex justify-center border border-zinc-200">
-                        <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-6" alt="SAL-FIN">
-                    </a>
+                <div class="text-right flex flex-col gap-2 flex-1">
+                    <p class="text-[8px] font-bold text-zinc-600 uppercase tracking-widest">Contact</p>
+                    <a href="mailto:office@safego.ro" class="text-[10px] font-black italic uppercase text-[#00D1FF]">office@safego.ro</a>
+                    <a href="tel:0723697805" class="text-[10px] font-bold text-zinc-400">0723 697 805</a>
+                    <div class="mt-4 flex flex-col gap-1 text-[7px] font-bold text-zinc-800 uppercase italic">
+                        <span>SafeGo Digital</span>
+                        <span>GDPR • Termeni</span>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
+
 </body>
 </html>
