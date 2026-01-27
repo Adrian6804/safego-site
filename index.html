@@ -8,7 +8,7 @@
     <style>
         body { background: #0a0a0a; color: white; font-family: 'Inter', sans-serif; margin: 0; }
         .hero-bg {
-            background: linear-gradient(rgba(10,10,10,0.4), rgba(10,10,10,0.9)), url('Wheels.jpg');
+            background: linear-gradient(rgba(10,10,10,0.5), rgba(10,10,10,0.9)), url('Wheels.jpg');
             background-size: cover; background-position: center; background-attachment: fixed;
             min-height: 100vh; display: flex; flex-direction: column;
         }
@@ -16,6 +16,7 @@
             background: rgba(255, 255, 255, 0.98); color: #1a1a1a;
             border-radius: 28px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
+        /* Efect activ la atingere pentru butoane si icoane */
         .btn-active:active { transform: scale(0.95); transition: 0.1s; }
     </style>
 </head>
@@ -40,14 +41,10 @@
 
         <main class="flex-grow flex flex-col items-center justify-center px-4 py-12">
             <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-6xl font-black uppercase italic mb-4 leading-tight">
+                <h1 class="text-3xl md:text-5xl font-black uppercase italic mb-4 leading-tight">
                     Expertiză în protecție.<br>
-                    <span class="text-cyan-400">Siguranța fără întrerupere</span>
+                    <span class="text-cyan-400 text-2xl md:text-4xl">Siguranța fără întrerupere</span>
                 </h1>
-                <div class="flex justify-center gap-2">
-                    <span class="h-1 w-12 bg-cyan-500 rounded-full"></span>
-                    <span class="h-1 w-4 bg-zinc-700 rounded-full"></span>
-                </div>
             </div>
 
             <div class="config-card w-full max-w-sm p-8 btn-active">
@@ -72,54 +69,57 @@
                         <input type="checkbox" checked class="w-6 h-6 rounded accent-cyan-500 cursor-pointer">
                     </div>
 
-                    <button onclick="trimite()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-black py-5 rounded-2xl uppercase text-xs tracking-widest shadow-xl transition-all btn-active">
+                    <button onclick="trimiteWhatsApp()" class="w-full bg-[#1a1a1a] hover:bg-black text-white font-black py-5 rounded-2xl uppercase text-xs tracking-widest shadow-xl transition-all btn-active">
                         Calculează Acum
                     </button>
                 </div>
             </div>
         </main>
 
-       <footer class="p-10 bg-black/90 border-t border-zinc-900">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
-       
-        <div class="flex flex-col gap-5">
-            <p class="text-zinc-600 text-[9px] font-black uppercase tracking-[0.2em] mb-2">Conformitate Legală</p>
-           
-            <a href="https://www.asfromania.ro/" target="_blank" class="opacity-60 hover:opacity-100 transition-opacity btn-active">
-                <span class="text-[10px] font-bold border border-zinc-700 px-3 py-1 rounded">ASF - SUPRAVEGHERE FINANCIARĂ</span>
-            </a>
+        <footer class="p-10 bg-black/95 border-t border-zinc-900">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+               
+                <div class="flex flex-col gap-4">
+                    <p class="text-zinc-600 text-[9px] font-black uppercase tracking-[0.2em] mb-2">Conformitate Legală</p>
+                   
+                    <a href="https://www.asfromania.ro/" target="_blank" class="opacity-70 hover:opacity-100 btn-active">
+                        <span class="text-[9px] font-bold border border-zinc-700 px-3 py-1 rounded">ASF - SUPRAVEGHERE FINANCIARĂ</span>
+                    </a>
 
-            <a href="https://anpc.ro/ce-este-sal/" target="_blank" class="btn-active">
-                <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-7 grayscale hover:grayscale-0 transition-all" alt="ANPC">
-            </a>
+                    <a href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=RO" target="_blank" class="btn-active">
+                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" class="h-6 grayscale hover:grayscale-0 transition-all" alt="SOL">
+                    </a>
 
-            <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank" class="btn-active">
-                <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-5 bg-white px-2 py-1 rounded shadow-sm" alt="SAL-FIN">
-            </a>
-        </div>
+                    <a href="https://anpc.ro/ce-este-sal/" target="_blank" class="btn-active">
+                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-6 grayscale hover:grayscale-0 transition-all" alt="ANPC">
+                    </a>
 
-        <div class="md:text-right">
-            <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-4">SafeGo Digital</p>
-            <p class="text-2xl font-black italic uppercase">office@safego.ro</p>
-            <p class="text-cyan-400 font-bold mt-2">0723 697 805</p>
-            <div class="mt-8 flex gap-6 md:justify-end text-[9px] font-black text-zinc-800 uppercase">
-                <a href="#" class="hover:text-zinc-400">GDPR</a>
-                <a href="#" class="hover:text-zinc-400">Termeni</a>
-                <a href="#" class="hover:text-zinc-400">Cookies</a>
+                    <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank" class="btn-active">
+                        <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-4 bg-white px-2 py-1 rounded shadow-sm" alt="SAL-FIN">
+                    </a>
+                </div>
+
+                <div class="md:text-right">
+                    <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-4">SafeGo Digital</p>
+                    <p class="text-2xl font-black italic uppercase">office@safego.ro</p>
+                    <p class="text-cyan-400 font-bold mt-2">0723 697 805</p>
+                    <div class="mt-8 flex gap-6 md:justify-end text-[9px] font-black text-zinc-800 uppercase">
+                        <a href="#" class="hover:text-zinc-400">GDPR</a>
+                        <a href="#" class="hover:text-zinc-400">Termeni</a>
+                        <a href="#" class="hover:text-zinc-400">Cookies</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</footer>
+        </footer>
     </div>
 
     <script>
-        function trimite() {
+        function trimiteWhatsApp() {
             const tip = document.getElementById('vType').value;
             const val = document.getElementById('vValue').value || "nespecificată";
-            const msg = `Bună ziua! Solicit ofertă SafeGo Wheels: ${tip}, valoare ${val} RON.`;
+            const msg = `Bună ziua! Solicit ofertă SafeGo Wheels pentru ${tip}, valoare vehicul ${val} RON.`;
             window.location.href = `https://wa.me/40723697805?text=${encodeURIComponent(msg)}`;
         }
     </script>
 </body>
 </html>
-
