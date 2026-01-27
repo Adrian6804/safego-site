@@ -6,45 +6,44 @@
     <title>SafeGo.ro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #050505; color: white; font-family: system-ui, -apple-system, sans-serif; }
-        .hero-box {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('1769436406916.png');
-            background-size: cover; background-position: center; border-radius: 30px;
+        body { background: #000; color: white; font-family: sans-serif; }
+        .hero-wheels {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('1769436406916.png');
+            background-size: cover; background-position: center; border-radius: 24px;
         }
-        .neon-glow { box-shadow: 0 0 20px rgba(0, 242, 255, 0.4); }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 pb-24">
 
-    <header class="flex items-center gap-3 mb-8">
-        <img src="logo-scut.png" class="h-10 w-10" alt="Logo">
-        <h1 class="text-2xl font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></h1>
+    <header class="flex items-center gap-2 mb-6">
+        <img src="logo-scut.png" class="h-8 w-8" alt="L">
+        <span class="text-xl font-black italic uppercase">SafeGo.ro</span>
     </header>
 
-    <div class="hero-box h-[500px] flex flex-col items-center justify-end p-8 mb-6 border border-zinc-800 neon-glow">
+    <div class="hero-wheels h-[480px] flex flex-col items-center justify-end p-8 border border-zinc-800 mb-6">
         <h2 class="text-3xl font-black uppercase italic mb-2">SafeGo Wheels</h2>
-        <p class="text-zinc-300 text-sm mb-6">Asigurare trotinete și biciclete electrice.</p>
+        <p class="text-zinc-300 text-xs mb-6 text-center">Asigurare trotinete și biciclete electrice.</p>
         <a href="https://wa.me/40723697805?text=Vreau%20oferta%20Wheels"
-           class="bg-cyan-400 text-black px-10 py-4 rounded-2xl font-black uppercase text-sm">
+           class="bg-cyan-400 text-black px-8 py-4 rounded-xl font-black uppercase text-sm shadow-lg shadow-cyan-500/20">
            Calculează Wheels
         </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-        <div class="bg-zinc-900/80 p-6 rounded-3xl border border-zinc-800">
-            <h3 class="text-lg font-bold uppercase italic mb-4">✈️ Go Travel</h3>
-            <a href="https://wa.me/40723697805" class="text-cyan-400 text-xs font-black uppercase tracking-widest">Solicită pe WhatsApp →</a>
+    <div class="grid grid-cols-1 gap-4 mb-12">
+        <div class="bg-zinc-900 p-5 rounded-3xl border border-zinc-800 flex justify-between items-center">
+            <span class="font-bold italic uppercase">✈️ Go Travel</span>
+            <a href="https://wa.me/40723697805" class="text-cyan-400 text-[10px] font-bold">SOLICITĂ PE WHATSAPP →</a>
         </div>
-        <div class="bg-zinc-900/80 p-6 rounded-3xl border border-zinc-800 text-right">
-            <h3 class="text-lg font-bold uppercase italic mb-4 text-green-400">🏠 Go Home</h3>
-            <a href="https://wa.me/40723697805" class="text-zinc-400 text-xs font-black uppercase tracking-widest">Protejează locuința →</a>
+        <div class="bg-zinc-900 p-5 rounded-3xl border border-zinc-800 flex justify-between items-center text-right">
+            <a href="https://wa.me/40723697805" class="text-green-400 text-[10px] font-bold">PROTEJEAZĂ LOCUINȚA →</a>
+            <span class="font-bold italic uppercase">🏠 Go Home</span>
         </div>
     </div>
 
-    <footer class="border-t border-zinc-900 pt-10 flex flex-col md:flex-row justify-between items-start gap-10">
+    <footer class="border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between gap-10">
        
         <div class="space-y-4">
-            <p class="text-zinc-600 text-[10px] font-bold uppercase">Protecția Consumatorului</p>
+            <p class="text-zinc-600 text-[10px] font-bold uppercase tracking-widest">Protecția Consumatorului</p>
             <div class="flex flex-col gap-3">
                 <a href="https://anpc.ro/ce-este-sal/" target="_blank">
                     <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" alt="ANPC SAL" class="h-10 opacity-70">
@@ -52,19 +51,17 @@
                 <a href="https://www.salfin.ro/" target="_blank" class="bg-white p-2 rounded-lg inline-block w-[200px]">
                     <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" alt="SAL-FIN" class="h-8 mx-auto">
                 </a>
-                <a href="https://www.asfromania.ro/" target="_blank" class="text-zinc-500 text-[10px] font-bold border border-zinc-800 px-3 py-2 rounded-md hover:bg-zinc-900">
+                <a href="https://www.asfromania.ro/" target="_blank" class="text-zinc-500 text-[10px] font-bold border border-zinc-800 px-3 py-2 rounded-md hover:text-white">
                     Autoritatea de Supraveghere Financiară (ASF)
                 </a>
             </div>
         </div>
 
-        <div class="md:text-right space-y-2">
-            <p class="text-white font-black italic uppercase text-xl">SafeGo Digital</p>
-            <p class="text-zinc-500 text-sm">office@safego.ro</p>
-            <p class="text-zinc-500 text-sm">0723 697 805</p>
-            <div class="pt-6">
-                <p class="text-[9px] text-zinc-700 font-bold uppercase">Partener: INTER BROKER DE ASIGURARE</p>
-            </div>
+        <div class="md:text-right space-y-1">
+            <p class="text-white font-black italic uppercase text-lg">SafeGo Digital</p>
+            <p class="text-zinc-500 text-xs">Email: office@safego.ro</p>
+            <p class="text-zinc-500 text-xs">Tel: 0723 697 805</p>
+            <p class="text-[9px] text-zinc-700 font-bold uppercase mt-4">Partener: INTER BROKER DE ASIGURARE</p>
         </div>
     </footer>
 
