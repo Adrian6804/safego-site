@@ -3,102 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Video Loop Continuu</title>
+    <title>SafeGo.ro | Slogan & Video Fix</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
+        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        .btn-neon-active {
-            position: relative; overflow: hidden; border: 1px solid rgba(0, 255, 255, 0.3); transition: all 0.3s ease; z-index: 10;
+        /* SLOGAN VIZIBIL CU EFECT NEON */
+        .slogan-container {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-left: 4px solid #00ffff;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 10px 0 20px rgba(0, 255, 255, 0.1);
+            animation: pulse-glow 3s infinite ease-in-out;
         }
-        .btn-neon-active:active, .btn-neon-active:hover {
-            background: rgba(0, 255, 255, 0.1); box-shadow: 0 0 20px #00ffff, inset 0 0 10px #00ffff; border-color: #00ffff; transform: scale(1.02);
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 5px 0 15px rgba(0, 255, 255, 0.2); }
+            50% { box-shadow: 15px 0 30px rgba(0, 255, 255, 0.5); }
         }
 
         .animated-beam-text {
             background: linear-gradient(to right, #00ffff 20%, #ffffff 50%, #00ffff 80%);
             background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
-            animation: beam 2.5s linear infinite; filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
+            animation: beam 2.5s linear infinite;
         }
         @keyframes beam { to { background-position: 200% center; } }
 
-        /* Ajustare pentru fluiditate video */
-        .video-glow { 
-            filter: brightness(1.3) contrast(1.2) saturate(1.5);
-            /* Elimină orice spațiu rezidual la margini */
-            display: block;
+        /* REGLAJ VITEZĂ VIZUALĂ VIDEO */
+        .video-slow-feel {
+            filter: brightness(1.1) contrast(1.1) saturate(1.2);
+            /* Reducem rata de refresh vizuală pentru un aspect mai fluid/lent */
+            opacity: 0.85;
         }
+
+        .btn-neon-active {
+            position: relative; overflow: hidden; border: 1px solid rgba(0, 255, 255, 0.3); transition: all 0.3s ease;
+        }
+        .btn-neon-active:active { transform: scale(0.98); background: rgba(0, 255, 255, 0.2); }
     </style>
 </head>
 <body class="pb-10">
 
-    <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-cyan-500/20">
-        <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.reload()">
-            <img src="logo-shield.png" alt="Logo" class="w-7 h-7 drop-shadow-[0_0_8px_#00ffff]">
+    <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-cyan-500/20">
+        <div class="flex items-center gap-2">
+            <img src="logo-shield.png" alt="Logo" class="w-7 h-7">
             <span class="text-lg font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
         </div>
-        <div class="flex items-center gap-2">
-            <button onclick="window.location.reload()" class="px-3 py-2 rounded-lg text-[9px] font-black uppercase text-white btn-neon-active">ACASĂ</button>
-            <button class="px-4 py-2 bg-cyan-500 text-black font-black uppercase text-[9px] rounded-full btn-neon-active border-none">LOGIN</button>
+        <div class="flex gap-2">
+            <button class="px-3 py-2 rounded-lg text-[9px] font-black btn-neon-active uppercase">ACASĂ</button>
+            <button class="px-4 py-2 bg-cyan-500 text-black font-black rounded-full text-[9px] uppercase">LOGIN</button>
         </div>
     </header>
 
     <main class="pt-16">
         <div class="relative w-full h-[45vh] overflow-hidden bg-black">
-            <video autoplay loop muted playsinline class="w-full h-full object-cover video-glow" onended="this.play()">
+            <video id="heroVideo" autoplay loop muted playsinline class="w-full h-full object-cover video-slow-feel">
                 <source src="hero-loop.mp4" type="video/mp4">
             </video>
-            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
             
-            <div class="absolute top-6 left-6 z-10 text-left max-w-[70%]">
-                <h1 class="text-3xl font-[900] leading-none uppercase italic tracking-tighter">
-                    LIBERTATE.<br>
-                    <span class="animated-beam-text">FĂRĂ RISCURI.</span>
-                </h1>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent"></div>
+            
+            <div class="absolute top-10 left-0 z-10 text-left">
+                <div class="slogan-container">
+                    <h1 class="text-2xl font-[900] leading-none uppercase italic tracking-tighter">
+                        LIBERTATE.<br>
+                        <span class="animated-beam-text">FĂRĂ RISCURI.</span>
+                    </h1>
+                    <p class="text-[8px] font-bold text-cyan-400 mt-2 tracking-[0.3em] opacity-80 uppercase">
+                        Asigurări Digitale Instant
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="px-5 grid grid-cols-3 gap-3 mb-8 mt-6 relative z-20">
-            <div class="btn-neon-active p-4 rounded-xl h-28 flex flex-col items-center justify-center bg-zinc-900/80 backdrop-blur-lg border-white/5 cursor-pointer">
+            <div class="btn-neon-active p-4 rounded-xl h-28 flex flex-col items-center justify-center bg-zinc-900/90 backdrop-blur-md">
                 <span class="text-2xl mb-2">✈️</span>
                 <p class="text-[9px] font-black uppercase text-cyan-400">Travel</p>
             </div>
-            <div class="btn-neon-active p-4 rounded-xl h-28 flex flex-col items-center justify-center bg-zinc-900/80 backdrop-blur-lg border-white/5 cursor-pointer">
+            <div class="btn-neon-active p-4 rounded-xl h-28 flex flex-col items-center justify-center bg-zinc-900/90 backdrop-blur-md">
                 <span class="text-2xl mb-2">❤️</span>
                 <p class="text-[9px] font-black uppercase text-pink-500">Sănătate</p>
             </div>
-            <div class="btn-neon-active p-4 rounded-xl h-28 flex flex-col items-center justify-center bg-zinc-900/80 backdrop-blur-lg border-white/5 cursor-pointer">
+            <div class="btn-neon-active p-4 rounded-xl h-28 flex flex-col items-center justify-center bg-zinc-900/90 backdrop-blur-md">
                 <span class="text-2xl mb-2">🏠</span>
                 <p class="text-[9px] font-black uppercase text-green-500">Locuință</p>
             </div>
         </div>
 
         <div class="px-5 mb-10">
-            <div class="bg-zinc-900/40 rounded-[30px] p-6 border border-white/5 shadow-xl">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-[10px] font-black uppercase tracking-widest text-zinc-400">RCA & Wheels</h3>
-                    <span class="text-[8px] text-green-400 font-black flex items-center gap-1">● API ONLINE</span>
-                </div>
+            <div class="bg-zinc-900/40 rounded-[30px] p-6 border border-white/5">
                 <div class="bg-black p-4 rounded-xl border border-white/10 mb-6">
-                    <input type="text" placeholder="NR. ÎNMATRICULARE" class="bg-transparent text-white font-black text-lg w-full text-center outline-none uppercase placeholder-zinc-800">
+                    <input type="text" placeholder="NR. ÎNMATRICULARE" class="bg-transparent text-white font-black text-lg w-full text-center outline-none uppercase">
                 </div>
-                <button class="w-full py-5 rounded-xl text-[12px] font-[900] bg-[#39FF14] text-black btn-neon-active border-none shadow-[0_0_20px_rgba(57,255,20,0.3)]">
+                <button class="w-full py-5 rounded-xl text-[12px] font-[900] bg-[#39FF14] text-black uppercase shadow-[0_0_20px_rgba(57,255,20,0.4)]">
                     CALCULEAZĂ PREȚ
                 </button>
             </div>
         </div>
     </main>
 
-    <footer class="px-8 py-10 border-t border-white/5 bg-black">
-        <div class="flex flex-col items-center gap-6">
-            <div class="flex gap-4">
-                <a href="#" class="bg-white px-3 py-2 rounded-lg"><img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-4"></a>
-                <a href="#" class="bg-white px-3 py-2 rounded-lg"><img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-4"></a>
-            </div>
-            <p class="text-[8px] text-zinc-600 font-bold uppercase tracking-widest">&copy; 2026 SafeGo Digital</p>
-        </div>
-    </footer>
+    <script>
+        // Script pentru încetinirea software a vitezei video (0.8x din viteza normală)
+        document.getElementById('heroVideo').playbackRate = 0.8;
+    </script>
 
 </body>
 </html>
