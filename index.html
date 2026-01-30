@@ -8,40 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
-        
-        .btn-neon { 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            border: 1px solid rgba(255,255,255,0.05); 
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Efectul de activare verde la apăsare */
-        .btn-neon:active, .btn-active { 
-            background: #39ff14 !important; 
-            box-shadow: 0 0 30px #39ff14; 
-            transform: scale(0.95);
-        }
+        .btn-neon { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.05); cursor: pointer; }
+        .btn-neon:active, .btn-active { background: #39ff14 !important; box-shadow: 0 0 30px #39ff14; transform: scale(0.95); }
         .btn-neon:active p, .btn-active p { color: black !important; }
-
         .hidden { display: none; }
-        
-        .loader { 
-            width: 40px; height: 40px; 
-            border: 4px solid #1a1a1a; 
-            border-top-color: #39ff14; 
-            border-radius: 50%; 
-            animation: spin 1s linear infinite; 
-        }
+        .loader { width: 40px; height: 40px; border: 4px solid #1a1a1a; border-top-color: #39ff14; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Stil pentru cardurile de oferte care vor veni din API */
-        .offer-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            backdrop-filter: blur(10px);
-        }
+        .offer-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px); }
     </style>
 </head>
 <body class="bg-black pb-20">
@@ -54,7 +27,6 @@
     </header>
 
     <main class="pt-28 px-5 max-w-lg mx-auto">
-        
         <div class="mb-12">
             <h1 class="text-3xl font-black uppercase italic leading-[0.9] tracking-tighter">
                 LIBERTATE.<br>
@@ -73,109 +45,119 @@
             </div>
         </div>
 
-      <div id="rca-container" class="hidden space-y-6">
-    <div id="step-dnt" class="bg-zinc-900/40 border border-white/5 p-8 rounded-[32px] backdrop-blur-md text-center">
-        <div class="flex justify-center mb-4">
-            <span class="bg-[#39ff14] text-black w-8 h-8 rounded-full flex items-center justify-center font-black">1</span>
-        </div>
-        <h2 class="font-black uppercase text-xs mb-2 tracking-widest text-white">Consultanță</h2>
-        <p class="text-[10px] text-zinc-400 mb-8 uppercase leading-relaxed">Doriți consultanță suplimentară conform reglementărilor?</p>
-        
-        <div class="space-y-3">
-            <button onclick="goToCalculation()" class="w-full py-4 border border-[#39ff14]/30 rounded-2xl text-[10px] font-black uppercase text-[#39ff14] hover:bg-[#39ff14]/10 transition-all">
-                Continuă fără consultanță
-            </button>
-            <button onclick="requestConsultancy()" class="w-full py-4 text-zinc-500 text-[10px] font-black uppercase hover:text-white transition-all">
-                Vreau consultanță
-            </button>
-        </div>
-    </div>
+        <div id="rca-container" class="hidden space-y-6">
+            <div id="step-dnt" class="bg-zinc-900/40 border border-white/5 p-8 rounded-[32px] backdrop-blur-md text-center">
+                <div class="flex justify-center mb-4">
+                    <span class="bg-[#39ff14] text-black w-8 h-8 rounded-full flex items-center justify-center font-black">1</span>
+                </div>
+                <h2 class="font-black uppercase text-xs mb-2 tracking-widest text-white">Consultanță</h2>
+                <p class="text-[10px] text-zinc-400 mb-8 uppercase leading-relaxed">Doriți consultanță suplimentară conform reglementărilor?</p>
+                <div class="space-y-3">
+                    <button onclick="goToCalculation()" class="w-full py-4 border border-[#39ff14]/30 rounded-2xl text-[10px] font-black uppercase text-[#39ff14]">Continuă fără consultanță</button>
+                    <button onclick="requestConsultancy()" class="w-full py-4 text-zinc-500 text-[10px] font-black uppercase hover:text-white transition-all">Vreau consultanță</button>
+                </div>
+            </div>
 
-    <div id="step-form" class="hidden bg-zinc-900/40 border border-white/5 p-8 rounded-[32px] backdrop-blur-md">
-        <div class="flex justify-center mb-4 text-[#39ff14]">
-            <span class="border border-[#39ff14] w-8 h-8 rounded-full flex items-center justify-center font-black">2</span>
-        </div>
-        <h2 class="text-center font-black uppercase text-[10px] mb-8 tracking-[0.3em] text-zinc-500 uppercase">Căutare Autovehicul</h2>
-        <div class="space-y-4">
-            <input type="text" id="plate" placeholder="NR. INMATRICULARE" class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl outline-none focus:border-[#39ff14] uppercase">
-            <input type="text" id="cnp" placeholder="CNP PROPRIETAR" class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl outline-none focus:border-[#39ff14]">
-            <button onclick="getQuotes()" class="w-full py-5 bg-[#39ff14] text-black font-black uppercase rounded-2xl shadow-[0_15px_30px_rgba(57,255,20,0.2)] text-xs tracking-widest">Calculează Preț RCA</button>
-        </div>
-    </div>
-    
-    <div id="step-loading" class="hidden py-16 text-center">
-        <div class="loader mx-auto mb-4"></div>
-        <p class="text-[9px] font-black uppercase tracking-widest animate-pulse">Interogăm InsureTech...</p>
-    </div>
-    <div id="step-results" class="hidden space-y-3"></div>
-</div>
-    
-    </div>
+            <div id="step-form" class="hidden bg-zinc-900/40 border border-white/5 p-8 rounded-[32px] backdrop-blur-md">
+                <div class="flex justify-center mb-4 text-[#39ff14]">
+                    <span class="border border-[#39ff14] w-8 h-8 rounded-full flex items-center justify-center font-black">2</span>
+                </div>
+                <h2 class="text-center font-black uppercase text-[10px] mb-8 tracking-[0.3em] text-zinc-500 uppercase">Căutare Autovehicul</h2>
+                <div class="space-y-4">
+                    <input type="text" id="plate" placeholder="NR. INMATRICULARE" class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl outline-none focus:border-[#39ff14] uppercase">
+                    <input type="text" id="cnp" placeholder="CNP PROPRIETAR" class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl outline-none focus:border-[#39ff14]">
+                    <button onclick="getQuotes()" class="w-full py-5 bg-[#39ff14] text-black font-black uppercase rounded-2xl shadow-[0_15px_30px_rgba(57,255,20,0.2)] text-xs tracking-widest">Calculează Preț RCA</button>
+                </div>
+            </div>
 
-            <div id="step-loading" class="hidden flex flex-col items-center justify-center py-16 bg-zinc-900/20 rounded-[32px] border border-white/5">
-                <div class="loader mb-6"></div>
+            <div id="step-loading" class="hidden py-16 text-center bg-zinc-900/20 rounded-[32px] border border-white/5">
+                <div class="loader mx-auto mb-6"></div>
                 <p class="text-[10px] font-black uppercase tracking-[0.4em] animate-pulse text-[#39ff14]">Interogăm InsureTech...</p>
             </div>
 
             <div id="step-results" class="hidden space-y-4">
                 <h3 class="text-center font-black uppercase text-[10px] tracking-widest text-zinc-500 mb-4">Oferte Găsite</h3>
-                <div id="offers-list" class="space-y-3">
-                    </div>
+                <div id="offers-list" class="space-y-3"></div>
             </div>
-
         </div>
     </main>
 
-    <footer class="mt-20 px-8 py-10 border-t border-white/5 text-center bg-black">
-        <div class="flex justify-center gap-6 mb-8 opacity-20 grayscale">
-            <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-5">
-            <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-5">
-        </div>
-        <p class="text-[9px] text-zinc-700 font-black uppercase tracking-[0.5em]">&copy; 2026 SafeGo Digital</p>
-    </footer>
-
     <script>
-   // Navigare pasi
-function goToCalculation() {
-    document.getElementById('step-dnt').classList.add('hidden');
-    document.getElementById('step-form').classList.remove('hidden');
-}
+        // Functia care deschide fluxul
+        function showRcaForm(el) {
+            document.querySelectorAll('.btn-neon').forEach(b => b.classList.remove('btn-active'));
+            el.classList.add('btn-active');
+            document.getElementById('rca-container').classList.remove('hidden');
+            document.getElementById('step-dnt').classList.remove('hidden');
+            document.getElementById('step-form').classList.add('hidden');
+            document.getElementById('step-results').classList.add('hidden');
+        }
 
-async function getQuotes() {
-    const plate = document.getElementById('plate').value;
-    const cnp = document.getElementById('cnp').value;
+        function goToCalculation() {
+            document.getElementById('step-dnt').classList.add('hidden');
+            document.getElementById('step-form').classList.remove('hidden');
+        }
 
-    document.getElementById('step-form').classList.add('hidden');
-    document.getElementById('step-loading').classList.remove('hidden');
+        function requestConsultancy() {
+            alert("Un consultant vă va contacta în curând!");
+        }
 
-    // Proxy alternativ pentru a forta trecerea cererii
-    const proxy = "https://api.allorigins.win/raw?url=";
-    const targetUrl = `https://insuretech.staging.insuretech.ro/api/v1/rca/quotes`;
+        async function getQuotes() {
+            const plate = document.getElementById('plate').value;
+            const cnp = document.getElementById('cnp').value;
 
-    try {
-        const response = await fetch(proxy + encodeURIComponent(targetUrl), {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-KEY': '015f40fc-1974-4ad5-bbde-48c117a54307' // Cheia ta
-            },
-            body: JSON.stringify({
-                registration_number: plate,
-                owner_id: cnp
-            })
-        });
+            if(!plate || !cnp) return alert("Completează datele!");
 
-        if (!response.ok) throw new Error("Serverul nu raspunde");
+            document.getElementById('step-form').classList.add('hidden');
+            document.getElementById('step-loading').classList.remove('hidden');
 
-        const data = await response.json();
-        renderOffers(data.data || data.offers || []);
+            const proxy = "https://api.allorigins.win/raw?url=";
+            const targetUrl = `https://insuretech.staging.insuretech.ro/api/v1/rca/quotes`;
 
-    } catch (e) {
-        alert("Eroare de conexiune. Verifică API-ul sau conexiunea la internet.");
-        document.getElementById('step-loading').classList.add('hidden');
-        document.getElementById('step-form').classList.remove('hidden');
-    }
-}
-</script>
+            try {
+                const response = await fetch(proxy + encodeURIComponent(targetUrl), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-KEY': '015f40fc-1974-4ad5-bbde-48c117a54307'
+                    },
+                    body: JSON.stringify({ registration_number: plate, owner_id: cnp })
+                });
+
+                const data = await response.json();
+                renderOffers(data.data || data.offers || []);
+            } catch (e) {
+                alert("Eroare de conexiune la server.");
+                document.getElementById('step-loading').classList.add('hidden');
+                document.getElementById('step-form').classList.remove('hidden');
+            }
+        }
+
+        function renderOffers(offers) {
+            const list = document.getElementById('offers-list');
+            list.innerHTML = '';
+            document.getElementById('step-loading').classList.add('hidden');
+            document.getElementById('step-results').classList.remove('hidden');
+
+            if(!offers || offers.length === 0) {
+                list.innerHTML = '<p class="text-center text-[10px] font-black uppercase text-zinc-600">Nicio ofertă găsită.</p>';
+                return;
+            }
+
+            offers.forEach(o => {
+                list.innerHTML += `
+                    <div class="offer-card p-6 rounded-[24px] flex justify-between items-center">
+                        <div>
+                            <p class="font-black text-sm uppercase text-white">${o.insurer_name}</p>
+                            <p class="text-[9px] text-zinc-500 uppercase mt-1">B${o.bm_class || 0}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xl font-black text-[#39ff14]">${o.price} RON</p>
+                            <button class="text-[9px] font-bold uppercase bg-white text-black px-4 py-2 rounded-xl mt-2">Detalii</button>
+                        </div>
+                    </div>`;
+            });
+        }
+    </script>
 </body>
 </html>
