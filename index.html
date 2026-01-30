@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Premium Interface</title>
+    <title>SafeGo.ro | Full Layout</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -21,40 +21,26 @@
             cursor: pointer;
         }
         
-        /* Efectul de aprindere verde intens solicitat */
-        .btn-universal-neon:active, .active-glow { 
+        .active-glow { 
             background: #39ff14 !important; 
             box-shadow: 0 0 40px #39ff14; 
             border-color: #39ff14; 
             transform: scale(0.92);
         }
-        .btn-universal-neon:active p, .active-glow p { color: black !important; }
+        .active-glow p { color: black !important; }
 
-        /* PANOU NOTIFICARE ELEGANTĂ */
         #notification-toast {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 400px;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(15px);
-            border: 1px solid #39ff14;
-            padding: 16px;
-            border-radius: 20px;
-            z-index: 100;
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px); border: 1px solid #39ff14;
+            padding: 16px; border-radius: 20px; z-index: 100;
             transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 12px;
         }
-
         #notification-toast.show { bottom: 30px; }
     </style>
 </head>
-<body class="pb-10">
+<body class="bg-black">
 
     <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
         <div class="flex items-center gap-2" onclick="location.reload()">
@@ -73,7 +59,6 @@
                 <source src="hero-loop.mp4" type="video/mp4">
             </video>
             <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-transparent to-transparent"></div>
-            
             <div class="absolute top-10 left-0 z-10">
                 <div class="bg-black/60 backdrop-blur-md p-4 border-l-4 border-[#39ff14] rounded-r-2xl">
                     <h1 class="text-2xl font-[900] leading-none uppercase italic tracking-tighter">
@@ -99,7 +84,6 @@
                     <p class="text-[9px] font-black uppercase text-white mt-2">Sănătate</p>
                 </div>
             </div>
-            
             <div class="grid grid-cols-2 gap-3">
                 <div onclick="handleAction(this, 'RCA Auto')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
                     <span class="text-2xl mr-3">🚗</span>
@@ -111,37 +95,38 @@
                 </div>
             </div>
         </div>
+
+        <footer class="mt-20 px-8 py-12 border-t border-white/5 bg-zinc-950 flex flex-col items-center gap-8">
+            <div class="flex gap-4">
+                <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-6 opacity-70 grayscale hover:grayscale-0 transition-all">
+                <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-6 opacity-70 grayscale hover:grayscale-0 transition-all">
+            </div>
+            <p class="text-[9px] text-zinc-600 font-bold uppercase tracking-[0.3em]">&copy; 2026 SafeGo Digital First</p>
+        </footer>
     </main>
 
     <div id="notification-toast">
-        <div class="bg-[#39ff14] p-2 rounded-full">
+        <div class="bg-[#39ff14] p-2 rounded-full shadow-[0_0_10px_#39ff14]">
             <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
         </div>
         <div>
             <p class="text-[10px] font-black uppercase text-[#39ff14]">Sistem SafeGo</p>
-            <p id="toast-text" class="text-[11px] font-medium text-white/80">Cererea a fost preluată.</p>
+            <p id="toast-text" class="text-[11px] text-white/80">Cererea a fost preluată.</p>
         </div>
     </div>
 
     <script>
         document.getElementById('heroVideo').playbackRate = 0.8;
-
         function handleAction(element, tip) {
-            // Aprinde butonul
             element.classList.add('active-glow');
-            
-            // Afișează Toast
             const toast = document.getElementById('notification-toast');
             document.getElementById('toast-text').innerText = "Am activat modulul: " + tip;
             toast.classList.add('show');
-
-            // Reset după 3 secunde
             setTimeout(() => {
                 toast.classList.remove('show');
                 element.classList.remove('active-glow');
             }, 3000);
         }
     </script>
-
 </body>
 </html>
