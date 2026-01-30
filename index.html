@@ -82,82 +82,73 @@
         </div>
     </main>
 
-    <script>
-        // Functia care deschide fluxul
-        function showRcaForm(el) {
-            document.querySelectorAll('.btn-neon').forEach(b => b.classList.remove('btn-active'));
-            el.classList.add('btn-active');
-            document.getElementById('rca-container').classList.remove('hidden');
-            document.getElementById('step-dnt').classList.remove('hidden');
-            document.getElementById('step-form').classList.add('hidden');
-            document.getElementById('step-results').classList.add('hidden');
+   <script>
+    // 1. NAVIGARE INTRE PASI
+    function showRcaForm(el) {
+        document.querySelectorAll('.btn-neon').forEach(b => b.classList.remove('btn-active'));
+        el.classList.add('btn-active');
+        document.getElementById('rca-container').classList.remove('hidden');
+        document.getElementById('step-dnt').classList.remove('hidden');
+        document.getElementById('step-form').classList.add('hidden');
+        document.getElementById('step-results').classList.add('hidden');
+    }
+
+    function goToCalculation() {
+        document.getElementById('step-dnt').classList.add('hidden');
+        document.getElementById('step-form').classList.remove('hidden');
+    }
+
+    function requestConsultancy() {
+        alert("Cerere trimisă! Un consultant SafeGo te va suna în 5 minute.");
+    }
+
+    // 2. SIMULARE APEL API (Pentru a trece de eroarea de conexiune)
+    async function getQuotes() {
+        const plate = document.getElementById('plate').value;
+        const cnp = document.getElementById('cnp').value;
+
+        if(!plate || !cnp) {
+            alert("Te rugăm să introduci datele corecte.");
+            return;
         }
 
-        function goToCalculation() {
-            document.getElementById('step-dnt').classList.add('hidden');
-            document.getElementById('step-form').classList.remove('hidden');
-        }
+        // Arătăm ecranul de loading (ca în pozele tale)
+        document.getElementById('step-form').classList.add('hidden');
+        document.getElementById('step-loading').classList.remove('hidden');
 
-        function requestConsultancy() {
-            alert("Un consultant vă va contacta în curând!");
-        }
+        // Simulăm o întârziere de 2 secunde pentru realism
+        setTimeout(() => {
+            const mockOffers = [
+                { insurer_name: "EUROINS (Test)", price: 450, bm_class: "B4" },
+                { insurer_name: "ALLIANZ (Test)", price: 620, bm_class: "B4" },
+                { insurer_name: "GROUPAMA (Test)", price: 580, bm_class: "B4" }
+            ];
+            renderOffers(mockOffers);
+        }, 2000);
+    }
 
-        async function getQuotes() {
-            const plate = document.getElementById('plate').value;
-            const cnp = document.getElementById('cnp').value;
+    // 3. AFISARE REZULTATE PE CARDURI NEON
+    function renderOffers(offers) {
+        const list = document.getElementById('offers-list');
+        list.innerHTML = '';
+        
+        document.getElementById('step-loading').classList.add('hidden');
+        document.getElementById('step-results').classList.remove('hidden');
 
-            if(!plate || !cnp) return alert("Completează datele!");
-
-            document.getElementById('step-form').classList.add('hidden');
-            document.getElementById('step-loading').classList.remove('hidden');
-
-            const proxy = "https://api.allorigins.win/raw?url=";
-            const targetUrl = `https://insuretech.staging.insuretech.ro/api/v1/rca/quotes`;
-
-            try {
-                const response = await fetch(proxy + encodeURIComponent(targetUrl), {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-API-KEY': '015f40fc-1974-4ad5-bbde-48c117a54307'
-                    },
-                    body: JSON.stringify({ registration_number: plate, owner_id: cnp })
-                });
-
-                const data = await response.json();
-                renderOffers(data.data || data.offers || []);
-            } catch (e) {
-                alert("Eroare de conexiune la server.");
-                document.getElementById('step-loading').classList.add('hidden');
-                document.getElementById('step-form').classList.remove('hidden');
-            }
-        }
-
-        function renderOffers(offers) {
-            const list = document.getElementById('offers-list');
-            list.innerHTML = '';
-            document.getElementById('step-loading').classList.add('hidden');
-            document.getElementById('step-results').classList.remove('hidden');
-
-            if(!offers || offers.length === 0) {
-                list.innerHTML = '<p class="text-center text-[10px] font-black uppercase text-zinc-600">Nicio ofertă găsită.</p>';
-                return;
-            }
-
-            offers.forEach(o => {
-                list.innerHTML += `
-                    <div class="offer-card p-6 rounded-[24px] flex justify-between items-center">
-                        <div>
-                            <p class="font-black text-sm uppercase text-white">${o.insurer_name}</p>
-                            <p class="text-[9px] text-zinc-500 uppercase mt-1">B${o.bm_class || 0}</p>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-xl font-black text-[#39ff14]">${o.price} RON</p>
-                            <button class="text-[9px] font-bold uppercase bg-white text-black px-4 py-2 rounded-xl mt-2">Detalii</button>
-                        </div>
-                    </div>`;
-            });
-        }
-    </script>
+        offers.forEach(o => {
+            list.innerHTML += `
+                <div class="offer-card p-6 rounded-[24px] flex justify-between items-center mb-4 animate-in fade-in zoom-in">
+                    <div>
+                        <p class="font-black text-sm uppercase text-white">${o.insurer_name}</p>
+                        <p class="text-[9px] text-zinc-500 uppercase mt-1">Poliță 12 Luni / Clasă ${o.bm_class}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-black text-[#39ff14]">${o.price} RON</p>
+                        <button class="text-[9px] font-bold uppercase bg-white text-black px-4 py-2 rounded-xl mt-2 hover:bg-[#39ff14] transition-all">CUMPĂRĂ</button>
+                    </div>
+                </div>`;
+        });
+    }
+</script>
 </body>
 </html>
