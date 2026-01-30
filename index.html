@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Categorii Reorganizate</title>
+    <title>SafeGo.ro | Interactivitate Neon</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
+        /* EFECTE NEON GENERALE */
+        .btn-active-neon {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Culori specifice la atingere/hover */
+        .neon-cyan:active { background: rgba(0, 255, 255, 0.15); box-shadow: 0 0 25px #00ffff; border-color: #00ffff; transform: scale(0.95); }
+        .neon-green:active { background: rgba(57, 255, 20, 0.15); box-shadow: 0 0 25px #39ff14; border-color: #39ff14; transform: scale(0.95); }
+        .neon-pink:active { background: rgba(255, 20, 147, 0.15); box-shadow: 0 0 25px #ff1493; border-color: #ff1493; transform: scale(0.95); }
+        .neon-yellow:active { background: rgba(255, 255, 0, 0.15); box-shadow: 0 0 25px #ffff00; border-color: #ffff00; transform: scale(0.95); }
+        .neon-white:active { background: rgba(255, 255, 255, 0.15); box-shadow: 0 0 25px #ffffff; border-color: #ffffff; transform: scale(0.95); }
+
         .slogan-container {
-            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px);
-            padding: 12px; border-left: 4px solid #00ffff; border-radius: 0 15px 15px 0;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px);
+            padding: 15px; border-left: 4px solid #00ffff; border-radius: 0 20px 20px 0;
         }
 
         .animated-beam-text {
@@ -20,27 +34,6 @@
             animation: beam 2.5s linear infinite;
         }
         @keyframes beam { to { background-position: 200% center; } }
-
-        /* BUTOANE MICI ȘI ACTIVE */
-        .btn-category {
-            background: rgba(26, 26, 26, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 18px;
-            padding: 12px;
-            display: flex;
-            flex-col;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            height: 85px; /* Înălțime fixă mai mică */
-        }
-        .btn-category:active {
-            transform: scale(0.92);
-            border-color: #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-            background: rgba(0, 255, 255, 0.05);
-        }
     </style>
 </head>
 <body class="pb-10">
@@ -51,19 +44,19 @@
             <span class="text-lg font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
         </div>
         <div class="flex gap-2">
-            <button class="px-3 py-2 rounded-lg text-[9px] font-black border border-cyan-500/30 uppercase">ACASĂ</button>
-            <button class="px-4 py-2 bg-cyan-500 text-black font-black rounded-full text-[9px] uppercase">LOGIN</button>
+            <button class="px-4 py-2 rounded-lg text-[10px] font-black border border-white/20 uppercase btn-active-neon neon-white">ACASĂ</button>
+            <button class="px-5 py-2 bg-cyan-500 text-black font-black rounded-full text-[10px] uppercase btn-active-neon neon-cyan">LOGIN</button>
         </div>
     </header>
 
     <main class="pt-16">
-        <div class="relative w-full h-[40vh] overflow-hidden bg-black">
-            <video id="heroVideo" autoplay loop muted playsinline class="w-full h-full object-cover opacity-90">
+        <div class="relative w-full h-[45vh] overflow-hidden bg-black">
+            <video id="heroVideo" autoplay loop muted playsinline class="w-full h-full object-cover opacity-80">
                 <source src="hero-loop.mp4" type="video/mp4">
             </video>
-            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-transparent to-transparent"></div>
             
-            <div class="absolute top-8 left-0 z-10 text-left">
+            <div class="absolute top-10 left-0 z-10">
                 <div class="slogan-container">
                     <h1 class="text-2xl font-[900] leading-none uppercase italic tracking-tighter">
                         LIBERTATE.<br>
@@ -73,41 +66,31 @@
             </div>
         </div>
 
-        <div class="px-5 mt-6 mb-10">
-            <div class="grid grid-cols-3 gap-3 mb-3">
-                <div class="btn-category flex-col">
+        <div class="px-5 mt-10 space-y-3">
+            <div class="grid grid-cols-3 gap-3">
+                <div class="btn-active-neon neon-cyan bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center border border-white/5">
                     <span class="text-2xl">✈️</span>
                     <p class="text-[9px] font-black uppercase text-cyan-400 mt-2">Travel</p>
                 </div>
-                <div class="btn-category flex-col">
+                <div class="btn-active-neon neon-green bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center border border-white/5">
                     <span class="text-2xl">🏠</span>
                     <p class="text-[9px] font-black uppercase text-green-500 mt-2">Locuință</p>
                 </div>
-                <div class="btn-category flex-col">
+                <div class="btn-active-neon neon-pink bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center border border-white/5">
                     <span class="text-2xl">❤️</span>
                     <p class="text-[9px] font-black uppercase text-pink-500 mt-2">Sănătate</p>
                 </div>
             </div>
+            
             <div class="grid grid-cols-2 gap-3">
-                <div class="btn-category">
+                <div class="btn-active-neon neon-yellow bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center border border-white/5">
                     <span class="text-2xl mr-3">🚗</span>
                     <p class="text-[10px] font-black uppercase text-yellow-400">RCA Auto</p>
                 </div>
-                <div class="btn-category">
+                <div class="btn-active-neon neon-white bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center border border-white/5">
                     <span class="text-2xl mr-3">➕</span>
                     <p class="text-[10px] font-black uppercase text-white">Alte Asigurări</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="px-5">
-            <div class="bg-zinc-900/40 rounded-[30px] p-6 border border-white/5">
-                <div class="bg-black p-4 rounded-xl border border-white/10 mb-6">
-                    <input type="text" placeholder="NR. ÎNMATRICULARE" class="bg-transparent text-white font-black text-lg w-full text-center outline-none uppercase">
-                </div>
-                <button class="w-full py-5 rounded-xl text-[12px] font-[900] bg-[#39FF14] text-black uppercase">
-                    CALCULEAZĂ PREȚ RCA
-                </button>
             </div>
         </div>
     </main>
