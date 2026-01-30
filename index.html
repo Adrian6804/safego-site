@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Full Layout</title>
+    <title>SafeGo.ro | RCA Form Active</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -29,18 +29,33 @@
         }
         .active-glow p { color: black !important; }
 
-        #notification-toast {
-            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(15px); border: 1px solid #39ff14;
-            padding: 16px; border-radius: 20px; z-index: 100;
-            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; align-items: center; gap: 12px;
+        /* PANOU FORMULAR RCA */
+        #rca-drawer {
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 70%;
+            background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px);
+            border-top: 2px solid #39ff14; border-radius: 30px 30px 0 0;
+            z-index: 1000; transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 30px 20px;
         }
-        #notification-toast.show { bottom: 30px; }
+        #rca-drawer.open { bottom: 0; }
+
+        .form-input {
+            background: black; border: 1px solid rgba(255,255,255,0.1);
+            padding: 18px; border-radius: 15px; width: 100%; color: white;
+            font-weight: 900; text-transform: uppercase; font-size: 20px;
+            text-align: center; outline: none; transition: 0.3s;
+        }
+        .form-input:focus { border-color: #39ff14; box-shadow: 0 0 15px rgba(57, 255, 20, 0.2); }
+
+        #overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            z-index: 900; display: none;
+        }
     </style>
 </head>
 <body class="bg-black">
+
+    <div id="overlay" onclick="closeRca()"></div>
 
     <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
         <div class="flex items-center gap-2" onclick="location.reload()">
@@ -48,8 +63,8 @@
             <span class="text-lg font-black italic uppercase tracking-tighter">SafeGo<span class="text-[#39ff14]">.ro</span></span>
         </div>
         <div class="flex gap-2">
-            <button onclick="handleAction(this, 'Acasă')" class="px-4 py-2 rounded-lg text-[10px] font-black border border-white/10 uppercase bg-zinc-900 btn-universal-neon">ACASĂ</button>
-            <button onclick="handleAction(this, 'Login')" class="px-5 py-2 border border-[#39ff14] text-[#39ff14] font-black rounded-full text-[10px] uppercase btn-universal-neon">LOGIN</button>
+            <button class="px-4 py-2 rounded-lg text-[10px] font-black border border-white/10 uppercase bg-zinc-900 btn-universal-neon">ACASĂ</button>
+            <button class="px-5 py-2 border border-[#39ff14] text-[#39ff14] font-black rounded-full text-[10px] uppercase btn-universal-neon">LOGIN</button>
         </div>
     </header>
 
@@ -71,25 +86,25 @@
 
         <div class="px-5 mt-10 space-y-3">
             <div class="grid grid-cols-3 gap-3">
-                <div onclick="handleAction(this, 'Travel')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
+                <div onclick="handleSimpleAction(this, 'Travel')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
                     <span class="text-2xl">✈️</span>
                     <p class="text-[9px] font-black uppercase text-white mt-2">Travel</p>
                 </div>
-                <div onclick="handleAction(this, 'Locuință')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
+                <div onclick="handleSimpleAction(this, 'Locuință')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
                     <span class="text-2xl">🏠</span>
                     <p class="text-[9px] font-black uppercase text-white mt-2">Locuință</p>
                 </div>
-                <div onclick="handleAction(this, 'Sănătate')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
+                <div onclick="handleSimpleAction(this, 'Sănătate')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
                     <span class="text-2xl">❤️</span>
                     <p class="text-[9px] font-black uppercase text-white mt-2">Sănătate</p>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-3">
-                <div onclick="handleAction(this, 'RCA Auto')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
+                <div onclick="openRca(this)" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
                     <span class="text-2xl mr-3">🚗</span>
                     <p class="text-[10px] font-black uppercase text-white">RCA Auto</p>
                 </div>
-                <div onclick="handleAction(this, 'Alte Asigurări')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
+                <div onclick="handleSimpleAction(this, 'Alte Asigurări')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
                     <span class="text-2xl mr-3">➕</span>
                     <p class="text-[10px] font-black uppercase text-white">Alte Asigurări</p>
                 </div>
@@ -98,34 +113,58 @@
 
         <footer class="mt-20 px-8 py-12 border-t border-white/5 bg-zinc-950 flex flex-col items-center gap-8">
             <div class="flex gap-4">
-                <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-6 opacity-70 grayscale hover:grayscale-0 transition-all">
-                <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-6 opacity-70 grayscale hover:grayscale-0 transition-all">
+                <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-6 opacity-50 grayscale">
+                <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-6 opacity-50 grayscale">
             </div>
-            <p class="text-[9px] text-zinc-600 font-bold uppercase tracking-[0.3em]">&copy; 2026 SafeGo Digital First</p>
+            <p class="text-[9px] text-zinc-600 font-bold uppercase tracking-[0.3em]">&copy; 2026 SafeGo Digital</p>
         </footer>
     </main>
 
-    <div id="notification-toast">
-        <div class="bg-[#39ff14] p-2 rounded-full shadow-[0_0_10px_#39ff14]">
-            <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-        </div>
-        <div>
-            <p class="text-[10px] font-black uppercase text-[#39ff14]">Sistem SafeGo</p>
-            <p id="toast-text" class="text-[11px] text-white/80">Cererea a fost preluată.</p>
+    <div id="rca-drawer">
+        <div class="w-12 h-1.5 bg-zinc-800 rounded-full mx-auto mb-8" onclick="closeRca()"></div>
+        <h2 class="text-xl font-black italic uppercase text-center mb-8">Configurator <span class="text-[#39ff14]">RCA Rapid</span></h2>
+        
+        <div class="space-y-6">
+            <div>
+                <label class="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-2">Nr. Înmatriculare</label>
+                <input type="text" placeholder="B 101 AAA" class="form-input mt-2">
+            </div>
+            <div>
+                <label class="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-2">Cod Numeric Personal (CNP)</label>
+                <input type="number" placeholder="1234567890123" class="form-input mt-2 text-lg">
+            </div>
+            <button onclick="submitRca()" class="w-full py-5 bg-[#39ff14] text-black font-black uppercase rounded-2xl shadow-[0_0_30px_rgba(57,255,20,0.3)] mt-4">
+                Calculează Oferte
+            </button>
         </div>
     </div>
 
     <script>
         document.getElementById('heroVideo').playbackRate = 0.8;
-        function handleAction(element, tip) {
+
+        function openRca(btn) {
+            btn.classList.add('active-glow');
+            document.getElementById('rca-drawer').classList.add('open');
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeRca() {
+            document.getElementById('rca-drawer').classList.remove('open');
+            document.getElementById('overlay').style.display = 'none';
+            document.querySelectorAll('.btn-universal-neon').forEach(b => b.classList.remove('active-glow'));
+        }
+
+        function submitRca() {
+            alert("Sistemul SafeGo interoghează baza de date... Revenim cu cele mai bune prețuri!");
+            closeRca();
+        }
+
+        function handleSimpleAction(element, tip) {
             element.classList.add('active-glow');
-            const toast = document.getElementById('notification-toast');
-            document.getElementById('toast-text').innerText = "Am activat modulul: " + tip;
-            toast.classList.add('show');
             setTimeout(() => {
-                toast.classList.remove('show');
+                alert("Modulul " + tip + " va fi disponibil în curând!");
                 element.classList.remove('active-glow');
-            }, 3000);
+            }, 300);
         }
     </script>
 </body>
