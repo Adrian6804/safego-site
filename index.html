@@ -3,37 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | RCA API Integration</title>
+    <title>SafeGo.ro | Conexiune InsureTech</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* Efecte vizuale butoane */
+        .btn-universal-neon { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; }
+        .active-glow { background: #39ff14 !important; box-shadow: 0 0 40px #39ff14; border-color: #39ff14; transform: scale(0.92); }
+        .active-glow p { color: black !important; }
 
-        .logo-pulse { animation: logo-glow 2s infinite ease-in-out; }
-        @keyframes logo-glow { 50% { filter: drop-shadow(0 0 15px #39ff14); opacity: 1; } }
-
-        /* Stiluri Formular și Drawer */
+        /* Drawer RCA */
         #rca-drawer {
-            position: fixed; bottom: -100%; left: 0; width: 100%; height: 85%;
-            background: rgba(8, 8, 8, 0.98); backdrop-filter: blur(25px);
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 90%;
+            background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px);
             border-top: 2px solid #39ff14; border-radius: 30px 30px 0 0;
             z-index: 1000; transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             padding: 25px; overflow-y: auto;
         }
         #rca-drawer.open { bottom: 0; }
 
-        .input-group { background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 10px; transition: 0.3s; }
-        .input-group:focus-within { border-color: #39ff14; box-shadow: 0 0 15px rgba(57, 255, 20, 0.2); }
-        
-        .form-control { background: transparent; border: none; color: white; width: 100%; text-align: center; font-weight: 900; font-size: 1.2rem; outline: none; text-transform: uppercase; }
+        /* Card Oferta Asigurator */
+        .offer-card {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 20px; margin-bottom: 15px;
+            display: flex; justify-between; align-items: center;
+            transition: 0.3s;
+        }
+        .offer-card:hover { border-color: #39ff14; background: rgba(57, 255, 20, 0.05); }
 
-        /* Ecran de Încărcare API */
-        #api-loader { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
-        .spinner { width: 50px; height: 50px; border: 5px solid #1a1a1a; border-top: 5px solid #39ff14; border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        .active-glow { background: #39ff14 !important; box-shadow: 0 0 40px #39ff14; transform: scale(0.95); }
-        .active-glow p, .active-glow span { color: black !important; }
+        .loader { width: 40px; height: 40px; border: 4px solid #1a1a1a; border-top-color: #39ff14; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-black">
@@ -41,76 +42,57 @@
     <div id="overlay" class="fixed inset-0 bg-black/80 z-[900] hidden" onclick="closeRca()"></div>
 
     <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
-        <div class="flex items-center gap-2" onclick="location.reload()">
-            <img src="logo-shield.png" alt="Logo" class="w-7 h-7 logo-pulse opacity-80">
-            <span class="text-lg font-black italic uppercase tracking-tighter">SafeGo<span class="text-[#39ff14]">.ro</span></span>
+        <div class="flex items-center gap-2">
+            <span class="text-lg font-black italic uppercase">SafeGo<span class="text-[#39ff14]">.ro</span></span>
         </div>
-        <button class="px-5 py-2 bg-transparent border border-[#39ff14] text-[#39ff14] font-black rounded-full text-[10px] uppercase">LOGIN</button>
+        <button class="px-4 py-2 border border-[#39ff14] text-[#39ff14] font-black rounded-full text-[10px] uppercase">LOGIN</button>
     </header>
 
-    <main class="pt-20">
-        <div class="relative w-full h-[35vh] overflow-hidden bg-black mb-10">
-            <video id="heroVideo" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60">
-                <source src="hero-loop.mp4" type="video/mp4">
-            </video>
-            <div class="absolute top-10 left-6">
-                <h1 class="text-2xl font-[900] italic leading-tight uppercase">Configurator<br><span class="text-[#39ff14]">Digital RCA</span></h1>
+    <main class="pt-24 px-5">
+        <div onclick="openRca(this)" class="btn-universal-neon bg-zinc-900/90 p-6 rounded-[25px] flex items-center justify-between">
+            <div>
+                <p class="text-[10px] font-black uppercase text-zinc-500 mb-1">Pasul 1</p>
+                <p class="text-xl font-black uppercase">Configurează RCA</p>
             </div>
+            <span class="text-3xl">🚗</span>
         </div>
-
-        <div class="px-5 space-y-3">
-            <div class="grid grid-cols-2 gap-3">
-                <div onclick="openRca(this)" class="bg-zinc-900/90 p-6 rounded-[25px] flex items-center justify-between border border-white/5 cursor-pointer transition-all active:scale-95 btn-category">
-                    <div>
-                        <p class="text-[10px] font-black uppercase text-zinc-500 mb-1">Asigurare</p>
-                        <p class="text-lg font-black uppercase">RCA Auto</p>
-                    </div>
-                    <span class="text-3xl">🚗</span>
-                </div>
-                <div class="bg-zinc-900/90 p-6 rounded-[25px] flex items-center justify-between border border-white/5 opacity-50">
-                    <div>
-                        <p class="text-[10px] font-black uppercase text-zinc-500 mb-1">Asigurare</p>
-                        <p class="text-lg font-black uppercase">Travel</p>
-                    </div>
-                    <span class="text-3xl">✈️</span>
-                </div>
-            </div>
-            </div>
-
-        <footer class="mt-20 px-8 py-10 border-t border-white/5 text-center">
-            <p class="text-[8px] text-zinc-600 font-black uppercase tracking-widest">&copy; 2026 SafeGo | API Powered Interface</p>
-        </footer>
     </main>
 
     <div id="rca-drawer">
-        <div class="w-12 h-1 bg-zinc-800 rounded-full mx-auto mb-6" onclick="closeRca()"></div>
+        <div class="w-12 h-1 bg-zinc-800 rounded-full mx-auto mb-8" onclick="closeRca()"></div>
         
-        <div id="form-content">
-            <h2 class="text-xl font-[900] uppercase italic text-center mb-8">Introdu Datele <span class="text-[#39ff14]">Vehiculului</span></h2>
+        <div id="step-form">
+            <h2 class="text-xl font-black uppercase italic text-center mb-8">Date <span class="text-[#39ff14]">Identificare</span></h2>
             <div class="space-y-4">
-                <div class="input-group">
-                    <label class="text-[9px] font-black text-zinc-500 uppercase block text-center mb-1">Nr. Înmatriculare</label>
-                    <input type="text" id="nr_auto" placeholder="B 123 ABC" class="form-control">
-                </div>
-                <div class="input-group">
-                    <label class="text-[9px] font-black text-zinc-500 uppercase block text-center mb-1">CNP Proprietar</label>
-                    <input type="number" id="cnp_owner" placeholder="1234567890123" class="form-control">
-                </div>
-                <button onclick="callBrokerAPI()" class="w-full py-5 bg-[#39ff14] text-black font-[900] uppercase rounded-2xl shadow-[0_10px_30px_rgba(57,255,20,0.3)] mt-6">
-                    Interoghează API Broker
-                </button>
+                <input type="text" id="plate" placeholder="NR. INMATRICULARE" class="w-full bg-black border border-white/10 p-5 rounded-xl text-center font-black text-xl outline-none focus:border-[#39ff14] uppercase">
+                <input type="number" id="cnp" placeholder="CNP PROPRIETAR" class="w-full bg-black border border-white/10 p-5 rounded-xl text-center font-black text-xl outline-none focus:border-[#39ff14]">
+                <button onclick="getQuotes()" class="w-full py-5 bg-[#39ff14] text-black font-black uppercase rounded-xl shadow-[0_0_30px_rgba(57,255,20,0.3)]">Vezi Prețuri Reale</button>
             </div>
         </div>
 
-        <div id="api-loader">
-            <div class="spinner mb-4"></div>
-            <p class="text-[11px] font-black uppercase tracking-widest animate-pulse">Căutăm cele mai bune oferte...</p>
+        <div id="step-loading" class="hidden flex-col items-center justify-center py-20">
+            <div class="loader mb-4"></div>
+            <p class="font-black uppercase text-[10px] tracking-widest animate-pulse">Interogăm baza de date InsureTech...</p>
+        </div>
+
+        <div id="step-results" class="hidden">
+            <h2 class="text-lg font-black uppercase mb-6 text-center">Oferte <span class="text-[#39ff14]">Disponibile</span></h2>
+            <div id="offers-list">
+                <div class="offer-card">
+                    <div>
+                        <p class="font-black text-sm uppercase">Allianz Tiriac</p>
+                        <p class="text-[10px] text-zinc-500">Poliță 12 Luni</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-black text-[#39ff14]">840 RON</p>
+                        <button class="text-[9px] font-black uppercase bg-white text-black px-3 py-1 rounded-md mt-1">Selectează</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('heroVideo').playbackRate = 0.8;
-
         function openRca(btn) {
             btn.classList.add('active-glow');
             document.getElementById('rca-drawer').classList.add('open');
@@ -120,25 +102,22 @@
         function closeRca() {
             document.getElementById('rca-drawer').classList.remove('open');
             document.getElementById('overlay').classList.add('hidden');
-            document.querySelectorAll('.btn-category').forEach(b => b.classList.remove('active-glow'));
         }
 
-        function callBrokerAPI() {
-            const nr = document.getElementById('nr_auto').value;
-            const cnp = document.getElementById('cnp_owner').value;
+        async function getQuotes() {
+            const plate = document.getElementById('plate').value;
+            const cnp = document.getElementById('cnp').value;
 
-            if(!nr || !cnp) { alert("Te rugăm să completezi toate datele!"); return; }
+            if(!plate || !cnp) return alert("Completează datele!");
 
-            // Ascundem formularul, arătăm loader-ul
-            document.getElementById('form-content').style.display = 'none';
-            document.getElementById('api-loader').style.display = 'flex';
+            document.getElementById('step-form').classList.add('hidden');
+            document.getElementById('step-loading').classList.remove('hidden');
 
-            // AICI VA VENI FETCH-ul CĂTRE API-UL TĂU
+            // SIMULARE APEL API (Urmează să punem cheia ta de API aici)
             setTimeout(() => {
-                alert("API Broker conectat! Am găsit 5 oferte pentru " + nr);
-                // Aici vom injecta rezultatele în HTML
-                location.reload(); 
-            }, 3000);
+                document.getElementById('step-loading').classList.add('hidden');
+                document.getElementById('step-results').classList.remove('hidden');
+            }, 2500);
         }
     </script>
 </body>
