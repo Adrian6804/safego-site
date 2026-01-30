@@ -135,111 +135,47 @@
     </footer>
 
     <script>
-    // 1. CONFIGURARE API
-    const API_URL = 'https://insuretech.staging.insuretech.ro/api/v1';
-    const API_KEY = '015f40fc-1974-4ad5-bbde-48c117a54307';
+   // Navigare pasi
+function goToCalculation() {
+    document.getElementById('step-dnt').classList.add('hidden');
+    document.getElementById('step-form').classList.remove('hidden');
+}
 
-    // 2. NAVIGARE INTRE PASI (DNT -> FORMULAR -> REZULTATE)
-    function showRcaForm(el) {
-        // Efect vizual pe butonul selectat
-        document.querySelectorAll('.btn-neon').forEach(b => b.classList.remove('btn-active'));
-        el.classList.add('btn-active');
-        
-        // Deschidem containerul si aratam primul pas (DNT)
-        document.getElementById('rca-container').classList.remove('hidden');
-        document.getElementById('step-dnt').classList.remove('hidden');
-        document.getElementById('step-form').classList.add('hidden');
-        document.getElementById('step-results').classList.add('hidden');
+async function getQuotes() {
+    const plate = document.getElementById('plate').value;
+    const cnp = document.getElementById('cnp').value;
 
-        // Scroll automat catre sectiune
-        setTimeout(() => {
-            document.getElementById('rca-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-    }
+    document.getElementById('step-form').classList.add('hidden');
+    document.getElementById('step-loading').classList.remove('hidden');
 
-    function goToCalculation() {
-        // Utilizatorul a ales "Fara consultanta" (Pasul 2 din poza colegului)
-        document.getElementById('step-dnt').classList.add('hidden');
+    // Proxy alternativ pentru a forta trecerea cererii
+    const proxy = "https://api.allorigins.win/raw?url=";
+    const targetUrl = `https://insuretech.staging.insuretech.ro/api/v1/rca/quotes`;
+
+    try {
+        const response = await fetch(proxy + encodeURIComponent(targetUrl), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-API-KEY': '015f40fc-1974-4ad5-bbde-48c117a54307' // Cheia ta
+            },
+            body: JSON.stringify({
+                registration_number: plate,
+                owner_id: cnp
+            })
+        });
+
+        if (!response.ok) throw new Error("Serverul nu raspunde");
+
+        const data = await response.json();
+        renderOffers(data.data || data.offers || []);
+
+    } catch (e) {
+        alert("Eroare de conexiune. Verifică API-ul sau conexiunea la internet.");
+        document.getElementById('step-loading').classList.add('hidden');
         document.getElementById('step-form').classList.remove('hidden');
     }
-
-    function requestConsultancy() {
-        // Utilizatorul a ales "Vreau consultanta"
-        alert("Cererea a fost înregistrată! Un consultant SafeGo te va contacta imediat.");
-    }
-
-    // 3. APELARE API PENTRU PRETURI
-    async function getQuotes() {
-        const plate = document.getElementById('plate').value;
-        const cnp = document.getElementById('cnp').value;
-
-        if(!plate || !cnp) {
-            alert("Te rugăm să introduci Numărul de Înmatriculare și CNP-ul.");
-            return;
-        }
-
-        // Trecem la ecranul de incarcare
-        document.getElementById('step-form').classList.add('hidden');
-        document.getElementById('step-loading').classList.remove('hidden');
-
-        // Folosim un proxy pentru a evita eroarea de conexiune (CORS) vazuta anterior
-        const proxy = "https://corsproxy.io/?"; 
-        const targetUrl = `${API_URL}/rca/quotes`;
-
-        try {
-            const response = await fetch(proxy + encodeURIComponent(targetUrl), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-API-KEY': API_KEY 
-                },
-                body: JSON.stringify({
-                    registration_number: plate,
-                    owner_id: cnp
-                })
-            });
-
-            const data = await response.json();
-            const offers = data.data || data.offers || [];
-            renderOffers(offers);
-
-        } catch (e) {
-            console.error("Eroare:", e);
-            alert("Eroare de conexiune. Verifică datele introduse.");
-            document.getElementById('step-loading').classList.add('hidden');
-            document.getElementById('step-form').classList.remove('hidden');
-        }
-    }
-
-    // 4. AFISARE REZULTATE PE CARDURI NEON
-    function renderOffers(offers) {
-        const list = document.getElementById('offers-list');
-        list.innerHTML = '';
-        
-        document.getElementById('step-loading').classList.add('hidden');
-        document.getElementById('step-results').classList.remove('hidden');
-
-        if(offers.length === 0) {
-            list.innerHTML = '<p class="text-center text-[10px] uppercase font-bold text-zinc-500 py-10">Nu am găsit oferte pentru aceste date.</p>';
-            return;
-        }
-
-        offers.forEach(o => {
-            const card = `
-                <div class="offer-card p-6 rounded-[24px] flex justify-between items-center mb-3">
-                    <div>
-                        <p class="font-black text-sm uppercase text-white">${o.insurer_name}</p>
-                        <p class="text-[9px] text-zinc-500 uppercase mt-1">RCA 12 Luni / B${o.bm_class || '0'}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-lg font-black text-[#39ff14]">${o.price} RON</p>
-                        <button class="text-[9px] font-bold uppercase bg-white text-black px-4 py-2 rounded-xl mt-2">Cumpără</button>
-                    </div>
-                </div>`;
-            list.innerHTML += card;
-        });
-    }
+}
 </script>
 </body>
 </html>
