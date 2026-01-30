@@ -135,44 +135,52 @@
             }, 100);
         }
 
-        async function getQuotes() {
-            const plate = document.getElementById('plate').value;
-            const cnp = document.getElementById('cnp').value;
+       async function getQuotes() {
+    const plate = document.getElementById('plate').value;
+    const cnp = document.getElementById('cnp').value;
 
-            if(!plate || !cnp) {
-                alert("Te rugăm să completezi ambele câmpuri.");
-                return;
-            }
+    if(!plate || !cnp) {
+        alert("Te rugăm să completezi ambele câmpuri.");
+        return;
+    }
 
-            document.getElementById('step-form').classList.add('hidden');
-            document.getElementById('step-loading').classList.remove('hidden');
+    document.getElementById('step-form').classList.add('hidden');
+    document.getElementById('step-loading').classList.remove('hidden');
 
-            try {
-                const response = await fetch(`${API_URL}/rca/quotes`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-API-KEY': API_KEY 
-                    },
-                    body: JSON.stringify({
-                        registration_number: plate,
-                        owner_id: cnp
-                    })
-                });
+    // Am adăugat un proxy pentru a evita blocarea conexiunii (CORS)
+    const proxy = "https://corsproxy.io/?"; 
+    const targetUrl = `${API_URL}/rca/quotes`;
 
-                const data = await response.json();
-                // Verificăm dacă avem oferte în data.data sau direct în data
-                const offers = data.data || data.offers || [];
-                renderOffers(offers);
+    try {
+        const response = await fetch(proxy + encodeURIComponent(targetUrl), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-API-KEY': API_KEY 
+            },
+            body: JSON.stringify({
+                registration_number: plate,
+                owner_id: cnp
+            })
+        });
 
-            } catch (e) {
-                console.error(e);
-                alert("Eroare de conexiune la serverul de test.");
-                document.getElementById('step-loading').classList.add('hidden');
-                document.getElementById('step-form').classList.remove('hidden');
-            }
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Serverul a răspuns cu eroare: ${response.status}`);
         }
+
+        const data = await response.json();
+        const offers = data.data || data.offers || [];
+        renderOffers(offers);
+
+    } catch (e) {
+        console.error("Detaliu eroare:", e);
+        alert("Conexiunea a fost refuzată. Verifică dacă API Key este activ sau datele mașinii sunt corecte.");
+        document.getElementById('step-loading').classList.add('hidden');
+        document.getElementById('step-form').classList.remove('hidden');
+    }
+}
 
         function renderOffers(offers) {
             const list = document.getElementById('offers-list');
