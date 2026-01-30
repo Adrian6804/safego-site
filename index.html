@@ -7,28 +7,75 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Optimizări Mobile-First */
+        /* SETĂRI DE BAZĂ MOBILE-FIRST */
         body { 
             background-color: #0F1115; 
             color: white; 
             font-family: 'Inter', sans-serif; 
             -webkit-tap-highlight-color: transparent;
-            overflow-x: hidden; /* Previne scroll orizontal nedorit */
+            overflow-x: hidden;
         }
-        /* Efecte Neon subtile pentru aspect modern */
-        .neon-box {
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.2) 100%);
-            transition: transform 0.1s;
-        }
-        .neon-active:active { transform: scale(0.97); }
-        
-        /* Accente specifice pe categorii */
-        .accent-blue { border-color: rgba(0, 209, 255, 0.3); box-shadow: 0 0 10px rgba(0, 209, 255, 0.05); }
-        .accent-pink { border-color: rgba(255, 0, 122, 0.3); box-shadow: 0 0 10px rgba(255, 0, 122, 0.05); }
-        .accent-green { border-color: rgba(57, 255, 20, 0.3); box-shadow: 0 0 10px rgba(57, 255, 20, 0.05); }
 
-        /* Ascundere scrollbar dar păstrare funcționalitate */
+        /* --- NOUA ANIMAȚIE FOSFORESCENTĂ STRĂLUCITOARE --- */
+        .btn-phosphorescent {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        /* Efectul de "Shine" (reflexie care trece peste buton) */
+        .btn-phosphorescent::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                rgba(0, 209, 255, 0.4),
+                transparent
+            );
+            transform: skewX(-25deg);
+            transition: none;
+            z-index: -1;
+        }
+
+        /* Activarea animației la Hover/Touch */
+        .btn-phosphorescent:hover,
+        .btn-phosphorescent:active {
+            border-color: rgba(0, 209, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 209, 255, 0.5), inset 0 0 10px rgba(0, 209, 255, 0.2);
+            transform: scale(1.02);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-phosphorescent:hover::after,
+        .btn-phosphorescent:active::after {
+            left: 150%;
+            transition: left 0.7s ease-in-out;
+        }
+
+        /* Stiluri specifice pentru butonul principal verde */
+        .btn-main-action {
+            background: #39FF14;
+            color: black;
+            border: none;
+        }
+        .btn-main-action:hover,
+        .btn-main-action:active {
+            background: #4cff29;
+            box-shadow: 0 0 40px rgba(57, 255, 20, 0.6);
+        }
+        .btn-main-action::after {
+             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        }
+
+        /* Utilitare */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -36,18 +83,18 @@
 <body class="pb-safe">
 
     <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-[#0F1115]/90 backdrop-blur-xl border-b border-white/5">
-        <div class="flex items-center gap-2" onclick="window.location.reload()">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.reload()">
             <div class="w-8 h-8 bg-cyan-400 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20">
                 <span class="text-black font-black text-[12px]">SG</span>
             </div>
             <span class="text-xl font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
         </div>
         
-        <div class="flex items-center gap-6">
-            <button onclick="window.location.reload()" class="text-[11px] font-black uppercase tracking-[0.15em] text-zinc-400 hover:text-white transition-colors border-b-2 border-transparent hover:border-cyan-400 neon-active">
+        <div class="flex items-center gap-4">
+            <button onclick="window.location.reload()" class="px-4 py-2 rounded-lg text-[11px] font-black uppercase tracking-[0.15em] text-zinc-300 btn-phosphorescent">
                 ACASĂ
             </button>
-            <button class="px-5 py-2 bg-cyan-500 text-black font-black uppercase text-[10px] rounded-full shadow-lg shadow-cyan-500/20 neon-active">
+            <button class="px-5 py-2 bg-cyan-500 text-black font-black uppercase text-[10px] rounded-full shadow-lg shadow-cyan-500/30 btn-phosphorescent border-none">
                 CONTUL MEU
             </button>
         </div>
@@ -55,92 +102,92 @@
 
     <main class="pt-28 pb-10 px-5 max-w-md mx-auto">
         
-        <div class="mb-10 animate-fade-in">
+        <div class="mb-8 animate-fade-in">
             <p class="text-zinc-500 text-[10px] uppercase tracking-[0.4em] font-bold mb-3 italic">Asigurări Inteligente</p>
             <h1 class="text-4xl font-[900] leading-[0.9] uppercase italic tracking-tighter text-white">
                 LIBERTATE. <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">FĂRĂ RISCURI.</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 font-black">FĂRĂ RISCURI.</span>
             </h1>
-            <p class="mt-4 text-zinc-400 text-xs font-medium max-w-[80%] leading-relaxed">
-                Platforma care conectează generația ta direct la sistemele asiguratorilor. Simplu. Rapid. Digital.
+            <p class="mt-4 text-zinc-400 text-xs font-medium max-w-[90%] leading-relaxed">
+                Platforma care conectează generația ta direct la sistemele asiguratorilor.
             </p>
         </div>
 
-        <div class="grid grid-cols-3 gap-3 mb-12">
-            <div id="btn-travel" class="neon-box accent-blue p-4 rounded-2xl h-32 flex flex-col justify-between neon-active cursor-pointer">
-                <span class="text-2xl">✈️</span>
+        <div class="w-full h-64 mb-12 rounded-3xl border-2 border-dashed border-cyan-500/30 flex flex-col items-center justify-center bg-[#16181D]/80 relative overflow-hidden group">
+             <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-blue-500/10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+             <p class="text-cyan-400 font-bold uppercase tracking-widest animate-pulse relative z-10">► Spațiu Video Dinamic</p>
+             <p class="text-zinc-500 text-[9px] mt-2 relative z-10">Încarcă filmulețul aici</p>
+        </div>
+        <div class="grid grid-cols-3 gap-3 mb-12 relative z-10">
+            <div id="btn-travel" class="btn-phosphorescent p-4 rounded-2xl h-32 flex flex-col justify-between cursor-pointer bg-[#1D3E79]/20">
+                <span class="text-3xl drop-shadow-[0_0_10px_rgba(0,209,255,0.5)]">✈️</span>
                 <div>
                     <p class="text-[10px] font-black uppercase tracking-tight text-cyan-400">Travel</p>
-                    <p class="text-[8px] text-zinc-400 mt-1">Oriunde în lume.<br>Acoperire medicală.</p>
+                    <p class="text-[8px] text-zinc-400 mt-1 leading-tight">Oriunde în lume.<br>Acoperire medicală.</p>
                 </div>
             </div>
-            <div id="btn-health" class="neon-box accent-pink p-4 rounded-2xl h-32 flex flex-col justify-between neon-active cursor-pointer">
-                <span class="text-2xl">❤️</span>
+            <div id="btn-health" class="btn-phosphorescent p-4 rounded-2xl h-32 flex flex-col justify-between cursor-pointer bg-[#4E1632]/20">
+                <span class="text-3xl drop-shadow-[0_0_10px_rgba(255,0,122,0.5)]">❤️</span>
                 <div>
                     <p class="text-[10px] font-black uppercase tracking-tight text-pink-500">Sănătate</p>
-                    <p class="text-[8px] text-zinc-400 mt-1">Clinici private.<br>Preventiv.</p>
+                    <p class="text-[8px] text-zinc-400 mt-1 leading-tight">Clinici private.<br>Preventiv.</p>
                 </div>
             </div>
-            <div id="btn-home" class="neon-box accent-green p-4 rounded-2xl h-32 flex flex-col justify-between neon-active cursor-pointer">
-                <span class="text-2xl">🏠</span>
+            <div id="btn-home" class="btn-phosphorescent p-4 rounded-2xl h-32 flex flex-col justify-between cursor-pointer bg-[#2D4A26]/20">
+                <span class="text-3xl drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">🏠</span>
                 <div>
                     <p class="text-[10px] font-black uppercase tracking-tight text-green-500">Locuință</p>
-                    <p class="text-[8px] text-zinc-400 mt-1">PAD + Facultativă.<br>Totul asigurat.</p>
+                    <p class="text-[8px] text-zinc-400 mt-1 leading-tight">PAD + Facultativă.<br>Totul asigurat.</p>
                 </div>
             </div>
         </div>
 
-        <div class="mb-12">
+        <div class="mb-12 relative z-10">
             <div class="flex justify-between items-end mb-4">
                 <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-bold italic">Mobilitate Urbană</p>
-                <span class="text-[9px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded border border-green-500/30">API CONECTAT</span>
+                <span class="text-[9px] bg-green-500/10 text-green-400 px-2 py-1 rounded-full border border-green-500/30 font-bold flex items-center gap-1">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> API CONECTAT
+                </span>
             </div>
             
-            <div class="bg-[#16181D] rounded-[32px] p-6 border border-white/5 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
-
+            <div class="bg-[#16181D] rounded-[32px] p-6 border border-white/10 shadow-2xl relative overflow-hidden">
                 <div class="flex justify-between items-center mb-6 relative z-10">
                     <h3 class="text-sm font-black uppercase italic tracking-widest text-white">RCA & Wheels</h3>
                     <div class="w-10 h-5 bg-zinc-800 rounded-full relative border border-white/10">
-                        <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
+                        <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-cyan-400 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.8)]"></div>
                     </div>
                 </div>
                 
-                <div class="flex gap-4 mb-6 relative z-10">
-                    <div class="flex-1 space-y-2">
-                        <div class="bg-black/60 rounded-xl p-3 border border-white/10 flex items-center gap-2">
-                            <span class="text-[10px] text-zinc-500 font-bold">RO</span>
-                            <input type="text" placeholder="B 100 ABC" class="bg-transparent text-white font-black text-sm w-full outline-none uppercase placeholder-zinc-700" />
+                <div class="flex gap-4 mb-8 relative z-10">
+                    <div class="flex-1">
+                        <div class="bg-black/50 rounded-xl p-4 border border-white/10 flex items-center gap-3 focus-within:border-cyan-400 transition-colors">
+                            <span class="text-xs text-zinc-400 font-bold">RO</span>
+                            <input type="text" placeholder="B 100 ABC" class="bg-transparent text-white font-black text-lg w-full outline-none uppercase placeholder-zinc-700" />
                         </div>
-                    </div>
-                    <div class="w-20 h-14 bg-zinc-800 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden">
-                         <img src="Wheels.jpg" onerror="this.style.display='none'" class="w-full h-full object-cover opacity-80" alt="Car">
-                        <span class="text-xl absolute" style="z-index:-1">🚗</span>
                     </div>
                 </div>
 
-                <button id="btn-calculate-rca" class="w-full bg-[#39FF14] text-black font-[900] py-4 rounded-2xl text-[12px] uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(57,255,20,0.4)] neon-active relative overflow-hidden group">
-                    <span class="relative z-10">Calculează Preț</span>
-                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <button id="btn-calculate-rca" class="w-full py-5 rounded-2xl text-[12px] uppercase tracking-[0.2em] font-[900] shadow-[0_0_30px_rgba(57,255,20,0.3)] btn-phosphorescent btn-main-action">
+                    Calculează Preț
                 </button>
             </div>
         </div>
 
-        <div class="mb-6">
-            <p class="text-zinc-600 text-[10px] uppercase tracking-[0.3em] font-bold italic border-b border-white/5 pb-2 mb-4">Comunitate SafeGo</p>
+        <div class="mb-10">
+            <p class="text-zinc-600 text-[10px] uppercase tracking-[0.3em] font-bold italic border-b border-white/5 pb-2 mb-6">Comunitate SafeGo</p>
             <div class="flex gap-4 overflow-x-auto no-scrollbar pb-4">
-                <div class="min-w-[140px] h-48 bg-zinc-900 rounded-[24px] border border-white/5 relative overflow-hidden neon-active cursor-pointer group">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
-                    <div class="absolute top-3 right-3 w-6 h-6 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">▶</div>
-                    <p class="absolute bottom-4 left-4 text-[9px] font-black uppercase text-white leading-tight group-hover:text-cyan-400 transition-colors">
+                <div class="min-w-[150px] h-52 bg-zinc-900 rounded-[24px] relative overflow-hidden cursor-pointer group btn-phosphorescent border-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90"></div>
+                    <div class="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md z-10 group-hover:bg-cyan-400/80 transition-colors">▶</div>
+                    <p class="absolute bottom-5 left-5 text-[10px] font-black uppercase text-white leading-tight z-10">
                         "Am primit polița<br>pe loc!"
                     </p>
                 </div>
-                <div class="min-w-[140px] h-48 bg-zinc-900 rounded-[24px] border border-white/5 relative overflow-hidden neon-active cursor-pointer group">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
-                    <div class="absolute top-3 right-3 w-6 h-6 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">▶</div>
-                    <p class="absolute bottom-4 left-4 text-[9px] font-black uppercase text-white leading-tight group-hover:text-cyan-400 transition-colors">
-                        "Cel mai bun preț<br>la RCA."
+                <div class="min-w-[150px] h-52 bg-zinc-900 rounded-[24px] relative overflow-hidden cursor-pointer group btn-phosphorescent border-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90"></div>
+                    <div class="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md z-10 group-hover:bg-pink-400/80 transition-colors">▶</div>
+                    <p class="absolute bottom-5 left-5 text-[10px] font-black uppercase text-white leading-tight z-10">
+                        "Asigurare de<br>călătorie top."
                     </p>
                 </div>
             </div>
@@ -148,50 +195,37 @@
 
     </main>
 
-    <footer class="bg-black border-t border-white/10 pb-safe">
+    <footer class="bg-[#0A0C10] border-t border-white/10 pb-safe relative z-10">
         <div class="max-w-md mx-auto p-8">
-            <div class="grid grid-cols-2 gap-8 mb-8">
-                
-                <div class="flex flex-col gap-3">
-                    <p class="text-[9px] font-black text-zinc-600 uppercase tracking-widest mb-1">Legal</p>
-                    
-                    <a href="https://www.asfromania.ro/" target="_blank" class="text-[9px] font-bold text-zinc-400 border border-zinc-800 p-2.5 rounded-lg text-center hover:bg-zinc-900 hover:text-white transition-colors uppercase">
+            <div class="grid grid-cols-2 gap-8 mb-10">
+                <div class="flex flex-col gap-4">
+                    <p class="text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-2">Legal & Conformitate</p>
+                    <a href="https://www.asfromania.ro/" target="_blank" class="text-[9px] font-bold text-zinc-400 p-3 rounded-xl text-center uppercase bg-zinc-900/50 btn-phosphorescent border-zinc-800">
                         ASF Supraveghere
                     </a>
-
-                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" class="bg-white p-2 rounded-lg flex justify-center hover:opacity-90 transition-opacity">
-                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" class="h-5 w-auto" alt="SOL">
+                    <a href="https://ec.europa.eu/consumers/odr" target="_blank" class="bg-white p-2 rounded-xl flex justify-center btn-phosphorescent border-transparent">
+                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png" class="h-6 w-auto" alt="SOL">
                     </a>
-
-                    <a href="https://anpc.ro/ce-este-sal/" target="_blank" class="bg-white p-2 rounded-lg flex justify-center hover:opacity-90 transition-opacity">
-                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-5 w-auto" alt="ANPC">
+                    <a href="https://anpc.ro/ce-este-sal/" target="_blank" class="bg-white p-2 rounded-xl flex justify-center btn-phosphorescent border-transparent">
+                        <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-6 w-auto" alt="ANPC">
                     </a>
-
-                    <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank" class="bg-white p-2 rounded-lg flex justify-center border border-zinc-200 hover:opacity-90 transition-opacity">
-                        <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-5 w-auto" alt="SAL-FIN">
+                    <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank" class="bg-white p-2 rounded-xl flex justify-center btn-phosphorescent border-zinc-200">
+                        <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-6 w-auto" alt="SAL-FIN">
                     </a>
                 </div>
 
                 <div class="flex flex-col justify-between text-right">
                     <div>
-                        <p class="text-[9px] font-black text-zinc-600 uppercase tracking-widest mb-3">Suport</p>
-                        <a href="mailto:office@safego.ro" class="block text-[11px] font-black text-cyan-400 uppercase mb-1">office@safego.ro</a>
-                        <a href="tel:0723697805" class="block text-[11px] font-bold text-white">0723 697 805</a>
+                        <p class="text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-4">Suport Rapid</p>
+                        <a href="mailto:office@safego.ro" class="block text-[11px] font-black text-cyan-400 uppercase mb-2 hover:underline">office@safego.ro</a>
+                        <a href="tel:0723697805" class="block text-[13px] font-black text-white hover:text-cyan-400 transition-colors">0723 697 805</a>
                     </div>
-                    
                     <div class="mt-auto">
-                        <p class="text-[8px] text-zinc-700 font-bold uppercase leading-tight">
-                            &copy; 2026 SafeGo Digital<br>
-                            Broker de Asigurare
+                        <p class="text-[8px] text-zinc-600 font-bold uppercase leading-tight">
+                            &copy; 2026 SafeGo Digital<br>Broker de Asigurare Autorizat
                         </p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="text-center border-t border-zinc-900 pt-6">
-                <p class="text-[8px] text-zinc-600 max-w-xs mx-auto">
-                    Platformă online destinată exclusiv emiterii de polițe de asigurare în conformitate cu normele ASF.
-                </p>
             </div>
         </div>
     </footer>
