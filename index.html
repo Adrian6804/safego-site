@@ -3,102 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo | Full Video View</title>
+    <title>SafeGo.ro | Corecție Vizuală</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #050505; color: white; margin: 0; padding: 0; overflow-x: hidden; font-family: sans-serif; }
-        
-        /* HEADER SUBȚIRE */
+        body { background-color: #050505; color: white; margin: 0; font-family: sans-serif; overflow-x: hidden; }
+
+        /* --- BACKGROUND VIDEO FIXAT: VIZIBIL COMPLET --- */
+        .video-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 50vh; /* Ocupă jumătatea de sus */
+            z-index: -1; overflow: hidden;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+        }
+        video { 
+            width: 100%; height: 100%; object-fit: cover; 
+            filter: brightness(1.2) contrast(1.1); 
+        }
+
+        /* --- HEADER SUBȚIRE --- */
         header { 
             position: fixed; top: 0; width: 100%; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 20px; background: rgba(0,0,0,0.7); backdrop-filter: blur(15px);
-            border-b: 1px solid rgba(0,255,255,0.1);
+            padding: 10px 20px; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
         }
 
-        /* SECȚIUNE VIDEO - ACUM VIZIBILĂ COMPLET */
-        .hero-portal {
-            width: 100%;
-            height: 45vh; /* Ocupă aproape jumătate de ecran pentru vizibilitate maximă */
-            position: relative;
-            margin-top: 50px;
-            overflow: hidden;
-            background: #000;
+        /* --- BUTOANE NEON FOSFORESCENTE (MAI MICI) --- */
+        .btn-neon-active {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(20, 20, 20, 0.8);
         }
-        video { 
-            width: 100%; height: 100%; object-fit: contain; /* 'contain' asigură că filmul se vede întreg, fără tăieri */
-            filter: brightness(1.4) contrast(1.1);
-        }
-
-        /* BUTOANE CATEGORII MICȘORATE (SLIM) */
-        .category-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-            padding: 10px 20px; margin-top: -30px; position: relative; z-index: 20;
-        }
-        .btn-slim {
-            background: rgba(26, 26, 26, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 12px 5px; /* Mai scurte pe verticală */
-            text-align: center;
-            transition: 0.3s;
-        }
-        .btn-slim:active {
-            box-shadow: 0 0 20px #00ffff;
+        .btn-neon-active:active {
+            box-shadow: 0 0 25px #00ffff, inset 0 0 10px #00ffff;
             border-color: #00ffff;
             transform: scale(0.95);
         }
 
-        /* BUTON RCA ACTIV */
-        .btn-calc {
-            width: 100%; background: #39FF14; color: black; padding: 18px;
-            border-radius: 12px; font-weight: 900; border: none;
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
-            transition: 0.3s;
+        /* --- TEXT SLOGAN --- */
+        .hero-text {
+            margin-top: 15vh;
+            text-align: center;
+            z-index: 10;
+            position: relative;
         }
-        .btn-calc:active { box-shadow: 0 0 30px #39FF14; transform: translateY(2px); }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <img src="logo-shield.png" style="width: 25px; height: 25px;">
-            <b style="font-size: 1rem; font-style: italic; letter-spacing: -1px;">SAFEGO.RO</b>
+        <div class="flex items-center gap-2">
+            <img src="logo-shield.png" class="w-7 h-7"> <b class="text-sm italic uppercase tracking-tighter">SafeGo.ro</b>
         </div>
-        <div style="display: flex; gap: 8px;">
-            <button onclick="location.reload()" style="background: none; border: 1px solid rgba(0,255,255,0.4); color: white; padding: 4px 12px; border-radius: 6px; font-size: 9px; font-weight: 800;">ACASĂ</button>
-            <button style="background: #00ffff; color: black; border: none; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-size: 9px;">LOGIN</button>
+        <div class="flex gap-2">
+            <button onclick="location.reload()" class="btn-neon-active px-3 py-1 rounded-md text-[9px] font-bold uppercase">ACASĂ</button>
+            <button class="bg-cyan-500 text-black px-4 py-1 rounded-full text-[9px] font-black uppercase">LOGIN</button>
         </div>
     </header>
 
-    <div class="hero-portal">
+    <div class="video-bg">
         <video autoplay loop muted playsinline>
             <source src="hero-loop.mp4" type="video/mp4">
         </video>
-        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(transparent, #050505 95%);">
-            <h1 style="font-size: 2.2rem; font-weight: 900; text-align: center; line-height: 0.8; text-shadow: 0 0 20px rgba(0,0,0,1);">
-                LIBERTATE.<br><span style="color: #00ffff; filter: drop-shadow(0 0 10px #00ffff);">FĂRĂ RISCURI.</span>
+    </div>
+
+    <main class="relative z-10">
+        
+        <div class="hero-text">
+            <h1 class="text-3xl font-[900] leading-none uppercase italic tracking-tighter">
+                LIBERTATE.<br>
+                <span class="text-cyan-400 drop-shadow-[0_0_10px_#00ffff]">FĂRĂ RISCURI.</span>
             </h1>
         </div>
-    </div>
 
-    <div class="category-grid">
-        <div class="btn-slim">
-            <span style="font-size: 1.2rem;">✈️</span>
-            <p style="font-size: 8px; font-weight: 900; color: #00ffff; margin-top: 5px; letter-spacing: 1px;">TRAVEL</p>
+        <div class="grid grid-cols-3 gap-3 px-6 mt-20">
+            <div class="btn-neon-active p-4 rounded-xl flex flex-col items-center justify-center">
+                <span class="text-xl">✈️</span>
+                <p class="text-[8px] font-black text-cyan-400 mt-2">TRAVEL</p>
+            </div>
+            <div class="btn-neon-active p-4 rounded-xl flex flex-col items-center justify-center">
+                <span class="text-xl">🏠</span>
+                <p class="text-[8px] font-black text-green-500 mt-2">LOCUINȚĂ</p>
+            </div>
+            <div class="btn-neon-active p-4 rounded-xl flex flex-col items-center justify-center">
+                <span class="text-xl">❤️</span>
+                <p class="text-[8px] font-black text-pink-500 mt-2">SĂNĂTATE</p>
+            </div>
         </div>
-        <div class="btn-slim">
-            <span style="font-size: 1.2rem;">🏠</span>
-            <p style="font-size: 8px; font-weight: 900; color: #39FF14; margin-top: 5px; letter-spacing: 1px;">LOCUINȚĂ</p>
-        </div>
-        <div class="btn-slim">
-            <span style="font-size: 1.2rem;">❤️</span>
-            <p style="font-size: 8px; font-weight: 900; color: #ff007f; margin-top: 5px; letter-spacing: 1px;">SĂNĂTATE</p>
-        </div>
-    </div>
 
-    <div style="padding: 15px 20px;">
-        <div style="background: #111; padding: 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.03);">
-            <p style="font-size: 9px; color: #444; margin-bottom: 12px; font-weight: bold; letter-spacing: 2px;">MOBILITATE URBANĂ</p>
-            <input type="text" placeholder="B
+        <div class="px-6 mt-10">
+            <div class="bg-zinc-900/60 p-6 rounded-[30px] border border-white/5 backdrop-blur-md">
+                <p class="text-[8px] font-bold text-zinc-500 mb-4 tracking-widest uppercase text-center">Mobilitate Urbană</p>
+                <div class="bg-black p-3 rounded-lg border border-white/10 mb-6">
+                    <input type="text" placeholder="NR. ÎNMATRICULARE" class="w-full bg-transparent text-white font-black text-center outline-none uppercase">
+                </div>
+                <button class="w-full py-4 bg-[#39FF14] text-black font-[900] rounded-xl text-xs uppercase shadow-[0_0_20px_rgba(57,255,20,0.3)]">
+                    Calculează Preț
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="p-10 mt-10 border-t border-white/5 bg-black/90">
+        <div class="flex flex-col items-center gap-4">
+            <a href="https://asfromania.ro/ro/a/1551/sal-fin" target="_blank" class="bg-white p-2 rounded-lg btn-neon-active">
+                <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-5" alt="SAL-FIN">
+            </a>
+            <p class="text-[7px] text-zinc-600 font-bold uppercase tracking-[0.3em]">&copy; 2026 SafeGo Digital</p>
+        </div>
+    </footer>
+
+</body>
+</html>
