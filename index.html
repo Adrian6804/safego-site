@@ -3,33 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Interactivitate Neon</title>
+    <title>SafeGo.ro | Neon Green Interactiv</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* EFECTE NEON GENERALE */
-        .btn-active-neon {
+        /* EFECT VERDE NEON PENTRU TOATE BUTOANELE */
+        .btn-universal-neon {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        /* Culori specifice la atingere/hover */
-        .neon-cyan:active { background: rgba(0, 255, 255, 0.15); box-shadow: 0 0 25px #00ffff; border-color: #00ffff; transform: scale(0.95); }
-        .neon-green:active { background: rgba(57, 255, 20, 0.15); box-shadow: 0 0 25px #39ff14; border-color: #39ff14; transform: scale(0.95); }
-        .neon-pink:active { background: rgba(255, 20, 147, 0.15); box-shadow: 0 0 25px #ff1493; border-color: #ff1493; transform: scale(0.95); }
-        .neon-yellow:active { background: rgba(255, 255, 0, 0.15); box-shadow: 0 0 25px #ffff00; border-color: #ffff00; transform: scale(0.95); }
-        .neon-white:active { background: rgba(255, 255, 255, 0.15); box-shadow: 0 0 25px #ffffff; border-color: #ffffff; transform: scale(0.95); }
+        .btn-universal-neon:active { 
+            background: rgba(57, 255, 20, 0.15); 
+            box-shadow: 0 0 30px #39ff14; 
+            border-color: #39ff14; 
+            transform: scale(0.94); 
+        }
+
+        /* HEADER GLOW INTENS */
+        .header-glow-btn {
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .header-glow-btn:active {
+            box-shadow: 0 0 40px #39ff14, inset 0 0 20px #39ff14;
+            background: #39ff14 !important;
+            color: black !important;
+            border-color: #39ff14;
+        }
 
         .slogan-container {
-            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px);
-            padding: 15px; border-left: 4px solid #00ffff; border-radius: 0 20px 20px 0;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px);
+            padding: 15px; border-left: 4px solid #39ff14; border-radius: 0 20px 20px 0;
+            box-shadow: 15px 0 30px rgba(57, 255, 20, 0.1);
         }
 
         .animated-beam-text {
-            background: linear-gradient(to right, #00ffff 20%, #ffffff 50%, #00ffff 80%);
+            background: linear-gradient(to right, #39ff14 20%, #ffffff 50%, #39ff14 80%);
             background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
             animation: beam 2.5s linear infinite;
         }
@@ -38,14 +51,14 @@
 </head>
 <body class="pb-10">
 
-    <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-cyan-500/20">
+    <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
         <div class="flex items-center gap-2">
             <img src="logo-shield.png" alt="Logo" class="w-7 h-7">
-            <span class="text-lg font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
+            <span class="text-lg font-black italic uppercase tracking-tighter">SafeGo<span class="text-[#39ff14]">.ro</span></span>
         </div>
         <div class="flex gap-2">
-            <button class="px-4 py-2 rounded-lg text-[10px] font-black border border-white/20 uppercase btn-active-neon neon-white">ACASĂ</button>
-            <button class="px-5 py-2 bg-cyan-500 text-black font-black rounded-full text-[10px] uppercase btn-active-neon neon-cyan">LOGIN</button>
+            <button class="header-glow-btn px-4 py-2 rounded-lg text-[10px] font-black border border-white/20 uppercase text-white bg-transparent">ACASĂ</button>
+            <button class="header-glow-btn px-5 py-2 bg-transparent border border-[#39ff14] text-[#39ff14] font-black rounded-full text-[10px] uppercase">LOGIN</button>
         </div>
     </header>
 
@@ -68,26 +81,26 @@
 
         <div class="px-5 mt-10 space-y-3">
             <div class="grid grid-cols-3 gap-3">
-                <div class="btn-active-neon neon-cyan bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center border border-white/5">
+                <div class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
                     <span class="text-2xl">✈️</span>
-                    <p class="text-[9px] font-black uppercase text-cyan-400 mt-2">Travel</p>
+                    <p class="text-[9px] font-black uppercase text-white mt-2">Travel</p>
                 </div>
-                <div class="btn-active-neon neon-green bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center border border-white/5">
+                <div class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
                     <span class="text-2xl">🏠</span>
-                    <p class="text-[9px] font-black uppercase text-green-500 mt-2">Locuință</p>
+                    <p class="text-[9px] font-black uppercase text-white mt-2">Locuință</p>
                 </div>
-                <div class="btn-active-neon neon-pink bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center border border-white/5">
+                <div class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
                     <span class="text-2xl">❤️</span>
-                    <p class="text-[9px] font-black uppercase text-pink-500 mt-2">Sănătate</p>
+                    <p class="text-[9px] font-black uppercase text-white mt-2">Sănătate</p>
                 </div>
             </div>
             
             <div class="grid grid-cols-2 gap-3">
-                <div class="btn-active-neon neon-yellow bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center border border-white/5">
+                <div class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
                     <span class="text-2xl mr-3">🚗</span>
-                    <p class="text-[10px] font-black uppercase text-yellow-400">RCA Auto</p>
+                    <p class="text-[10px] font-black uppercase text-white">RCA Auto</p>
                 </div>
-                <div class="btn-active-neon neon-white bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center border border-white/5">
+                <div class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
                     <span class="text-2xl mr-3">➕</span>
                     <p class="text-[10px] font-black uppercase text-white">Alte Asigurări</p>
                 </div>
