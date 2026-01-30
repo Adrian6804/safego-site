@@ -8,90 +8,141 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
-        .logo-glow { animation: glow 2s infinite ease-in-out; }
-        @keyframes glow { 50% { filter: drop-shadow(0 0 10px #39ff14); } }
         
-        /* Stiluri Butoane Neon */
-        .btn-neon { transition: all 0.3s; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; }
-        .btn-neon:active { background: #39ff14 !important; box-shadow: 0 0 30px #39ff14; transform: scale(0.95); }
-        .btn-neon:active p { color: black !important; }
+        .btn-neon { 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Efectul de activare verde la apăsare */
+        .btn-neon:active, .btn-active { 
+            background: #39ff14 !important; 
+            box-shadow: 0 0 30px #39ff14; 
+            transform: scale(0.95);
+        }
+        .btn-neon:active p, .btn-active p { color: black !important; }
 
         .hidden { display: none; }
-        .loader { width: 30px; height: 30px; border: 3px solid #1a1a1a; border-top-color: #39ff14; border-radius: 50%; animation: spin 1s linear infinite; }
+        
+        .loader { 
+            width: 40px; height: 40px; 
+            border: 4px solid #1a1a1a; 
+            border-top-color: #39ff14; 
+            border-radius: 50%; 
+            animation: spin 1s linear infinite; 
+        }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Stil pentru cardurile de oferte care vor veni din API */
+        .offer-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+        }
     </style>
 </head>
-<body class="bg-black">
+<body class="bg-black pb-20">
 
-    <header class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
+    <header class="fixed top-0 w-full z-50 px-6 py-5 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
         <div class="flex items-center gap-2">
-            <span class="text-lg font-black italic uppercase tracking-tighter">SafeGo<span class="text-[#39ff14]">.ro</span></span>
+            <span class="text-xl font-black italic uppercase tracking-tighter">SafeGo<span class="text-[#39ff14]">.ro</span></span>
         </div>
         <button class="px-5 py-2 border border-[#39ff14] text-[#39ff14] font-black rounded-full text-[10px] uppercase">LOGIN</button>
     </header>
 
-    <main class="pt-24 px-5">
-        <div class="mb-10 text-left">
-            <h1 class="text-3xl font-black uppercase italic leading-none">Libertate.<br><span class="text-[#39ff14]">Fără Riscuri.</span></h1>
+    <main class="pt-28 px-5 max-w-lg mx-auto">
+        
+        <div class="mb-12">
+            <h1 class="text-3xl font-black uppercase italic leading-[0.9] tracking-tighter">
+                LIBERTATE.<br>
+                <span class="text-[#39ff14] drop-shadow-[0_0_8px_#39ff14]">FĂRĂ RISCURI.</span>
+            </h1>
         </div>
 
-        <div class="grid grid-cols-2 gap-3 mb-10">
-            <div onclick="showRcaForm()" class="btn-neon bg-zinc-900/90 p-5 rounded-2xl flex flex-col items-center">
-                <span class="text-2xl mb-2">🚗</span>
-                <p class="text-[10px] font-black uppercase">RCA Auto</p>
+        <div class="grid grid-cols-2 gap-4 mb-10">
+            <div onclick="showRcaForm(this)" class="btn-neon bg-zinc-900/80 p-6 rounded-[24px] flex flex-col items-center justify-center min-h-[110px]">
+                <span class="text-3xl mb-2">🚗</span>
+                <p class="text-[11px] font-black uppercase tracking-widest text-white">RCA Auto</p>
             </div>
-            <div class="btn-neon bg-zinc-900/90 p-5 rounded-2xl flex flex-col items-center opacity-40">
-                <span class="text-2xl mb-2">✈️</span>
-                <p class="text-[10px] font-black uppercase text-zinc-400">Travel</p>
+            <div class="btn-neon bg-zinc-900/80 p-6 rounded-[24px] flex flex-col items-center justify-center min-h-[110px] opacity-40">
+                <span class="text-3xl mb-2">✈️</span>
+                <p class="text-[11px] font-black uppercase tracking-widest text-zinc-400">Travel</p>
             </div>
         </div>
 
-        <div id="rca-container" class="bg-zinc-900/40 p-6 rounded-3xl border border-white/5 hidden">
+        <div id="rca-container" class="hidden space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             
-            <div id="step-form">
-                <h2 class="text-center font-black uppercase text-xs mb-6 tracking-widest">Identificare Vehicul</h2>
+            <div id="step-form" class="bg-zinc-900/40 border border-white/5 p-8 rounded-[32px] backdrop-blur-md">
+                <h2 class="text-center font-black uppercase text-[10px] mb-8 tracking-[0.3em] text-zinc-500">Configurare Rapidă</h2>
+                
                 <div class="space-y-4">
-                    <input type="text" id="plate" placeholder="NR. INMATRICULARE" class="w-full bg-black border border-white/10 p-4 rounded-xl text-center font-black text-lg outline-none focus:border-[#39ff14] uppercase">
-                    <input type="text" id="cnp" placeholder="CNP PROPRIETAR" class="w-full bg-black border border-white/10 p-4 rounded-xl text-center font-black text-lg outline-none focus:border-[#39ff14]">
-                    <button onclick="getQuotes()" class="w-full py-4 bg-[#39ff14] text-black font-black uppercase rounded-xl shadow-[0_0_20px_rgba(57,255,20,0.3)]">Calculează Preț RCA</button>
+                    <div class="group">
+                        <label class="text-[9px] font-black uppercase text-zinc-600 ml-4 mb-1 block">Nr. Înmatriculare</label>
+                        <input type="text" id="plate" placeholder="B 01 ABC" class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl outline-none focus:border-[#39ff14] uppercase transition-all">
+                    </div>
+
+                    <div class="group">
+                        <label class="text-[9px] font-black uppercase text-zinc-600 ml-4 mb-1 block">CNP Proprietar</label>
+                        <input type="text" id="cnp" placeholder="185..." class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl outline-none focus:border-[#39ff14] transition-all">
+                    </div>
+
+                    <button onclick="getQuotes()" class="w-full py-5 bg-[#39ff14] text-black font-black uppercase rounded-2xl shadow-[0_15px_30px_rgba(57,255,20,0.2)] hover:shadow-[#39ff14]/40 transition-all mt-4 text-xs tracking-widest">
+                        Calculează Preț RCA
+                    </button>
                 </div>
             </div>
 
-            <div id="step-loading" class="hidden flex flex-col items-center py-10">
-                <div class="loader mb-4"></div>
-                <p class="text-[9px] font-black uppercase tracking-[0.2em] animate-pulse">Se conectează la InsureTech...</p>
+            <div id="step-loading" class="hidden flex flex-col items-center justify-center py-16 bg-zinc-900/20 rounded-[32px] border border-white/5">
+                <div class="loader mb-6"></div>
+                <p class="text-[10px] font-black uppercase tracking-[0.4em] animate-pulse text-[#39ff14]">Interogăm InsureTech...</p>
             </div>
 
-            <div id="step-results" class="hidden">
-                <h2 class="text-center font-black uppercase text-xs mb-6 text-[#39ff14]">Oferte Disponibile</h2>
+            <div id="step-results" class="hidden space-y-4">
+                <h3 class="text-center font-black uppercase text-[10px] tracking-widest text-zinc-500 mb-4">Oferte Găsite</h3>
                 <div id="offers-list" class="space-y-3">
                     </div>
             </div>
+
         </div>
     </main>
 
-    <footer class="mt-20 px-8 py-10 border-t border-white/5 text-center">
-        <div class="flex justify-center gap-4 mb-6 opacity-30 grayscale">
-            <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-4">
-            <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-4">
+    <footer class="mt-20 px-8 py-10 border-t border-white/5 text-center bg-black">
+        <div class="flex justify-center gap-6 mb-8 opacity-20 grayscale">
+            <img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-5">
+            <img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-5">
         </div>
-        <p class="text-[8px] text-zinc-600 font-black uppercase tracking-widest">&copy; 2026 SafeGo Digital</p>
+        <p class="text-[9px] text-zinc-700 font-black uppercase tracking-[0.5em]">&copy; 2026 SafeGo Digital</p>
     </footer>
 
     <script>
         const API_URL = 'https://insuretech.staging.insuretech.ro/api/v1';
         const API_KEY = '015f40fc-1974-4ad5-bbde-48c117a54307';
 
-        function showRcaForm() {
+        function showRcaForm(el) {
+            // Adăugăm efectul vizual pe buton
+            document.querySelectorAll('.btn-neon').forEach(b => b.classList.remove('btn-active'));
+            el.classList.add('btn-active');
+            
+            // Arătăm formularul
             document.getElementById('rca-container').classList.remove('hidden');
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            
+            // Scroll fin către formular
+            setTimeout(() => {
+                document.getElementById('rca-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
         }
 
         async function getQuotes() {
             const plate = document.getElementById('plate').value;
             const cnp = document.getElementById('cnp').value;
 
-            if(!plate || !cnp) return alert("Introdu datele!");
+            if(!plate || !cnp) {
+                alert("Te rugăm să completezi ambele câmpuri.");
+                return;
+            }
 
             document.getElementById('step-form').classList.add('hidden');
             document.getElementById('step-loading').classList.remove('hidden');
@@ -111,9 +162,13 @@
                 });
 
                 const data = await response.json();
-                renderOffers(data.data || data.offers || []);
+                // Verificăm dacă avem oferte în data.data sau direct în data
+                const offers = data.data || data.offers || [];
+                renderOffers(offers);
+
             } catch (e) {
-                alert("Eroare conexiune API.");
+                console.error(e);
+                alert("Eroare de conexiune la serverul de test.");
                 document.getElementById('step-loading').classList.add('hidden');
                 document.getElementById('step-form').classList.remove('hidden');
             }
@@ -122,24 +177,25 @@
         function renderOffers(offers) {
             const list = document.getElementById('offers-list');
             list.innerHTML = '';
+            
             document.getElementById('step-loading').classList.add('hidden');
             document.getElementById('step-results').classList.remove('hidden');
 
             if(offers.length === 0) {
-                list.innerHTML = '<p class="text-center text-[10px] uppercase font-bold text-zinc-500">Nu am găsit oferte.</p>';
+                list.innerHTML = '<div class="p-10 text-center border border-dashed border-white/10 rounded-2xl"><p class="text-[10px] font-black uppercase text-zinc-600">Momentan nu sunt oferte disponibile pentru aceste date.</p></div>';
                 return;
             }
 
             offers.forEach(o => {
                 const card = `
-                    <div class="bg-black/60 p-4 rounded-2xl border border-white/5 flex justify-between items-center">
+                    <div class="offer-card p-6 rounded-[24px] flex justify-between items-center animate-in fade-in zoom-in duration-300">
                         <div>
-                            <p class="font-black text-[11px] uppercase">${o.insurer_name}</p>
-                            <p class="text-[8px] text-zinc-500 uppercase">Clasa B${o.bm_class || '0'}</p>
+                            <p class="font-black text-sm uppercase tracking-tighter text-white">${o.insurer_name}</p>
+                            <p class="text-[9px] text-zinc-500 uppercase font-bold mt-1">Poliță 12 Luni / B${o.bm_class || '0'}</p>
                         </div>
                         <div class="text-right">
-                            <p class="text-lg font-black text-[#39ff14]">${o.price} RON</p>
-                            <button class="text-[8px] font-black uppercase bg-white text-black px-3 py-1.5 rounded-lg mt-1">Cumpără</button>
+                            <p class="text-xl font-black text-[#39ff14] tracking-tighter">${o.price} RON</p>
+                            <button class="text-[9px] font-bold uppercase bg-white text-black px-4 py-2 rounded-xl mt-2 hover:bg-[#39ff14] transition-colors">Detalii</button>
                         </div>
                     </div>`;
                 list.innerHTML += card;
