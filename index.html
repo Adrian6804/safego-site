@@ -3,93 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo | Design Corectat</title>
+    <title>SafeGo | Full Video View</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #050505; color: white; margin: 0; padding: 0; overflow-x: hidden; }
+        body { background-color: #050505; color: white; margin: 0; padding: 0; overflow-x: hidden; font-family: sans-serif; }
         
-        /* HEADER FIXAT */
+        /* HEADER SUBȚIRE */
         header { 
             position: fixed; top: 0; width: 100%; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 20px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            padding: 10px 20px; background: rgba(0,0,0,0.7); backdrop-filter: blur(15px);
             border-b: 1px solid rgba(0,255,255,0.1);
         }
 
-        /* CONTAINER VIDEO MICȘORAT - PORTALUL DE JETOANE */
-        .video-top-section {
-            margin-top: 70px; /* Lasă loc pentru header */
+        /* SECȚIUNE VIDEO - ACUM VIZIBILĂ COMPLET */
+        .hero-portal {
             width: 100%;
-            height: 35vh; /* Ocupă doar o treime din ecran */
+            height: 45vh; /* Ocupă aproape jumătate de ecran pentru vizibilitate maximă */
             position: relative;
+            margin-top: 50px;
             overflow: hidden;
+            background: #000;
         }
         video { 
-            width: 100%; height: 100%; object-fit: cover; 
-            filter: brightness(1.5) contrast(1.2); /* Neon mai puternic */
+            width: 100%; height: 100%; object-fit: contain; /* 'contain' asigură că filmul se vede întreg, fără tăieri */
+            filter: brightness(1.4) contrast(1.1);
         }
 
-        /* BUTOANE NEON */
-        .neon-box {
-            background: rgba(20,20,20,0.9);
-            border: 1px solid rgba(0,255,255,0.1);
-            border-radius: 20px;
-            padding: 20px;
+        /* BUTOANE CATEGORII MICȘORATE (SLIM) */
+        .category-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+            padding: 10px 20px; margin-top: -30px; position: relative; z-index: 20;
+        }
+        .btn-slim {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 12px 5px; /* Mai scurte pe verticală */
             text-align: center;
             transition: 0.3s;
         }
-        .neon-box:active {
-            box-shadow: 0 0 25px #00ffff;
+        .btn-slim:active {
+            box-shadow: 0 0 20px #00ffff;
             border-color: #00ffff;
+            transform: scale(0.95);
         }
+
+        /* BUTON RCA ACTIV */
+        .btn-calc {
+            width: 100%; background: #39FF14; color: black; padding: 18px;
+            border-radius: 12px; font-weight: 900; border: none;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+            transition: 0.3s;
+        }
+        .btn-calc:active { box-shadow: 0 0 30px #39FF14; transform: translateY(2px); }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="logo-shield.png" style="width: 30px; height: 30px;">
-            <b style="font-size: 1.2rem; font-style: italic;">SAFEGO.RO</b>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <img src="logo-shield.png" style="width: 25px; height: 25px;">
+            <b style="font-size: 1rem; font-style: italic; letter-spacing: -1px;">SAFEGO.RO</b>
         </div>
-        <div style="display: flex; gap: 10px;">
-            <button onclick="location.reload()" style="background: none; border: 1px solid cyan; color: white; padding: 5px 15px; border-radius: 8px; font-size: 10px;">ACASĂ</button>
-            <button style="background: cyan; color: black; border: none; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 10px;">LOGIN</button>
+        <div style="display: flex; gap: 8px;">
+            <button onclick="location.reload()" style="background: none; border: 1px solid rgba(0,255,255,0.4); color: white; padding: 4px 12px; border-radius: 6px; font-size: 9px; font-weight: 800;">ACASĂ</button>
+            <button style="background: #00ffff; color: black; border: none; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-size: 9px;">LOGIN</button>
         </div>
     </header>
 
-    <div class="video-top-section">
+    <div class="hero-portal">
         <video autoplay loop muted playsinline>
             <source src="hero-loop.mp4" type="video/mp4">
         </video>
-        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(transparent, #050505);">
-            <h1 style="font-size: 2.5rem; font-weight: 900; text-align: center; line-height: 0.9;">
-                LIBERTATE.<br><span style="color: #00ffff;">FĂRĂ RISCURI.</span>
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(transparent, #050505 95%);">
+            <h1 style="font-size: 2.2rem; font-weight: 900; text-align: center; line-height: 0.8; text-shadow: 0 0 20px rgba(0,0,0,1);">
+                LIBERTATE.<br><span style="color: #00ffff; filter: drop-shadow(0 0 10px #00ffff);">FĂRĂ RISCURI.</span>
             </h1>
         </div>
     </div>
 
-    <div style="padding: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-        <div class="neon-box">
-            <span style="font-size: 2rem;">✈️</span>
-            <p style="font-size: 10px; font-weight: bold; color: cyan; margin-top: 10px;">TRAVEL</p>
+    <div class="category-grid">
+        <div class="btn-slim">
+            <span style="font-size: 1.2rem;">✈️</span>
+            <p style="font-size: 8px; font-weight: 900; color: #00ffff; margin-top: 5px; letter-spacing: 1px;">TRAVEL</p>
         </div>
-        <div class="neon-box">
-            <span style="font-size: 2rem;">🏠</span>
-            <p style="font-size: 10px; font-weight: bold; color: #39FF14; margin-top: 10px;">LOCUINȚĂ</p>
+        <div class="btn-slim">
+            <span style="font-size: 1.2rem;">🏠</span>
+            <p style="font-size: 8px; font-weight: 900; color: #39FF14; margin-top: 5px; letter-spacing: 1px;">LOCUINȚĂ</p>
         </div>
-        <div class="neon-box">
-            <span style="font-size: 2rem;">❤️</span>
-            <p style="font-size: 10px; font-weight: bold; color: #ff007f; margin-top: 10px;">SĂNĂTATE</p>
-        </div>
-    </div>
-
-    <div style="padding: 20px;">
-        <div style="background: #111; padding: 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05);">
-            <p style="font-size: 10px; color: #555; margin-bottom: 15px;">MOBILITATE URBANĂ</p>
-            <input type="text" placeholder="NR. ÎNMATRICULARE" style="width: 100%; background: #000; border: 1px solid #333; padding: 15px; border-radius: 15px; color: white; font-weight: bold; margin-bottom: 20px;">
-            <button style="width: 100%; background: #39FF14; color: black; padding: 20px; border-radius: 15px; font-weight: 900; border: none; box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);">CALCULEAZĂ PREȚ</button>
+        <div class="btn-slim">
+            <span style="font-size: 1.2rem;">❤️</span>
+            <p style="font-size: 8px; font-weight: 900; color: #ff007f; margin-top: 5px; letter-spacing: 1px;">SĂNĂTATE</p>
         </div>
     </div>
 
-</body>
-</html>
+    <div style="padding: 15px 20px;">
+        <div style="background: #111; padding: 20px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.03);">
+            <p style="font-size: 9px; color: #444; margin-bottom: 12px; font-weight: bold; letter-spacing: 2px;">MOBILITATE URBANĂ</p>
+            <input type="text" placeholder="B
