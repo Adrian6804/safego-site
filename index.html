@@ -3,143 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Asigurări Instant</title>
+    <title>SafeGo.ro | Asigurări Neon</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { 
-            background-color: #0F1115; 
+            background-color: #050505; 
             color: white; 
             font-family: 'Inter', sans-serif; 
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
         }
 
-        /* --- ANIMAȚIE FASCICUL LUMINOS (SLOGAN) --- */
+        /* --- ANIMAȚIE BUTOANE FOSFORESCENTE (ACASĂ & LOGIN) --- */
+        .btn-neon-active {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .btn-neon-active::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.8), transparent);
+            transition: none;
+        }
+        .btn-neon-active:active, .btn-neon-active:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 20px #00ffff, inset 0 0 10px #00ffff;
+            border-color: #00ffff;
+            transform: scale(1.05);
+        }
+        .btn-neon-active:active::after, .btn-neon-active:hover::after {
+            left: 100%;
+            transition: left 0.5s ease-in-out;
+        }
+
+        /* --- SLOGAN CU FASCICUL LUMINOS --- */
         .animated-beam-text {
-            background: linear-gradient(to right, #ffffff 20%, #00d1ff 50%, #ffffff 80%);
+            background: linear-gradient(to right, #00ffff 20%, #ffffff 50%, #00ffff 80%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: beam-pass 3s linear infinite;
+            animation: beam 2.5s linear infinite;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
         }
-        @keyframes beam-pass {
-            to { background-position: 200% center; }
-        }
+        @keyframes beam { to { background-position: 200% center; } }
 
-        /* --- BUTOANE FOSFORESCENTE --- */
-        .btn-phosphorescent {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* --- VIDEO STRĂLUCITOR (NEON) --- */
+        .video-glow {
+            filter: brightness(1.3) contrast(1.2) saturate(1.5);
         }
-        .btn-phosphorescent::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -150%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 209, 255, 0.4), transparent);
-            transform: skewX(-25deg);
-            transition: none;
-        }
-        .btn-phosphorescent:active, .btn-phosphorescent:hover {
-            border-color: #00d1ff;
-            box-shadow: 0 0 20px rgba(0, 209, 255, 0.6);
-            transform: scale(1.02);
-        }
-        .btn-phosphorescent:active::after, .btn-phosphorescent:hover::after {
-            left: 150%;
-            transition: left 0.6s ease-in-out;
-        }
-
-        /* --- BUTON RCA VERDE INTENS --- */
-        .btn-rca-glow {
-            background: #39FF14;
-            color: black;
-            box-shadow: 0 0 25px rgba(57, 255, 20, 0.4);
-        }
-        .btn-rca-glow:active {
-            box-shadow: 0 0 40px rgba(57, 255, 20, 0.8);
-        }
-
-        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="pb-10">
 
-    <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-[#0F1115]/80 backdrop-blur-md border-b border-white/5">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-cyan-400 rounded-lg flex items-center justify-center">
-                <span class="text-black font-black text-xs">SG</span>
-            </div>
+    <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-black/60 backdrop-blur-xl border-b border-cyan-500/20">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.reload()">
+            <img src="logo-shield.png" alt="Logo" class="w-8 h-8 drop-shadow-[0_0_8px_#00ffff]">
             <span class="text-xl font-black italic uppercase tracking-tighter">SafeGo<span class="text-cyan-400">.ro</span></span>
         </div>
-        <button class="px-5 py-2 bg-cyan-500 text-black font-black uppercase text-[10px] rounded-full btn-phosphorescent border-none">LOGIN</button>
+        
+        <div class="flex items-center gap-3">
+            <button onclick="window.location.reload()" class="px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest text-white btn-neon-active">
+                ACASĂ
+            </button>
+            <button class="px-5 py-2 bg-cyan-500 text-black font-black uppercase text-[10px] rounded-full btn-neon-active border-none">
+                LOGIN
+            </button>
+        </div>
     </header>
 
-    <main class="pt-20">
+    <main class="pt-16">
         
-        <div class="relative w-full h-[50vh] overflow-hidden mb-10 flex items-center justify-center">
-            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-50">
+        <div class="relative w-full h-[55vh] overflow-hidden flex items-center justify-center">
+            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-80 video-glow">
                 <source src="hero-loop.mp4" type="video/mp4">
             </video>
             
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0F1115] via-transparent to-[#0F1115]"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/40"></div>
 
             <div class="relative z-10 text-center px-6">
-                <img src="logo-shield.png" alt="SafeGo Logo" class="w-24 h-24 mx-auto mb-6 drop-shadow-[0_0_20px_rgba(0,210,255,0.7)] animate-pulse">
-                
-                <h1 class="text-4xl font-[900] leading-tight uppercase italic tracking-tighter">
+                <h1 class="text-5xl font-[900] leading-none uppercase italic tracking-tighter drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]">
                     LIBERTATE.<br>
                     <span class="animated-beam-text">FĂRĂ RISCURI.</span>
                 </h1>
-                <p class="text-zinc-400 text-[10px] uppercase tracking-[0.3em] mt-4 font-bold">Asigurări Instant pentru Generația Ta</p>
+                <p class="text-cyan-300 text-[11px] uppercase tracking-[0.4em] mt-6 font-black opacity-90">
+                    Asigurări Instant · Digital First
+                </p>
             </div>
         </div>
 
-        <div class="px-5 grid grid-cols-3 gap-3 mb-10">
-            <div class="btn-phosphorescent p-4 rounded-2xl h-32 flex flex-col justify-between bg-zinc-900/50 backdrop-blur-sm border-white/10">
-                <span class="text-2xl">✈️</span>
-                <p class="text-[10px] font-black uppercase text-cyan-400">Travel</p>
+        <div class="px-5 grid grid-cols-3 gap-3 mb-10 -mt-10 relative z-20">
+            <div class="btn-neon-active p-5 rounded-2xl h-36 flex flex-col justify-between bg-zinc-900/80 backdrop-blur-lg border-white/5 cursor-pointer">
+                <span class="text-3xl">✈️</span>
+                <p class="text-[11px] font-black uppercase text-cyan-400">Travel</p>
             </div>
-            <div class="btn-phosphorescent p-4 rounded-2xl h-32 flex flex-col justify-between bg-zinc-900/50 backdrop-blur-sm border-white/10">
-                <span class="text-2xl">❤️</span>
-                <p class="text-[10px] font-black uppercase text-pink-500">Sănătate</p>
-            </div>
-            <div class="btn-phosphorescent p-4 rounded-2xl h-32 flex flex-col justify-between bg-zinc-900/50 backdrop-blur-sm border-white/10">
-                <span class="text-2xl">🏠</span>
-                <p class="text-[10px] font-black uppercase text-green-500">Locuință</p>
-            </div>
-        </div>
-
-        <div class="px-5 mb-10">
-            <div class="bg-[#16181D] rounded-[32px] p-6 border border-white/5">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-sm font-black uppercase italic text-white">RCA & Wheels</h3>
-                    <span class="text-[9px] text-green-400 font-bold animate-pulse">● API ACTIV</span>
-                </div>
-                <div class="bg-black/40 rounded-xl p-4 border border-white/10 mb-6">
-                    <input type="text" placeholder="NR. ÎNMATRICULARE (EX: B 123 ABC)" class="bg-transparent text-white font-black w-full outline-none uppercase placeholder-zinc-700">
-                </div>
-                <button class="w-full py-5 rounded-2xl text-[12px] uppercase font-[900] btn-phosphorescent btn-rca-glow border-none">
-                    Calculează Acum
-                </button>
-            </div>
-        </div>
-
-    </main>
-
-    <footer class="px-8 py-10 border-t border-white/5 bg-[#0A0C10]">
-        <div class="flex flex-col gap-4">
-            <p class="text-[9px] font-bold text-zinc-600 uppercase tracking-widest">Conformitate Legală</p>
-            <div class="flex flex-wrap gap-2">
-                <a href="https://anpc.ro" class="bg-white p-2 rounded-lg btn-phosphorescent"><img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-5"></a>
-                <a href="https://asfromania.ro" class="bg-zinc-900 p-3 rounded-lg text-[9px] font-bold btn-phosphorescent border-white/10">ASF SUPRAVEGHERE</a>
-            </div>
-            <p class="text-[8px] text-zinc-700 mt-4">&copy; 2026 SafeGo Digital Broker. Toate drepturile rezervate.</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+            <div class="btn-neon-active p-5 rounded-2xl h-36 flex flex-col justify-between bg-zinc-900/80 backdrop-blur-lg border-white/5 cursor-pointer">
