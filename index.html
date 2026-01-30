@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Verde Neon Activ</title>
+    <title>SafeGo.ro | Premium Interface</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -15,33 +15,43 @@
             50% { opacity: 1; filter: drop-shadow(0 0 15px #39ff14); }
         }
 
-        /* BUTOANE CARE SE APRIND ÎN VERDE APRINS */
         .btn-universal-neon {
-            transition: all 0.2s ease-in-out;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(255, 255, 255, 0.05);
             cursor: pointer;
-            position: relative;
         }
         
-        /* Starea când este apăsat sau activat prin script */
-        .btn-universal-neon:active, .btn-universal-neon.active-glow { 
+        /* Efectul de aprindere verde intens solicitat */
+        .btn-universal-neon:active, .active-glow { 
             background: #39ff14 !important; 
-            box-shadow: 0 0 50px #39ff14, inset 0 0 20px rgba(0,0,0,0.2); 
+            box-shadow: 0 0 40px #39ff14; 
             border-color: #39ff14; 
-            transform: scale(0.95);
+            transform: scale(0.92);
+        }
+        .btn-universal-neon:active p, .active-glow p { color: black !important; }
+
+        /* PANOU NOTIFICARE ELEGANTĂ */
+        #notification-toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid #39ff14;
+            padding: 16px;
+            border-radius: 20px;
+            z-index: 100;
+            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .btn-universal-neon:active p, .btn-universal-neon.active-glow p {
-            color: black !important;
-        }
-
-        .header-glow-btn { transition: all 0.3s ease; }
-        .header-glow-btn:active {
-            box-shadow: 0 0 40px #39ff14;
-            background: #39ff14 !important;
-            color: black !important;
-            border-color: #39ff14;
-        }
+        #notification-toast.show { bottom: 30px; }
     </style>
 </head>
 <body class="pb-10">
@@ -52,8 +62,8 @@
             <span class="text-lg font-black italic uppercase tracking-tighter">SafeGo<span class="text-[#39ff14]">.ro</span></span>
         </div>
         <div class="flex gap-2">
-            <button onclick="handleCommand(this, 'Acasă')" class="header-glow-btn px-4 py-2 rounded-lg text-[10px] font-black border border-white/20 uppercase">ACASĂ</button>
-            <button onclick="handleCommand(this, 'Login')" class="header-glow-btn px-5 py-2 bg-transparent border border-[#39ff14] text-[#39ff14] font-black rounded-full text-[10px] uppercase">LOGIN</button>
+            <button onclick="handleAction(this, 'Acasă')" class="px-4 py-2 rounded-lg text-[10px] font-black border border-white/10 uppercase bg-zinc-900 btn-universal-neon">ACASĂ</button>
+            <button onclick="handleAction(this, 'Login')" class="px-5 py-2 border border-[#39ff14] text-[#39ff14] font-black rounded-full text-[10px] uppercase btn-universal-neon">LOGIN</button>
         </div>
     </header>
 
@@ -65,7 +75,7 @@
             <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-transparent to-transparent"></div>
             
             <div class="absolute top-10 left-0 z-10">
-                <div class="bg-black/50 backdrop-blur-md p-4 border-l-4 border-[#39ff14] rounded-r-2xl">
+                <div class="bg-black/60 backdrop-blur-md p-4 border-l-4 border-[#39ff14] rounded-r-2xl">
                     <h1 class="text-2xl font-[900] leading-none uppercase italic tracking-tighter">
                         LIBERTATE.<br>
                         <span class="text-[#39ff14] drop-shadow-[0_0_10px_#39ff14]">FĂRĂ RISCURI.</span>
@@ -76,26 +86,26 @@
 
         <div class="px-5 mt-10 space-y-3">
             <div class="grid grid-cols-3 gap-3">
-                <div onclick="handleCommand(this, 'Travel')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
+                <div onclick="handleAction(this, 'Travel')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
                     <span class="text-2xl">✈️</span>
                     <p class="text-[9px] font-black uppercase text-white mt-2">Travel</p>
                 </div>
-                <div onclick="handleCommand(this, 'Locuință')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
+                <div onclick="handleAction(this, 'Locuință')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
                     <span class="text-2xl">🏠</span>
                     <p class="text-[9px] font-black uppercase text-white mt-2">Locuință</p>
                 </div>
-                <div onclick="handleCommand(this, 'Sănătate')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
+                <div onclick="handleAction(this, 'Sănătate')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex flex-col items-center justify-center">
                     <span class="text-2xl">❤️</span>
                     <p class="text-[9px] font-black uppercase text-white mt-2">Sănătate</p>
                 </div>
             </div>
             
             <div class="grid grid-cols-2 gap-3">
-                <div onclick="handleCommand(this, 'RCA Auto')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
+                <div onclick="handleAction(this, 'RCA Auto')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
                     <span class="text-2xl mr-3">🚗</span>
                     <p class="text-[10px] font-black uppercase text-white">RCA Auto</p>
                 </div>
-                <div onclick="handleCommand(this, 'Alte Asigurări')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
+                <div onclick="handleAction(this, 'Alte Asigurări')" class="btn-universal-neon bg-zinc-900/90 p-4 rounded-2xl h-24 flex items-center justify-center">
                     <span class="text-2xl mr-3">➕</span>
                     <p class="text-[10px] font-black uppercase text-white">Alte Asigurări</p>
                 </div>
@@ -103,14 +113,35 @@
         </div>
     </main>
 
+    <div id="notification-toast">
+        <div class="bg-[#39ff14] p-2 rounded-full">
+            <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <div>
+            <p class="text-[10px] font-black uppercase text-[#39ff14]">Sistem SafeGo</p>
+            <p id="toast-text" class="text-[11px] font-medium text-white/80">Cererea a fost preluată.</p>
+        </div>
+    </div>
+
     <script>
         document.getElementById('heroVideo').playbackRate = 0.8;
 
-        function handleCommand(element, tip) {
-            // Efect de aprindere verde
+        function handleAction(element, tip) {
+            // Aprinde butonul
             element.classList.add('active-glow');
             
-            // Confirmare SafeGo
+            // Afișează Toast
+            const toast = document.getElementById('notification-toast');
+            document.getElementById('toast-text').innerText = "Am activat modulul: " + tip;
+            toast.classList.add('show');
+
+            // Reset după 3 secunde
             setTimeout(() => {
-                alert("Sistemul SafeGo a preluat cererea ta pentru: " + tip);
-                element
+                toast.classList.remove('show');
+                element.classList.remove('active-glow');
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
