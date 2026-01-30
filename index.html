@@ -1,174 +1,136 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <title>SafeGo.ro | RCA V3</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; }
-        .hidden { display: none; }
-        /* Stil Pagina A4 Alb */
-        .page-a4 { background: white; color: black; max-width: 850px; margin: 20px auto; padding: 50px; border-radius: 2px; position: relative; box-shadow: 0 0 40px rgba(0,0,0,0.5); }
-        .section-box { border: 1px solid #e5e7eb; padding: 15px; border-radius: 8px; margin-bottom: 12px; font-size: 13px; }
-        .q-title { font-weight: 700; margin-bottom: 8px; display: block; line-height: 1.4; }
-        input[type="radio"] { accent-color: #22c55e; margin-right: 4px; }
-        .a4-input { border: 1px solid #d1d5db !important; padding: 10px; border-radius: 4px; width: 100%; margin-top: 5px; }
-        .save-btn { position: absolute; top: 40px; right: 50px; background: #22c55e; color: white; padding: 10px 24px; border-radius: 6px; font-weight: 800; cursor: pointer; border: none; }
-    </style>
-</head>
-<body class="p-4">
+<div id="section-dnt" class="hidden">
+    <div class="page-a4">
+        <button onclick="submitDntAndCalculate()" class="save-btn">SALVEAZĂ ȘI CONTINUĂ</button>
 
-    <div id="view-start" class="text-center mt-20">
-        <div onclick="showOptions()" class="inline-block p-10 bg-zinc-900 border border-white/10 rounded-[40px] cursor-pointer hover:border-[#39ff14] transition">
-            <span class="text-4xl block mb-2">🚗</span>
-            <span class="font-black uppercase text-xs tracking-widest">RCA AUTO</span>
-        </div>
-    </div>
-
-    <div id="view-links" class="hidden max-w-sm mx-auto mt-20 text-center space-y-6 bg-zinc-900 p-10 rounded-[40px]">
-        <button onclick="openDnt()" class="block w-full text-[#39ff14] font-bold text-lg hover:underline">Nu vreau consultanță</button>
-        <button onclick="openContact()" class="block w-full text-white/50 font-bold text-lg hover:underline">Vreau consultanță</button>
-    </div>
-
-    <div id="view-dnt" class="hidden">
-        <div class="page-a4">
-            <button onclick="submitAll()" class="save-btn">SALVEAZĂ ȘI CONTINUĂ</button>
-            <h1 class="text-xl font-black mb-6 uppercase border-b-2 border-black pb-2">Formular DNT General</h1>
-            
-            <p class="text-[11px] text-gray-600 mb-6">Prin completarea acestui formular, confirm că informațiile sunt complete și corecte.</p>
-
+        <h1 class="text-xl font-black border-b-2 border-black pb-4 mb-4">FORMULAR DNT GENERAL</h1>
+        <p class="text-[11px] text-gray-600 mb-6">Prin completarea acestui formular, confirm ca informațiile sunt complete, corecte, corespund cerințelor și nevoilor mele de asigurare și înțeleg că datele sunt necesare pentru obținerea de produse și servicii de asigurare.</p>
+        
+        <div class="space-y-1">
             <div class="section-box">
                 <span class="q-title">Sunteți interesat doar de acest tip de asigurare? *</span>
-                <label><input type="radio" name="p1" checked> Da</label> <label class="ml-4"><input type="radio" name="p1"> Nu</label>
+                <label><input type="radio" name="dnt_1" checked> Da</label> <label class="ml-4"><input type="radio" name="dnt_1"> Nu</label>
+            </div>
+
+            <div class="section-box">
+                <span class="q-title">Îmi exprim acordul de a furniza informațiile solicitate... *</span>
+                <label><input type="radio" name="dnt_2" checked> Da</label> <label class="ml-4"><input type="radio" name="dnt_2"> Nu</label>
             </div>
 
             <div class="section-box">
                 <span class="q-title">Doresc ofertă: *</span>
-                <label><input type="radio" name="p2" checked> De la mai mulți asigurători</label>
+                <div class="grid grid-cols-1 gap-1">
+                    <label><input type="radio" name="dnt_3"> Reînnoire poliță la același asigurător</label>
+                    <label><input type="radio" name="dnt_3"> De la un singur asigurător</label>
+                    <label><input type="radio" name="dnt_3" checked> De la mai mulți asigurători</label>
+                </div>
             </div>
 
             <div class="section-box">
-                <span class="q-title">Acordare Consultanță: Doresc să primesc consultanță? *</span>
-                <label><input type="radio" name="p3"> Da</label> <label class="ml-4"><input type="radio" name="p3" checked> Nu</label>
+                <span class="q-title">În cazul unui accident din vina ta: *</span>
+                <label><input type="radio" name="dnt_4"> Vreau să văd cum mă pot proteja și eu</label>
+                <label class="ml-4"><input type="radio" name="dnt_4" checked> Nu mă interesează nici un fel de protecție pentru mine</label>
             </div>
 
             <div class="section-box">
-                <span class="q-title">Calitatea dumneavoastră: *</span>
-                <label><input type="radio" name="p4" checked> Proprietar</label> <label class="ml-4"><input type="radio" name="p4"> Utilizator</label>
+                <span class="q-title">ACORDARE CONSULTANȚĂ: Doresc să primesc consultanță... *</span>
+                <label><input type="radio" name="dnt_5"> Da</label> <label class="ml-4"><input type="radio" name="dnt_5" checked> Nu</label>
+            </div>
+
+            <div class="section-box">
+                <span class="q-title">DETALII SUPLIMENTARE SPECIFICE: Calitatea dumneavoastră: *</span>
+                <label><input type="radio" name="dnt_6" checked> Proprietar</label> <label class="ml-4"><input type="radio" name="dnt_6"> Utilizator (Leasing, Închiriere, etc.)</label>
+            </div>
+
+            <div class="section-box">
+                <span class="q-title">Decontare directă îți permite să ceri despăgubirea asigurătorului tău... *</span>
+                <label><input type="radio" name="dnt_7" checked> Da</label> <label class="ml-4"><input type="radio" name="dnt_7"> Nu</label>
             </div>
 
             <div class="section-box">
                 <span class="q-title">Auto este: *</span>
-                <label><input type="radio" name="p5" checked> Înmatriculat</label> <label class="ml-4"><input type="radio" name="p5"> Supus înmatriculării</label>
+                <div class="flex flex-wrap gap-4">
+                    <label><input type="radio" name="dnt_8"> Supus înmatriculării</label>
+                    <label><input type="radio" name="dnt_8"> Transfer de proprietate RO-RO</label>
+                    <label><input type="radio" name="dnt_8"> Înregistrat</label>
+                    <label><input type="radio" name="dnt_8"> Supus înregistrării</label>
+                    <label><input type="radio" name="dnt_8" checked> Înmatriculat</label>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <span class="q-title">Polița RCA nu acoperă și tractarea mașinii tale în caz de accident. *</span>
+                <div class="grid grid-cols-1 gap-1">
+                    <label><input type="radio" name="dnt_9"> Nu mă interesează să am o soluție de tractare și asistență rutieră</label>
+                    <label><input type="radio" name="dnt_9" checked> Vreau să văd cum pot să am și eu servicii de tractare și asistență rutieră</label>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <span class="q-title">Călătoriți cu auto în țări NON-UE? *</span>
+                <label><input type="radio" name="dnt_10"> Da</label> <label class="ml-4"><input type="radio" name="dnt_10" checked> Nu</label>
+            </div>
+
+            <div class="section-box">
+                <span class="q-title">În cazul unui accident din vina ta: *</span>
+                <label><input type="radio" name="dnt_11"> Nu sunt interesat(ă)</label>
+                <label class="ml-4"><input type="radio" name="dnt_11" checked> Da, sunt interesat(ă) să am o soluție pentru servicii medicale</label>
             </div>
 
             <div class="section-box">
                 <span class="q-title">Auto este utilizat ca: *</span>
-                <select class="a4-input"><option>Personal</option><option>Taxi / Bolt</option><option>Rent-a-car</option></select>
+                <div class="flex flex-wrap gap-4">
+                    <label><input type="radio" name="dnt_12" checked> Personal</label>
+                    <label><input type="radio" name="dnt_12"> Rent-a-car</label>
+                    <label><input type="radio" name="dnt_12"> Școală de șoferi</label>
+                    <label><input type="radio" name="dnt_12"> Taxi</label>
+                    <label><input type="radio" name="dnt_12"> Pază și protecție</label>
+                    <label><input type="radio" name="dnt_12"> Transport persoane</label>
+                    <label><input type="radio" name="dnt_12"> Transport marfă</label>
+                    <label><input type="radio" name="dnt_12"> Altele</label>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <span class="q-title">RCA acoperă daunele pe care le produci altora. Ai vreo formă de protecție și pentru mașina ta? *</span>
+                <label><input type="radio" name="dnt_13"> Da</label> <label class="ml-4"><input type="radio" name="dnt_13" checked> Nu</label>
+            </div>
+
+            <div class="section-box">
+                <span class="q-title">Sunteți interesat(ă) de decontare directă? *</span>
+                <label><input type="radio" name="dnt_14" checked> Da</label> <label class="ml-4"><input type="radio" name="dnt_14"> Nu</label>
+            </div>
+
+            <div class="section-box">
+                <span class="q-title">Doriți și alt tip de poliță cu riscuri asociate poliței RCA? *</span>
+                <div class="flex gap-4">
+                    <label><input type="checkbox"> Accidente</label>
+                    <label><input type="checkbox"> Asistență Rutieră</label>
+                    <label><input type="checkbox"> Viață</label>
+                    <label><input type="radio" name="dnt_15" checked> Nu sunt interesat(ă)</label>
+                </div>
             </div>
 
             <div class="section-box">
                 <span class="q-title">Sunteți căsătorit(ă)? *</span>
-                <label><input type="radio" name="p6"> Da</label> <label class="ml-4"><input type="radio" name="p6"> Nu</label> <label class="ml-4"><input type="radio" name="p6" checked> Nu răspund</label>
+                <label><input type="radio" name="dnt_16"> Da</label> <label class="ml-4"><input type="radio" name="dnt_16"> Nu</label> <label class="ml-4"><input type="radio" name="dnt_16" checked> Nu răspund</label>
             </div>
 
             <div class="section-box">
                 <span class="q-title">Aveți copii? *</span>
-                <label><input type="radio" name="p7"> Da</label> <label class="ml-4"><input type="radio" name="p7"> Nu</label> <label class="ml-4"><input type="radio" name="p7" checked> Nu răspund</label>
+                <label><input type="radio" name="dnt_17"> Da</label> <label class="ml-4"><input type="radio" name="dnt_17"> Nu</label> <label class="ml-4"><input type="radio" name="dnt_17" checked> Nu răspund</label>
             </div>
 
             <div class="section-box">
-                <span class="q-title">Înregistrați un venit lunar din: *</span>
-                <label><input type="radio" name="p8" checked> Angajat</label> <label class="ml-4"><input type="radio" name="p8"> PFA</label> <label class="ml-4"><input type="radio" name="p8"> Nu răspund</label>
+                <span class="q-title">Ocupație / Domeniu de activitate</span>
+                <input type="text" class="white-input" placeholder="Introduceți ocupația">
             </div>
 
             <div class="section-box">
-                <span class="q-title">Confirmare Sancțiuni Internaționale & AML? *</span>
-                <label><input type="radio" name="p9" checked> Da, confirm respectarea legislației</label>
+                <span class="q-title">Număr membri de familie</span>
+                <input type="text" class="white-input" placeholder="Introduceți numărul">
             </div>
 
-            <div class="mt-6 p-6 bg-gray-50 border-2 border-dashed border-gray-200 rounded-lg">
-                <h3 class="font-black mb-4">DATE IDENTIFICARE</h3>
-                <input type="text" id="plate" placeholder="NR. INMATRICULARE (ex: B123ABC)" class="a4-input mb-3 uppercase">
-                <input type="text" id="cnp" placeholder="CNP PROPRIETAR" class="a4-input">
-            </div>
-        </div>
-    </div>
-
-    <div id="view-contact" class="hidden max-w-md mx-auto mt-10 bg-white text-black p-10 rounded-lg">
-        <h2 class="text-xl font-black mb-6">Cerere Consultanță</h2>
-        <input type="text" placeholder="Nume Complet" class="a4-input mb-4">
-        <input type="text" placeholder="Telefon" class="a4-input mb-4">
-        <button class="w-full bg-black text-white py-4 font-bold rounded">Trimite Solicitarea</button>
-    </div>
-
-    <div id="view-results" class="hidden max-w-lg mx-auto mt-10 space-y-4"></div>
-
-    <script>
-        const API_KEY = '015f40fc-1974-4ad5-bbde-48c117a54307';
-        const PROXY = "https://api.allorigins.win/raw?url=";
-        const BASE = "https://insuretech.staging.insuretech.ro/api/v1";
-
-        function showOptions() {
-            document.getElementById('view-start').classList.add('hidden');
-            document.getElementById('view-links').classList.remove('hidden');
-        }
-
-        function openDnt() {
-            document.body.style.backgroundColor = "#f3f4f6";
-            document.getElementById('view-links').classList.add('hidden');
-            document.getElementById('view-dnt').classList.remove('hidden');
-        }
-
-        function openContact() {
-            document.body.style.backgroundColor = "#f3f4f6";
-            document.getElementById('view-links').classList.add('hidden');
-            document.getElementById('view-contact').classList.remove('hidden');
-        }
-
-        async function submitAll() {
-            const plate = document.getElementById('plate').value;
-            const cnp = document.getElementById('cnp').value;
-            if(!plate || !cnp) return alert("Introdu NR. AUTO și CNP!");
-
-            try {
-                // PASUL 1: Inregistrare consimtamant (OBLIGATORIU V3)
-                await fetch(PROXY + encodeURIComponent(`${BASE}/online/client/documents/submit-answers`), {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-API-KEY': API_KEY },
-                    body: JSON.stringify({
-                        personBaseRequest: { cif: cnp, legalType: "PF" },
-                        vendorProductType: "RCA",
-                        formInputData: { dnt_v3_confirmed: true, aml_accepted: true }
-                    })
-                });
-
-                // PASUL 2: Cerere Oferte
-                const res = await fetch(PROXY + encodeURIComponent(`${BASE}/rca/quotes`), {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'X-API-KEY': API_KEY },
-                    body: JSON.stringify({ registration_number: plate, owner_id: cnp })
-                });
-                
-                const data = await res.json();
-                renderOffers(data.data || []);
-            } catch (err) {
-                alert("Eroare de sistem. Verifică datele.");
-            }
-        }
-
-        function renderOffers(offers) {
-            document.body.style.backgroundColor = "#050505";
-            document.getElementById('view-dnt').classList.add('hidden');
-            const resDiv = document.getElementById('view-results');
-            resDiv.classList.remove('hidden');
-            resDiv.innerHTML = offers.length ? offers.map(o => `
-                <div class="bg-zinc-900 p-6 rounded-2xl border border-white/5 flex justify-between items-center">
-                    <span class="font-bold text-xs uppercase">${o.insurer_name}</span>
-                    <span class="text-[#39ff14] font-black">${o.price} RON</span>
-                </div>
-            `).join('') : '<p class="text-center">Nu sunt oferte disponibile.</p>';
-        }
-    </script>
-</body>
-</html>
+            <div class="section-box">
+                <span class="q-title">Înregistrați un venit lunar din activitatea de: *</span>
+                <div class="flex flex-wrap gap-4">
+                    <label>
