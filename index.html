@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Layout Ajustat</title>
+    <title>SafeGo.ro | Video Loop Continuu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -23,7 +23,12 @@
         }
         @keyframes beam { to { background-position: 200% center; } }
 
-        .video-glow { filter: brightness(1.3) contrast(1.2) saturate(1.5); }
+        /* Ajustare pentru fluiditate video */
+        .video-glow { 
+            filter: brightness(1.3) contrast(1.2) saturate(1.5);
+            /* Elimină orice spațiu rezidual la margini */
+            display: block;
+        }
     </style>
 </head>
 <body class="pb-10">
@@ -40,8 +45,8 @@
     </header>
 
     <main class="pt-16">
-        <div class="relative w-full h-[40vh] overflow-hidden bg-black">
-            <video autoplay loop muted playsinline class="w-full h-full object-cover video-glow">
+        <div class="relative w-full h-[45vh] overflow-hidden bg-black">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover video-glow" onended="this.play()">
                 <source src="hero-loop.mp4" type="video/mp4">
             </video>
             <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
