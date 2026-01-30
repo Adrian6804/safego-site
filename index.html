@@ -1,124 +1,87 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Conexiune InsureTech</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        
-        /* Efecte vizuale butoane */
-        .btn-universal-neon { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; }
-        .active-glow { background: #39ff14 !important; box-shadow: 0 0 40px #39ff14; border-color: #39ff14; transform: scale(0.92); }
-        .active-glow p { color: black !important; }
+// Constantele de configurare API
+const API_BASE_URL = 'https://insuretech.staging.insuretech.ro/api/v1';
+const API_KEY = '015f40fc-1974-4ad5-bbde-48c117a54307';
 
-        /* Drawer RCA */
-        #rca-drawer {
-            position: fixed; bottom: -100%; left: 0; width: 100%; height: 90%;
-            background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px);
-            border-top: 2px solid #39ff14; border-radius: 30px 30px 0 0;
-            z-index: 1000; transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 25px; overflow-y: auto;
+async function getQuotes() {
+    const plate = document.getElementById('plate').value;
+    const cnp = document.getElementById('cnp').value;
+
+    if(!plate || !cnp) {
+        alert("Te rugăm să introduci numărul de înmatriculare și CNP-ul.");
+        return;
+    }
+
+    // Interfața: Trecem la starea de încărcare
+    document.getElementById('step-form').classList.add('hidden');
+    document.getElementById('step-loading').classList.remove('hidden');
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/rca/quotes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-API-KEY': API_KEY // Unele API-uri folosesc X-API-KEY sau Bearer
+            },
+            body: JSON.stringify({
+                registration_number: plate,
+                owner_id: cnp
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            renderOffers(data.data || data.offers); // Adaptăm în funcție de structura răspunsului
+        } else {
+            throw new Error(data.message || "Nu am putut obține ofertele.");
         }
-        #rca-drawer.open { bottom: 0; }
 
-        /* Card Oferta Asigurator */
-        .offer-card {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px; padding: 20px; margin-bottom: 15px;
-            display: flex; justify-between; align-items: center;
-            transition: 0.3s;
-        }
-        .offer-card:hover { border-color: #39ff14; background: rgba(57, 255, 20, 0.05); }
+    } catch (error) {
+        console.error("Eroare API:", error);
+        alert("Eroare la conectare: " + error.message);
+        resetToForm();
+    }
+}
 
-        .loader { width: 40px; height: 40px; border: 4px solid #1a1a1a; border-top-color: #39ff14; border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-    </style>
-</head>
-<body class="bg-black">
+function renderOffers(offers) {
+    const list = document.getElementById('offers-list');
+    list.innerHTML = ''; // Curățăm ofertele vechi
 
-    <div id="overlay" class="fixed inset-0 bg-black/80 z-[900] hidden" onclick="closeRca()"></div>
+    document.getElementById('step-loading').classList.add('hidden');
+    document.getElementById('step-results').classList.remove('hidden');
 
-    <header class="fixed top-0 w-full z-50 px-5 py-4 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
-        <div class="flex items-center gap-2">
-            <span class="text-lg font-black italic uppercase">SafeGo<span class="text-[#39ff14]">.ro</span></span>
-        </div>
-        <button class="px-4 py-2 border border-[#39ff14] text-[#39ff14] font-black rounded-full text-[10px] uppercase">LOGIN</button>
-    </header>
+    if (!offers || offers.length === 0) {
+        list.innerHTML = '<p class="text-center text-zinc-500 uppercase font-black text-xs py-10">Nu am găsit oferte pentru aceste date.</p>';
+        return;
+    }
 
-    <main class="pt-24 px-5">
-        <div onclick="openRca(this)" class="btn-universal-neon bg-zinc-900/90 p-6 rounded-[25px] flex items-center justify-between">
-            <div>
-                <p class="text-[10px] font-black uppercase text-zinc-500 mb-1">Pasul 1</p>
-                <p class="text-xl font-black uppercase">Configurează RCA</p>
-            </div>
-            <span class="text-3xl">🚗</span>
-        </div>
-    </main>
-
-    <div id="rca-drawer">
-        <div class="w-12 h-1 bg-zinc-800 rounded-full mx-auto mb-8" onclick="closeRca()"></div>
-        
-        <div id="step-form">
-            <h2 class="text-xl font-black uppercase italic text-center mb-8">Date <span class="text-[#39ff14]">Identificare</span></h2>
-            <div class="space-y-4">
-                <input type="text" id="plate" placeholder="NR. INMATRICULARE" class="w-full bg-black border border-white/10 p-5 rounded-xl text-center font-black text-xl outline-none focus:border-[#39ff14] uppercase">
-                <input type="number" id="cnp" placeholder="CNP PROPRIETAR" class="w-full bg-black border border-white/10 p-5 rounded-xl text-center font-black text-xl outline-none focus:border-[#39ff14]">
-                <button onclick="getQuotes()" class="w-full py-5 bg-[#39ff14] text-black font-black uppercase rounded-xl shadow-[0_0_30px_rgba(57,255,20,0.3)]">Vezi Prețuri Reale</button>
-            </div>
-        </div>
-
-        <div id="step-loading" class="hidden flex-col items-center justify-center py-20">
-            <div class="loader mb-4"></div>
-            <p class="font-black uppercase text-[10px] tracking-widest animate-pulse">Interogăm baza de date InsureTech...</p>
-        </div>
-
-        <div id="step-results" class="hidden">
-            <h2 class="text-lg font-black uppercase mb-6 text-center">Oferte <span class="text-[#39ff14]">Disponibile</span></h2>
-            <div id="offers-list">
-                <div class="offer-card">
-                    <div>
-                        <p class="font-black text-sm uppercase">Allianz Tiriac</p>
-                        <p class="text-[10px] text-zinc-500">Poliță 12 Luni</p>
+    offers.forEach(offer => {
+        const card = `
+            <div class="offer-card flex justify-between items-center bg-zinc-900/50 p-5 rounded-2xl border border-white/5 mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-black font-bold text-[8px] text-center p-1">
+                        ${offer.insurer_name}
                     </div>
-                    <div class="text-right">
-                        <p class="text-xl font-black text-[#39ff14]">840 RON</p>
-                        <button class="text-[9px] font-black uppercase bg-white text-black px-3 py-1 rounded-md mt-1">Selectează</button>
+                    <div>
+                        <p class="font-black text-xs uppercase text-white">${offer.insurer_name}</p>
+                        <p class="text-[9px] text-zinc-500 uppercase">Perioadă: ${offer.period} Luni</p>
                     </div>
                 </div>
+                <div class="text-right">
+                    <p class="text-xl font-black text-[#39ff14]">${offer.price} ${offer.currency}</p>
+                    <button onclick="initiateOrder('${offer.id}')" class="text-[9px] font-black uppercase bg-[#39ff14] text-black px-4 py-2 rounded-full mt-2">
+                        Cumpără
+                    </button>
+                </div>
             </div>
-        </div>
-    </div>
+        `;
+        list.innerHTML += card;
+    });
+}
 
-    <script>
-        function openRca(btn) {
-            btn.classList.add('active-glow');
-            document.getElementById('rca-drawer').classList.add('open');
-            document.getElementById('overlay').classList.remove('hidden');
-        }
-
-        function closeRca() {
-            document.getElementById('rca-drawer').classList.remove('open');
-            document.getElementById('overlay').classList.add('hidden');
-        }
-
-        async function getQuotes() {
-            const plate = document.getElementById('plate').value;
-            const cnp = document.getElementById('cnp').value;
-
-            if(!plate || !cnp) return alert("Completează datele!");
-
-            document.getElementById('step-form').classList.add('hidden');
-            document.getElementById('step-loading').classList.remove('hidden');
-
-            // SIMULARE APEL API (Urmează să punem cheia ta de API aici)
-            setTimeout(() => {
-                document.getElementById('step-loading').classList.add('hidden');
-                document.getElementById('step-results').classList.remove('hidden');
-            }, 2500);
-        }
-    </script>
-</body>
-</html>
+function resetToForm() {
+    document.getElementById('step-loading').classList.add('hidden');
+    document.getElementById('step-results').classList.add('hidden');
+    document.getElementById('step-form').classList.remove('hidden');
+}
