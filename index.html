@@ -3,145 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeGo.ro | RCA</title>
+    <title>SafeGo.ro | RCA Professional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #050505; color: white; font-family: sans-serif; }
-        .btn-neon { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: 0.3s; }
+        body { background-color: #050505; color: white; font-family: sans-serif; transition: background 0.3s; }
+        .btn-neon { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
         .btn-active { background: #39ff14 !important; color: black !important; box-shadow: 0 0 20px #39ff14; }
         .hidden { display: none; }
-        /* Stil Pagina A4 Alb */
-        .page-a4 { background: white; color: black; padding: 40px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 800px; margin: auto; }
-        .page-a4 input[type="text"], .page-a4 select { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; }
+        /* Stil A4 Alb */
+        .page-a4 { background: white; color: black; max-width: 900px; margin: 20px auto; padding: 50px; border-radius: 4px; box-shadow: 0 0 20px rgba(0,0,0,0.2); position: relative; }
+        .dnt-question { border-bottom: 1px solid #eee; padding: 15px 0; font-size: 13px; }
+        .dnt-question p { font-weight: bold; margin-bottom: 8px; }
+        input[type="radio"] { accent-color: #22c55e; }
+        .white-input { border: 1px solid #ccc !important; padding: 10px; border-radius: 6px; width: 100%; margin-top: 5px; }
     </style>
 </head>
-<body class="p-6">
+<body class="p-4">
 
-    <header class="flex justify-between items-center mb-10">
-        <span class="text-2xl font-black italic tracking-tighter">SAFEGO<span class="text-[#39ff14]">.RO</span></span>
-    </header>
-
-    <div id="main-selection" class="max-w-md mx-auto grid grid-cols-2 gap-4 mb-10">
-        <div id="btn-rca" onclick="showConsultancyOptions()" class="btn-neon p-8 rounded-[32px] flex flex-col items-center">
-            <span class="text-3xl mb-3">🚗</span>
-            <p class="text-[11px] font-black uppercase tracking-widest">RCA Auto</p>
-        </div>
-        <div class="btn-neon p-8 rounded-[32px] flex flex-col items-center opacity-20">
-            <span class="text-3xl mb-3">✈️</span>
-            <p class="text-[11px] font-black uppercase tracking-widest">Travel</p>
-        </div>
-    </div>
-
-    <div id="consultancy-step" class="hidden max-w-lg mx-auto bg-zinc-900/50 p-8 rounded-[32px] border border-white/5 text-center">
-        <h3 class="text-[#39ff14] font-black uppercase text-xs mb-6 tracking-widest">Alege metoda de ofertare</h3>
-        <p class="text-zinc-400 text-xs mb-8">Conform legislației, trebuie să alegi dacă dorești consultanță pentru analiza nevoilor.</p>
-        
-        <div class="space-y-4">
-            <button onclick="openDntA4()" class="w-full py-4 text-[#39ff14] border border-[#39ff14] rounded-2xl font-bold hover:bg-[#39ff14] hover:text-black transition">
-                Continuă fără consultanță (Completare DNT)
-            </button>
-            <button onclick="openContactPage()" class="w-full py-4 text-white border border-white/20 rounded-2xl font-bold hover:bg-white hover:text-black transition">
-                Vreau consultanță (Contactează-mă)
-            </button>
+    <div id="section-home">
+        <header class="flex justify-between items-center mb-10">
+            <span class="text-2xl font-black italic">SAFEGO<span class="text-[#39ff14]">.RO</span></span>
+        </header>
+        <div class="max-w-md mx-auto grid grid-cols-2 gap-4">
+            <div id="btn-rca" onclick="activateRca()" class="btn-neon p-8 rounded-[32px] flex flex-col items-center">
+                <span class="text-3xl mb-3">🚗</span>
+                <p class="text-[10px] font-black uppercase">RCA Auto</p>
+            </div>
+            <div class="btn-neon p-8 rounded-[32px] flex flex-col items-center opacity-20">
+                <span class="text-3xl mb-3">✈️</span>
+                <p class="text-[10px] font-black uppercase">Travel</p>
+            </div>
         </div>
     </div>
 
-    <div id="page-dnt-a4" class="hidden">
+    <div id="section-choice" class="hidden max-w-lg mx-auto mt-20 text-center space-y-6 bg-zinc-900/50 p-10 rounded-[40px]">
+        <h2 class="text-[#39ff14] font-black text-xs uppercase tracking-widest">Calculare RCA</h2>
+        <div class="flex flex-col gap-4">
+            <button onclick="goToDnt()" class="text-[#39ff14] text-lg font-bold hover:underline">Continuă fără consultanță</button>
+            <button onclick="goToContact()" class="text-white text-lg font-bold hover:underline opacity-60">Vreau consultanță</button>
+        </div>
+    </div>
+
+    <div id="section-dnt" class="hidden">
         <div class="page-a4">
-            <h1 class="text-2xl font-bold mb-6 border-b pb-4">FORMULAR DNT GENERAL</h1>
-            <p class="text-[12px] mb-6 text-gray-600">Prin completarea acestui formular, confirm că informațiile sunt complete și corecte.</p>
+            <button onclick="submitDntAndCalculate()" class="absolute top-8 right-8 bg-[#22c55e] text-white px-6 py-2 rounded-lg font-bold text-sm hover:bg-green-600 transition">
+                SALVEAZĂ ȘI CONTINUĂ
+            </button>
+
+            <h1 class="text-xl font-black border-b-2 border-black pb-4 mb-6">FORMULAR DNT GENERAL</h1>
             
-            <div class="space-y-6 text-sm">
-                <div class="p-4 border rounded-lg bg-gray-50">
-                    <p class="font-bold mb-2">Sunteți interesat doar de acest tip de asigurare? *</p>
-                    <div class="flex gap-4"><label><input type="radio" name="dnt1" checked> Da</label><label><input type="radio" name="dnt1"> Nu</label></div>
-                </div>
-
-                <div class="p-4 border rounded-lg bg-gray-50">
-                    <p class="font-bold mb-2">Calitatea dumneavoastră: *</p>
-                    <div class="flex gap-4"><label><input type="radio" name="dnt_qual" checked> Proprietar</label><label><input type="radio" name="dnt_qual"> Utilizator</label></div>
-                </div>
-
-                <div class="p-4 border rounded-lg bg-gray-50">
-                    <p class="font-bold mb-2">Date Identificare Vehicul</p>
-                    <input type="text" id="plate" placeholder="NR. INMATRICULARE" class="w-full p-3 mb-3 uppercase font-bold">
-                    <input type="text" id="cnp" placeholder="CNP PROPRIETAR" class="w-full p-3 font-bold">
+            <div class="space-y-2">
+                <div class="dnt-question"><p>Sunteți interesat doar de acest tip de asigurare? *</p><label><input type="radio" name="q1" checked> DA</label> <label class="ml-4"><input type="radio" name="q1"> NU</label></div>
+                <div class="dnt-question"><p>Doresc ofertă: *</p><label><input type="radio" name="q2" checked> De la mai mulți asigurători</label></div>
+                <div class="dnt-question"><p>Calitatea dumneavoastră: *</p><label><input type="radio" name="q3" checked> Proprietar</label> <label class="ml-4"><input type="radio" name="q3"> Utilizator</label></div>
+                <div class="dnt-question"><p>Auto este utilizat ca: *</p><select class="white-input"><option>Personal</option><option>Taxi / Bolt</option></select></div>
+                <div class="dnt-question"><p>Aveți copii? *</p><label><input type="radio" name="q4"> DA</label> <label class="ml-4"><input type="radio" name="q4" checked> NU</label></div>
+                <div class="dnt-question"><p>Venit lunar din activitatea de: *</p><label><input type="radio" name="q5" checked> Angajat</label> <label class="ml-4"><input type="radio" name="q5"> Altele</label></div>
+                <div class="dnt-question"><p>Confirmare Sancțiuni Internaționale & AML? *</p><label><input type="radio" name="q6" checked> DA</label></div>
+                
+                <div class="mt-8 p-6 bg-gray-50 rounded-xl">
+                    <p class="font-black mb-4">DATE IDENTIFICARE</p>
+                    <input type="text" id="plate" placeholder="NR. INMATRICULARE (ex: B01ABC)" class="white-input mb-4 uppercase font-bold text-lg">
+                    <input type="text" id="cnp" placeholder="CNP PROPRIETAR" class="white-input font-bold text-lg">
                 </div>
             </div>
-
-            <button onclick="calculateRca()" class="w-full mt-8 py-5 bg-black text-white font-black uppercase rounded-lg">Salvează și calculează preț</button>
         </div>
     </div>
 
-    <div id="page-contact" class="hidden max-w-lg mx-auto bg-white text-black p-10 rounded-xl">
-        <h2 class="text-xl font-bold mb-6 text-center">SOLICITARE CONSULTANȚĂ</h2>
-        <div class="space-y-4">
-            <div><label class="text-[10px] font-bold">NUME COMPLET</label><input type="text" class="w-full border p-4 rounded-lg bg-gray-50" placeholder="Introdu numele"></div>
-            <div><label class="text-[10px] font-bold">ADRESA DE EMAIL</label><input type="text" class="w-full border p-4 rounded-lg bg-gray-50" placeholder="email@exemplu.com"></div>
-            <div><label class="text-[10px] font-bold">NUMĂR DE TELEFON</label><input type="text" class="w-full border p-4 rounded-lg bg-gray-50" placeholder="+40 7xx xxx xxx"></div>
-            <button class="w-full py-5 bg-blue-600 text-white font-bold rounded-lg mt-4">Trimite solicitarea</button>
+    <div id="section-contact" class="hidden">
+        <div class="page-a4">
+            <h2 class="text-2xl font-black mb-8 text-center">SOLICITARE CONSULTANȚĂ</h2>
+            <div class="max-w-md mx-auto space-y-4">
+                <input type="text" placeholder="Nume Complet" class="white-input p-4">
+                <input type="email" placeholder="Adresa de email" class="white-input p-4">
+                <input type="text" placeholder="Număr de telefon" class="white-input p-4">
+                <button class="w-full py-4 bg-black text-white font-bold rounded-lg">TRIMITE</button>
+            </div>
         </div>
     </div>
 
-    <div id="step-results" class="hidden max-w-lg mx-auto mt-10 space-y-4"></div>
+    <div id="section-results" class="hidden max-w-lg mx-auto space-y-4 mt-10"></div>
 
-<script>
-    function showConsultancyOptions() {
-        // Activează butonul
-        document.getElementById('btn-rca').classList.add('btn-active');
-        document.getElementById('consultancy-step').classList.remove('hidden');
-    }
-
-    function openDntA4() {
-        // Deschide pagina de DNT pe fond alb
-        document.body.style.backgroundColor = "#f3f4f6";
-        document.getElementById('consultancy-step').classList.add('hidden');
-        document.getElementById('main-selection').classList.add('hidden');
-        document.getElementById('page-dnt-a4').classList.remove('hidden');
-    }
-
-    function openContactPage() {
-        // Deschide pagina de contact
-        document.body.style.backgroundColor = "#f3f4f6";
-        document.getElementById('consultancy-step').classList.add('hidden');
-        document.getElementById('main-selection').classList.add('hidden');
-        document.getElementById('page-contact').classList.remove('hidden');
-    }
-
-    async function calculateRca() {
-        const plate = document.getElementById('plate').value;
-        const cnp = document.getElementById('cnp').value;
-        if(!plate || !cnp) return alert("Introdu datele corect!");
-
-        const PROXY = "https://api.allorigins.win/raw?url=";
+    <script>
         const API_KEY = '015f40fc-1974-4ad5-bbde-48c117a54307';
-        const url = `https://insuretech.staging.insuretech.ro/api/v1/rca/quotes`;
+        const PROXY = "https://api.allorigins.win/raw?url=";
 
-        try {
-            const res = await fetch(PROXY + encodeURIComponent(url), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'X-API-KEY': API_KEY },
-                body: JSON.stringify({ registration_number: plate, owner_id: cnp })
-            });
-            const data = await res.json();
-            renderResults(data.data || []);
-        } catch (e) {
-            alert("Eroare de conexiune la serverul de test.");
+        function activateRca() {
+            document.getElementById('btn-rca').classList.add('btn-active');
+            document.getElementById('section-home').classList.add('hidden');
+            document.getElementById('section-choice').classList.remove('hidden');
         }
-    }
 
-    function renderResults(offers) {
-        document.getElementById('page-dnt-a4').classList.add('hidden');
-        const resDiv = document.getElementById('step-results');
-        resDiv.classList.remove('hidden');
-        document.body.style.backgroundColor = "#050505";
-        resDiv.innerHTML = `<h2 class="text-center font-bold mb-6">OFERTE RCA</h2>` + offers.map(o => `
-            <div class="bg-zinc-900 p-6 rounded-2xl border border-white/5 flex justify-between items-center text-white">
-                <span class="font-bold">${o.insurer_name}</span>
-                <span class="text-[#39ff14] font-black">${o.price} RON</span>
-            </div>
-        `).join('');
-    }
-</script>
+        function goToDnt() {
+            document.body.style.backgroundColor = "#e5e7eb";
+            document.getElementById('section-choice').classList.add('hidden');
+            document.getElementById('section-dnt').classList.remove('hidden');
+        }
+
+        function goToContact() {
+            document.body.style.backgroundColor = "#e5e7eb";
+            document.getElementById('section-choice').classList.add('hidden');
+            document.getElementById('section-contact').classList.remove('hidden');
+        }
+
+        async function submitDntAndCalculate() {
+            const plate = document.getElementById('plate').value;
+            const cnp = document.getElementById('cnp').value;
+            if(!plate || !cnp) return alert("Completează datele mașinii și CNP-ul!");
+
+            // Simulăm trimiterea DNT (Necesar pentru validare V3)
+            const url = `https://insuretech.staging.insuretech.ro/api/v1/rca/quotes`;
+            
+            try {
+                const res = await fetch(PROXY + encodeURIComponent(url), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-API-KEY': API_KEY },
+                    body: JSON.stringify({ registration_number: plate, owner_id: cnp })
+                });
+                const data = await res.json();
+                showOffers(data.data || []);
+            } catch (e) {
+                alert("Eroare server. Verifică datele introduse.");
+            }
+        }
+
+        function showOffers(offers) {
+            document.body.style.backgroundColor = "#050505";
+            document.getElementById('section-dnt').classList.add('hidden');
+            const resDiv = document.getElementById('section-results');
+            resDiv.classList.remove('hidden');
+            resDiv.innerHTML = offers.length ? offers.map(o => `
+                <div class="bg-zinc-900 p-6 rounded-3xl border border-white/5 flex justify-between items-center text-white">
+                    <div><p class="font-black text-sm uppercase">${o.insurer_name}</p></div>
+                    <p class="text-xl font-black text-[#39ff14]">${o.price} RON</p>
+                </div>
+            `).join('') : '<p class="text-center">Nu s-au găsit oferte pentru acest CNP/Auto.</p>';
+        }
+    </script>
 </body>
 </html>
