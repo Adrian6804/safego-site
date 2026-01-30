@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SafeGo.ro | Layout Corectat</title>
+    <title>SafeGo.ro | Layout Ajustat</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -40,12 +40,13 @@
     </header>
 
     <main class="pt-16">
-        <div class="relative w-full h-[40vh] overflow-hidden flex items-center justify-center bg-black">
-            <video autoplay loop muted playsinline class="w-full h-full object-contain video-glow">
+        <div class="relative w-full h-[40vh] overflow-hidden bg-black">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover video-glow">
                 <source src="hero-loop.mp4" type="video/mp4">
             </video>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
-            <div class="absolute z-10 text-center px-6">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent"></div>
+            
+            <div class="absolute top-6 left-6 z-10 text-left max-w-[70%]">
                 <h1 class="text-3xl font-[900] leading-none uppercase italic tracking-tighter">
                     LIBERTATE.<br>
                     <span class="animated-beam-text">FĂRĂ RISCURI.</span>
@@ -53,7 +54,7 @@
             </div>
         </div>
 
-        <div class="px-5 grid grid-cols-3 gap-3 mb-8 mt-4 relative z-20">
+        <div class="px-5 grid grid-cols-3 gap-3 mb-8 mt-6 relative z-20">
             <div class="btn-neon-active p-4 rounded-xl h-28 flex flex-col items-center justify-center bg-zinc-900/80 backdrop-blur-lg border-white/5 cursor-pointer">
                 <span class="text-2xl mb-2">✈️</span>
                 <p class="text-[9px] font-black uppercase text-cyan-400">Travel</p>
@@ -72,4 +73,27 @@
             <div class="bg-zinc-900/40 rounded-[30px] p-6 border border-white/5 shadow-xl">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-[10px] font-black uppercase tracking-widest text-zinc-400">RCA & Wheels</h3>
-                    <span class="text-[8px] text-green-400 font-black flex items-center gap-1">
+                    <span class="text-[8px] text-green-400 font-black flex items-center gap-1">● API ONLINE</span>
+                </div>
+                <div class="bg-black p-4 rounded-xl border border-white/10 mb-6">
+                    <input type="text" placeholder="NR. ÎNMATRICULARE" class="bg-transparent text-white font-black text-lg w-full text-center outline-none uppercase placeholder-zinc-800">
+                </div>
+                <button class="w-full py-5 rounded-xl text-[12px] font-[900] bg-[#39FF14] text-black btn-neon-active border-none shadow-[0_0_20px_rgba(57,255,20,0.3)]">
+                    CALCULEAZĂ PREȚ
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="px-8 py-10 border-t border-white/5 bg-black">
+        <div class="flex flex-col items-center gap-6">
+            <div class="flex gap-4">
+                <a href="#" class="bg-white px-3 py-2 rounded-lg"><img src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png" class="h-4"></a>
+                <a href="#" class="bg-white px-3 py-2 rounded-lg"><img src="https://www.salfin.ro/wp-content/themes/salfin/images/logo.png" class="h-4"></a>
+            </div>
+            <p class="text-[8px] text-zinc-600 font-bold uppercase tracking-widest">&copy; 2026 SafeGo Digital</p>
+        </div>
+    </footer>
+
+</body>
+</html>
