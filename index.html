@@ -36,20 +36,57 @@
         </div>
 
         <div id="rca-container" class="hidden space-y-6">
-            <div id="step-dnt" class="bg-zinc-900/40 border border-white/5 p-8 rounded-[32px] text-center">
-                <h2 class="font-black uppercase text-xs mb-4 text-white">Pasul 1: Consultanță</h2>
-                <p class="text-[10px] text-zinc-400 mb-8 uppercase">Doriți consultanță conform reglementărilor?</p>
-                <div class="space-y-3">
-                    <button onclick="goToCalculation()" class="w-full py-4 border border-[#39ff14]/30 rounded-2xl text-[10px] font-black uppercase text-[#39ff14]">Continuă fără consultanță</button>
-                </div>
+            <div id="step-dnt" class="hidden bg-zinc-900/40 border border-white/5 p-6 rounded-[32px] backdrop-blur-md">
+    <h2 class="text-center font-black uppercase text-[12px] mb-6 text-[#39ff14] tracking-widest">Analiza Nevoilor (DNT)</h2>
+    
+    <div class="space-y-6 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar text-[11px]">
+        <div class="space-y-3">
+            <p class="text-zinc-300 uppercase font-bold">Sunteți interesat doar de acest tip de asigurare? *</p>
+            <div class="flex gap-4">
+                <label class="flex items-center gap-2"><input type="radio" name="q1" value="true" checked> DA</label>
+                <label class="flex items-center gap-2"><input type="radio" name="q1" value="false"> NU</label>
             </div>
+        </div>
 
-            <div id="step-form" class="hidden bg-zinc-900/40 border border-white/5 p-8 rounded-[32px]">
-                <h2 class="text-center font-black uppercase text-[10px] mb-8 text-zinc-500">Pasul 2: Date Vehicul</h2>
-                <div class="space-y-4">
-                    <input type="text" id="plate" placeholder="NR. INMATRICULARE" class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl uppercase outline-none focus:border-[#39ff14]">
-                    <input type="text" id="cnp" placeholder="CNP PROPRIETAR" class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl outline-none focus:border-[#39ff14]">
-                    <button onclick="startV3Flow()" class="w-full py-5 bg-[#39ff14] text-black font-black uppercase rounded-2xl text-xs">Calculează Preț</button>
+        <div class="space-y-3 border-t border-white/5 pt-4">
+            <p class="text-zinc-300 uppercase font-bold">Îmi exprim acordul de a furniza informațiile solicitate? *</p>
+            <div class="flex gap-4">
+                <label class="flex items-center gap-2"><input type="radio" name="q2" value="true" checked> DA</label>
+                <label class="flex items-center gap-2"><input type="radio" name="q2" value="false"> NU</label>
+            </div>
+        </div>
+
+        <div class="space-y-3 border-t border-white/5 pt-4">
+            <p class="text-zinc-300 uppercase font-bold">Doresc ofertă: *</p>
+            <select id="q_offer_type" class="w-full bg-black border border-white/10 p-3 rounded-xl outline-none focus:border-[#39ff14]">
+                <option value="multi">De la mai mulți asigurători</option>
+                <option value="single">De la un singur asigurător</option>
+                <option value="renew">Reînnoire poliță</option>
+            </select>
+        </div>
+
+        <div class="space-y-3 border-t border-white/5 pt-4">
+            <p class="text-zinc-300 uppercase font-bold">Calitatea dumneavoastră: *</p>
+            <div class="flex gap-4">
+                <label class="flex items-center gap-2"><input type="radio" name="q_quality" value="proprietar" checked> Proprietar</label>
+                <label class="flex items-center gap-2"><input type="radio" name="q_quality" value="utilizator"> Utilizator</label>
+            </div>
+        </div>
+
+        <div class="space-y-3 border-t border-white/5 pt-4">
+            <p class="text-zinc-300 uppercase font-bold">Auto este utilizat ca: *</p>
+            <select id="q_usage" class="w-full bg-black border border-white/10 p-3 rounded-xl outline-none focus:border-[#39ff14]">
+                <option value="personal">Personal</option>
+                <option value="taxi">Taxi / Uber</option>
+                <option value="marfa">Transport Marfă</option>
+            </select>
+        </div>
+    </div>
+
+    <button onclick="submitDNTAndGoToForm()" class="w-full mt-6 py-4 bg-[#39ff14] text-black font-black uppercase rounded-2xl text-[10px] tracking-widest shadow-[0_10px_20px_rgba(57,255,20,0.2)]">
+        Confirm datele și continuu
+    </button>
+</div>
                 </div>
             </div>
 
