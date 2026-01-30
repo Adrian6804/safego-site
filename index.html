@@ -66,7 +66,7 @@
                 <div class="space-y-4">
                     <input type="text" id="plate" placeholder="NR. INMATRICULARE" class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl outline-none focus:border-[#39ff14] uppercase">
                     <input type="text" id="cnp" placeholder="CNP PROPRIETAR" class="w-full bg-black/50 border border-white/10 p-5 rounded-2xl text-center font-black text-xl outline-none focus:border-[#39ff14]">
-                    <button onclick="getQuotes()" class="w-full py-5 bg-[#39ff14] text-black font-black uppercase rounded-2xl shadow-[0_15px_30px_rgba(57,255,20,0.2)] text-xs tracking-widest">Calculează Preț RCA</button>
+                    <button onclick="checkConsentStatus()" class="w-full py-5 bg-[#39ff14] text-black font-black uppercase rounded-2xl shadow-[0_15px_30px_rgba(57,255,20,0.2)] text-xs tracking-widest">Calculează Preț RCA</button>
                 </div>
             </div>
 
@@ -82,60 +82,126 @@
         </div>
     </main>
 
- <script>
-    // Configurații noi conform doc IT
+<script>
     const API_BASE = 'https://insuretech.staging.insuretech.ro/api/v1';
     const API_KEY = '015f40fc-1974-4ad5-bbde-48c117a54307';
+    const PROXY = "https://api.allorigins.win/raw?url=";
 
-    // PASUL 1: Verificăm dacă are deja DNT semnat
+    // --- FUNCTII INTERFATA (Lipsesc in codul tau anterior) ---
+    function showRcaForm(el) {
+        document.querySelectorAll('.btn-neon').forEach(b => b.classList.remove('btn-active'));
+        el.classList.add('btn-active');
+        document.getElementById('rca-container').classList.remove('hidden');
+        document.getElementById('step-dnt').classList.remove('hidden');
+        document.getElementById('step-form').classList.add('hidden');
+        document.getElementById('step-results').classList.add('hidden');
+    }
+
+    function goToCalculation() {
+        document.getElementById('step-dnt').classList.add('hidden');
+        document.getElementById('step-form').classList.remove('hidden');
+    }
+
+    function requestConsultancy() {
+        alert("Un consultant vă va contacta în curând!");
+    }
+
+    // --- LOGICA V3 IT (Consent & DNT) ---
     async function checkConsentStatus() {
         const cnp = document.getElementById('cnp').value;
-        const proxy = "https://api.allorigins.win/raw?url=";
+        const plate = document.getElementById('plate').value;
+        if(!cnp || !plate) return alert("Completează datele!");
+
+        document.getElementById('step-form').classList.add('hidden');
+        document.getElementById('step-loading').classList.remove('hidden');
+
         const url = `${API_BASE}/online/client/documents/status?legalType=PF&cif=${cnp}&vendorProductType=RCA`;
 
         try {
-            const response = await fetch(proxy + encodeURIComponent(url), {
+            const response = await fetch(PROXY + encodeURIComponent(url), {
                 headers: { 'X-API-KEY': API_KEY }
             });
             const data = await response.json();
             
-            // Dacă signedDocuments este false, trebuie să trimitem răspunsurile DNT
             if (!data.signedDocuments) {
                 await submitDefaultConsent(cnp);
             } else {
-                getQuotes(); // Dacă e deja semnat, mergem la prețuri
+                getQuotes(); 
             }
         } catch (e) {
-            console.error("Eroare DNT:", e);
-            // Dacă dă eroare de conexiune la Staging, forțăm simularea pentru a vedea designul
-            getQuotes(); 
+            getQuotes(); // Fallback la cererea directa daca statusul esueaza
         }
     }
 
-    // PASUL 2: Trimitem consimțământul (Submit Answers)
-    // Documentația spune că acest pas este OBLIGATORIU înainte de ofertare
     async function submitDefaultConsent(cnp) {
-        const proxy = "https://api.allorigins.win/raw?url=";
         const url = `${API_BASE}/online/client/documents/submit-answers`;
-        
         const payload = {
             personBaseRequest: { cif: cnp, legalType: "PF" },
             communicationChannelEmail: true,
-            formInputData: { "inputName_1207": true, "inputName_123": true }, // Exemplu din doc IT
+            formInputData: { "inputName_1207": true, "inputName_123": true }, // Date cerute de doc IT
             vendorProductType: "RCA",
             website: "safego.ro"
         };
 
-        await fetch(proxy + encodeURIComponent(url), {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-API-KEY': API_KEY },
-            body: JSON.stringify(payload)
-        });
-
-        getQuotes(); // După ce am trimis acordul, cerem prețurile
+        try {
+            await fetch(PROXY + encodeURIComponent(url), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-API-KEY': API_KEY },
+                body: JSON.stringify(payload)
+            });
+            getQuotes();
+        } catch (e) {
+            getQuotes();
+        }
     }
 
-    // Restul funcțiilor (showRcaForm, getQuotes, renderOffers) rămân la fel
+    // --- OBTINERE PRETURI ---
+    async function getQuotes() {
+        const plate = document.getElementById('plate').value;
+        const cnp = document.getElementById('cnp').value;
+        const url = `${API_BASE}/rca/quotes`;
+
+        try {
+            const response = await fetch(PROXY + encodeURIComponent(url), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-API-KEY': API_KEY },
+                body: JSON.stringify({ registration_number: plate, owner_id: cnp })
+            });
+
+            const data = await response.json();
+            renderOffers(data.data || data.offers || []);
+        } catch (e) {
+            alert("Eroare de conexiune la serverul InsureTech.");
+            document.getElementById('step-loading').classList.add('hidden');
+            document.getElementById('step-form').classList.remove('hidden');
+        }
+    }
+
+    function renderOffers(offers) {
+        const list = document.getElementById('offers-list');
+        list.innerHTML = '';
+        document.getElementById('step-loading').classList.add('hidden');
+        document.getElementById('step-results').classList.remove('hidden');
+
+        if(!offers || offers.length === 0) {
+            list.innerHTML = '<p class="text-center text-[10px] uppercase text-zinc-600">Nicio ofertă găsită.</p>';
+            return;
+        }
+
+        offers.forEach(o => {
+            list.innerHTML += `
+                <div class="offer-card p-6 rounded-[24px] flex justify-between items-center">
+                    <div>
+                        <p class="font-black text-sm uppercase text-white">${o.insurer_name}</p>
+                        <p class="text-[9px] text-zinc-500 uppercase mt-1">B${o.bm_class || 0}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xl font-black text-[#39ff14]">${o.price} RON</p>
+                        <button class="text-[9px] font-bold uppercase bg-white text-black px-4 py-2 rounded-xl mt-2">Detalii</button>
+                    </div>
+                </div>`;
+        });
+    }
 </script>
 </body>
 </html>
